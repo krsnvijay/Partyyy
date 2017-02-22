@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Partyyy</string>
+    <string name="title_activity_login">Login</string>
+    <string name="facebook_application_id" translatable="false">1276720475710260</string>
+
+    <string name="facebook_login_protocol_scheme" translatable="false">fb1276720475710260</string>
+    <string name="unknown_response">Unknown Error</string>
+    <string name="sign_in_cancelled">Sign In Cancelled</string>
+    <string name="no_internet_connection">No Internet Connection!</string>
+    <string name="unknown_error">Unknown Error</string>
+</resources>

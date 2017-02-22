@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "780830825228",
+    "firebase_url": "https://partyyy-5e773.firebaseio.com",
+    "project_id": "partyyy-5e773",
+    "storage_bucket": "partyyy-5e773.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:780830825228:android:ab8c113b89e1c5d5",
+        "android_client_info": {
+          "package_name": "partyyy.com.notadeveloper.app.partyyy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "780830825228-jomvipa10ch5ehhbrv3ioak3dgaa572k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "partyyy.com.notadeveloper.app.partyyy",
+            "certificate_hash": "92a9a953edc03304be6f3c1f325ec3043d194eac"
+          }
+        },
+        {
+          "client_id": "780830825228-rj5itol93gcgojkcbu9hak2fh92edrpf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "partyyy.com.notadeveloper.app.partyyy",
+            "certificate_hash": "7fd5d7d17941850aec07bf870e224ded72289a99"
+          }
+        },
+        {
+          "client_id": "780830825228-tu3m0pvom1pg9th5hj4nhlgru7i53bol.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiGnoyWz6tZZ-w43t5efGHXvwE_alv6Ts"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "780830825228-tu3m0pvom1pg9th5hj4nhlgru7i53bol.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
