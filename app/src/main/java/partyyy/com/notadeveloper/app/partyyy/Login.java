@@ -2,10 +2,8 @@ package partyyy.com.notadeveloper.app.partyyy;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
 
@@ -48,14 +46,14 @@ public class Login extends AppCompatActivity {
 
             // Successfully signed in
             if (resultCode == RESULT_OK) {
-                startActivity(new Intent(Login.this,MainActivity.class));
+                startActivity(new Intent(Login.this,Register.class));
                 finish();
                 return;
             } else {
                 // Sign in failed
                 if (response == null) {
                     Snackbar.make(findViewById(android.R.id.content), R.string.sign_in_cancelled, Snackbar.LENGTH_SHORT).show();
-                    startActivity(new Intent(Login.this,MainActivity.class));
+                    startActivity(new Intent(Login.this,Register.class));
                     finish();
                     return;
                 }
@@ -66,7 +64,7 @@ public class Login extends AppCompatActivity {
                             .setAction("RETRY", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    startActivity(new Intent(Login.this,MainActivity.class));
+                                    startActivity(new Intent(Login.this,Register.class));
                                     finish();
 
                                 }
