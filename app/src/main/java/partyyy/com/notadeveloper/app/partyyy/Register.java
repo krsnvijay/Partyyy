@@ -1,6 +1,7 @@
 package partyyy.com.notadeveloper.app.partyyy;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
@@ -106,7 +107,9 @@ public class Register extends AppCompatActivity {
                 if (!check.isChecked())
                 {
                     cancel = true;
-                    Snackbar.make(findViewById(android.R.id.content),"Accept T&C", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(findViewById(android.R.id.content),"Accept T&C", Snackbar.LENGTH_SHORT)
+                            .setActionTextColor(Color.WHITE)
+                            .show();
                     focusView=check;
                 }
 
