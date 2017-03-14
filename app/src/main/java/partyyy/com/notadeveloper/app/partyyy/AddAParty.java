@@ -1,15 +1,22 @@
 package partyyy.com.notadeveloper.app.partyyy;
 
+import android.*;
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.view.View;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -22,8 +29,33 @@ import com.mikelau.croperino.Croperino;
 import com.mikelau.croperino.CroperinoConfig;
 import com.mikelau.croperino.CroperinoFileUtil;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class AddAParty extends AppCompatActivity {
-    private ImageButton mProfile;
+    @BindView(R.id.picture)
+    ImageButton mProfile;
+    @BindView(R.id.title)
+    AutoCompleteTextView mTitle;
+    @BindView(R.id.title1)
+    TextInputLayout mTitle1;
+    @BindView(R.id.email)
+    AutoCompleteTextView mEmail;
+    @BindView(R.id.emaila)
+    TextInputLayout mEmaila;
+    @BindView(R.id.number)
+    AutoCompleteTextView mNumber;
+    @BindView(R.id.number1)
+    TextInputLayout mNumber1;
+    @BindView(R.id.tickets)
+    AutoCompleteTextView mTickets;
+    @BindView(R.id.tickets1)
+    TextInputLayout mTickets1;
+    @BindView(R.id.text)
+    TextView mText;
+    @BindView(R.id.confirm)
+    Button mConfirm;
+
     private String photoUrl;
     private FirebaseStorage storage;
     private StorageReference storageRef;
@@ -34,19 +66,27 @@ public class AddAParty extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_aparty);
+        ButterKnife.bind(this);
 
 
         storage = FirebaseStorage.getInstance();
-        //storageRef = storage.getReferenceFromUrl("gs://sgn-pharmacy.appspot.com/");
-        ref= FirebaseDatabase.getInstance().getReference();
-
+        storageRef = storage.getReferenceFromUrl("gs://partyyy-5e773.appspot.com");
+        ref = FirebaseDatabase.getInstance().getReference();
 
 
         new CroperinoConfig("IMG_" + System.currentTimeMillis() + ".jpg", "/MikeLau/Pictures", Environment.getExternalStorageDirectory().getPath());
         CroperinoFileUtil.setupDirectory(AddAParty.this);
 
-        mProfile = (ImageButton) findViewById(R.id.picture);
+        mProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                imagesRef = storageRef.child("images").child("picture");
+                if (CroperinoFileUtil.verifyStoragePermissions(AddAParty.this))
+                    prepareChooser();
+            }
+        });
     }
+
     private void prepareChooser() {
         Croperino.prepareChooser(AddAParty.this, "Change Picture", ContextCompat.getColor(AddAParty.this, android.R.color.background_dark));
     }
@@ -108,7 +148,7 @@ public class AddAParty extends AppCompatActivity {
                 String permission = permissions[i];
                 int grantResult = grantResults[i];
 
-                if (permission.equals(android.Manifest.permission.CAMERA)) {
+                if (permission.equals(Manifest.permission.CAMERA)) {
                     if (grantResult == PackageManager.PERMISSION_GRANTED) {
                         prepareCamera();
                     }
@@ -122,12 +162,12 @@ public class AddAParty extends AppCompatActivity {
                 String permission = permissions[i];
                 int grantResult = grantResults[i];
 
-                if (permission.equals(android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                if (permission.equals(Manifest.permission.READ_EXTERNAL_STORAGE)) {
                     if (grantResult == PackageManager.PERMISSION_GRANTED) {
                         wasReadGranted = true;
                     }
                 }
-                if (permission.equals(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                if (permission.equals(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                     if (grantResult == PackageManager.PERMISSION_GRANTED) {
                         wasWriteGranted = true;
                     }
