@@ -3,9 +3,13 @@ package partyyy.com.notadeveloper.app.partyyy;
 import android.*;
 import android.Manifest;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.icu.text.DateFormat;
+import android.icu.text.SimpleDateFormat;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
@@ -13,9 +17,11 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -28,11 +34,16 @@ import com.google.firebase.storage.UploadTask;
 import com.mikelau.croperino.Croperino;
 import com.mikelau.croperino.CroperinoConfig;
 import com.mikelau.croperino.CroperinoFileUtil;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AddAParty extends AppCompatActivity {
+import static android.text.Html.fromHtml;
+
+public class AddAParty extends AppCompatActivity implements OnDateSelectedListener{
     @BindView(R.id.picture)
     ImageButton mProfile;
     @BindView(R.id.title)
@@ -61,6 +72,11 @@ public class AddAParty extends AppCompatActivity {
     private StorageReference storageRef;
     private StorageReference imagesRef;
     private DatabaseReference ref;
+    private TextView dates;
+    private MaterialCalendarView calendarView;
+    Dialog dialog;
+    private static final DateFormat FORMATTER = SimpleDateFormat.getDateInstance();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +84,34 @@ public class AddAParty extends AppCompatActivity {
         setContentView(R.layout.activity_add_aparty);
         ButterKnife.bind(this);
 
+        dates = (TextView) findViewById(R.id.dates);
 
+        dates.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                calendarView = (MaterialCalendarView)findViewById(R.id.calendarView);
+                calendarView.setOnDateChangedListener(this);
+                /*calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
+                    @Override
+                    public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
+                        dates.setText(calendarView.getSelectedDates().toString());
+                        dialog.dismiss();
+                    }
+                });*/
+
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    dialog = new Dialog(AddAParty.this, R.style.dialogthemez);
+                } else {
+                    dialog = new Dialog(AddAParty.this);
+                }
+                dialog.setContentView(R.layout.calenderlayout);
+                dialog.setTitle(fromHtml("<font color='#c83737'>Select Dates</font>"));
+                dialog.show();
+
+            }
+        });
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReferenceFromUrl("gs://partyyy-5e773.appspot.com");
         ref = FirebaseDatabase.getInstance().getReference();
@@ -86,6 +129,7 @@ public class AddAParty extends AppCompatActivity {
             }
         });
     }
+
 
     private void prepareChooser() {
         Croperino.prepareChooser(AddAParty.this, "Change Picture", ContextCompat.getColor(AddAParty.this, android.R.color.background_dark));
@@ -178,6 +222,19 @@ public class AddAParty extends AppCompatActivity {
                 prepareChooser();
             }
         }
+    }
+
+    @Override
+    public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
+        dates.setText(getSelectedDatesString());
+    }
+    private String getSelectedDatesString() {
+        calendarView = (MaterialCalendarView)findViewById(R.id.calendarView);
+        CalendarDay date = calendarView.getSelectedDate();
+        if (date == null) {
+            return "No Selection";
+        }
+        return FORMATTER.format(date.getDate());
     }
 }
 
