@@ -16,6 +16,9 @@ import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import io.github.yavski.fabspeeddial.FabSpeedDial;
+import io.github.yavski.fabspeeddial.SimpleMenuListenerAdapter;
+
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout dl;
     private ActionBarDrawerToggle abdt;
@@ -87,6 +90,22 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                  return true;
+            }
+        });
+        FabSpeedDial fabSpeedDial = (FabSpeedDial) findViewById(R.id.fab_speed_dial);
+        fabSpeedDial.setMenuListener(new SimpleMenuListenerAdapter() {
+            @Override
+            public boolean onMenuItemSelected(MenuItem menuItem) {
+                if(menuItem.getItemId() == R.id.action_car)
+                {Toast.makeText(MainActivity.this, "CAR",
+                        Toast.LENGTH_LONG).show();}
+                else if(menuItem.getItemId() == R.id.action_food)
+                {Toast.makeText(MainActivity.this, "FOOD",
+                        Toast.LENGTH_LONG).show();}
+                else if(menuItem.getItemId() == R.id.action_booze)
+                {Toast.makeText(MainActivity.this, "BOOZE",
+                        Toast.LENGTH_LONG).show();}
+                return false;
             }
         });
 

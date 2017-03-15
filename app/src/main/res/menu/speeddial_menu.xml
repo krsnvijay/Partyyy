@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_car"
+        android:icon="@drawable/ic_confetti"
+        android:title="car services" />
+    <item
+        android:id="@+id/action_food"
+        android:icon="@drawable/ic_confetti"
+        android:title="food"/>
+    <item
+        android:id="@+id/action_booze"
+        android:icon="@drawable/ic_confetti"
+        android:title="booze" />
+</menu>
