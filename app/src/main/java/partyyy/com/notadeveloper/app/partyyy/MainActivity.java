@@ -105,6 +105,9 @@ public class MainActivity extends AppCompatActivity {
                 else if(menuItem.getItemId() == R.id.action_booze)
                 {Toast.makeText(MainActivity.this, "BOOZE",
                         Toast.LENGTH_LONG).show();}
+                else if(menuItem.getItemId() == R.id.action_shisha)
+                {Toast.makeText(MainActivity.this, "SHISHA",
+                        Toast.LENGTH_LONG).show();}
                 return false;
             }
         });

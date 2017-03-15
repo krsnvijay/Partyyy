@@ -2,12 +2,15 @@ package partyyy.com.notadeveloper.app.partyyy;
 
 import android.*;
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
+import android.icu.util.Calendar;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -34,16 +37,14 @@ import com.google.firebase.storage.UploadTask;
 import com.mikelau.croperino.Croperino;
 import com.mikelau.croperino.CroperinoConfig;
 import com.mikelau.croperino.CroperinoFileUtil;
-import com.prolificinteractive.materialcalendarview.CalendarDay;
-import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
-import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
+
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static android.text.Html.fromHtml;
 
-public class AddAParty extends AppCompatActivity implements OnDateSelectedListener{
+public class AddAParty extends AppCompatActivity{
     @BindView(R.id.picture)
     ImageButton mProfile;
     @BindView(R.id.title)
@@ -73,9 +74,7 @@ public class AddAParty extends AppCompatActivity implements OnDateSelectedListen
     private StorageReference imagesRef;
     private DatabaseReference ref;
     private TextView dates;
-    private MaterialCalendarView calendarView;
-    Dialog dialog;
-    private static final DateFormat FORMATTER = SimpleDateFormat.getDateInstance();
+
 
 
     @Override
@@ -90,25 +89,7 @@ public class AddAParty extends AppCompatActivity implements OnDateSelectedListen
             @Override
             public void onClick(View view) {
 
-                calendarView = (MaterialCalendarView)findViewById(R.id.calendarView);
-                calendarView.setOnDateChangedListener(this);
-                /*calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
-                    @Override
-                    public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
-                        dates.setText(calendarView.getSelectedDates().toString());
-                        dialog.dismiss();
-                    }
-                });*/
 
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    dialog = new Dialog(AddAParty.this, R.style.dialogthemez);
-                } else {
-                    dialog = new Dialog(AddAParty.this);
-                }
-                dialog.setContentView(R.layout.calenderlayout);
-                dialog.setTitle(fromHtml("<font color='#c83737'>Select Dates</font>"));
-                dialog.show();
 
             }
         });
@@ -224,17 +205,6 @@ public class AddAParty extends AppCompatActivity implements OnDateSelectedListen
         }
     }
 
-    @Override
-    public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
-        dates.setText(getSelectedDatesString());
-    }
-    private String getSelectedDatesString() {
-        calendarView = (MaterialCalendarView)findViewById(R.id.calendarView);
-        CalendarDay date = calendarView.getSelectedDate();
-        if (date == null) {
-            return "No Selection";
-        }
-        return FORMATTER.format(date.getDate());
-    }
+
 }
 

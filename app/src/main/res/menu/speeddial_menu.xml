@@ -12,4 +12,8 @@
         android:id="@+id/action_booze"
         android:icon="@drawable/ic_confetti"
         android:title="booze" />
+    <item
+        android:id="@+id/action_shisha"
+        android:icon="@drawable/ic_confetti"
+        android:title="rent shisha" />
 </menu>
