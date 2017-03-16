@@ -41,7 +41,7 @@ import java.util.Calendar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     @BindView(R.id.picture)
     ImageButton mProfile;
     @BindView(R.id.title)
@@ -101,15 +101,37 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
         time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TimePickerFragment newFragment = new TimePickerFragment();
-                newFragment.show(getFragmentManager(),"timePicker1");
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(AddAParty.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        time.setText( selectedHour + ":" + selectedMinute);
+                    }
+                }, hour, minute, false);//Yes 24 hour time
+                mTimePicker.setTitle("Select Time");
+                mTimePicker.show();
+
+
             }
         });
         time1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TimePickerFragment newFragment = new TimePickerFragment();
-                newFragment.show(getFragmentManager(),"timePicker2");
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(AddAParty.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        time1.setText( selectedHour + ":" + selectedMinute);
+                    }
+                }, hour, minute, false);//Yes 24 hour time
+                mTimePicker.setTitle("Select Time");
+                mTimePicker.show();
             }
         });
 
@@ -131,19 +153,11 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
         });
     }
 
-    @Override
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute)
-    {
-       int a = view.getId();
-        if(a == R.id.time1)
-        {
-            time1.setText(hourOfDay+"/"+minute);
-        }
-        else
-            time.setText(hourOfDay+"/"+minute);
-    }
 
-    public static class TimePickerFragment extends DialogFragment {
+
+
+    public static class TimePickerFragment extends DialogFragment
+            implements TimePickerDialog.OnTimeSetListener {
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -152,14 +166,15 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
             int hour = c.get(Calendar.HOUR_OF_DAY);
             int minute = c.get(Calendar.MINUTE);
 
-            // Activity has to implement this interface
-            TimePickerDialog.OnTimeSetListener listener = (TimePickerDialog.OnTimeSetListener) getActivity();
-
             // Create a new instance of TimePickerDialog and return it
-            return new TimePickerDialog(getActivity(), listener, hour, minute,
+            return new TimePickerDialog(getActivity(), this, hour, minute,
                     DateFormat.is24HourFormat(getActivity()));
         }
 
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            // Do something with the time chosen by the user
+
+        }
     }
 
     public static class DatePickerFragment extends DialogFragment {
