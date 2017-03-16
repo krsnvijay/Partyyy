@@ -1,8 +1,6 @@
 package partyyy.com.notadeveloper.app.partyyy;
 
-import android.*;
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -10,25 +8,20 @@ import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
-
-import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateFormat;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
-import android.widget.Spinner;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -43,15 +36,12 @@ import com.mikelau.croperino.Croperino;
 import com.mikelau.croperino.CroperinoConfig;
 import com.mikelau.croperino.CroperinoFileUtil;
 
-
 import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static android.text.Html.fromHtml;
-
-public class AddAParty extends  AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
     @BindView(R.id.picture)
     ImageButton mProfile;
     @BindView(R.id.title)
@@ -74,13 +64,19 @@ public class AddAParty extends  AppCompatActivity implements DatePickerDialog.On
     TextView mText;
     @BindView(R.id.confirm)
     Button mConfirm;
+    @BindView(R.id.time)
+    TextView time;
+    @BindView(R.id.activity_signup)
+    LinearLayout activitySignup;
+    @BindView(R.id.time1)
+    TextView time1;
 
     private String photoUrl;
     private FirebaseStorage storage;
     private StorageReference storageRef;
     private StorageReference imagesRef;
     private DatabaseReference ref;
-    private  TextView dates;
+    private TextView dates;
     static String datetxt;
 
 
@@ -102,6 +98,21 @@ public class AddAParty extends  AppCompatActivity implements DatePickerDialog.On
 
             }
         });
+        time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TimePickerFragment newFragment = new TimePickerFragment();
+                newFragment.show(getFragmentManager(),"timePicker1");
+            }
+        });
+        time1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TimePickerFragment newFragment = new TimePickerFragment();
+                newFragment.show(getFragmentManager(),"timePicker2");
+            }
+        });
+
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReferenceFromUrl("gs://partyyy-5e773.appspot.com");
         ref = FirebaseDatabase.getInstance().getReference();
@@ -118,6 +129,37 @@ public class AddAParty extends  AppCompatActivity implements DatePickerDialog.On
                     prepareChooser();
             }
         });
+    }
+
+    @Override
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute)
+    {
+       int a = view.getId();
+        if(a == R.id.time1)
+        {
+            time1.setText(hourOfDay+"/"+minute);
+        }
+        else
+            time.setText(hourOfDay+"/"+minute);
+    }
+
+    public static class TimePickerFragment extends DialogFragment {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the current time as the default values for the picker
+            final Calendar c = Calendar.getInstance();
+            int hour = c.get(Calendar.HOUR_OF_DAY);
+            int minute = c.get(Calendar.MINUTE);
+
+            // Activity has to implement this interface
+            TimePickerDialog.OnTimeSetListener listener = (TimePickerDialog.OnTimeSetListener) getActivity();
+
+            // Create a new instance of TimePickerDialog and return it
+            return new TimePickerDialog(getActivity(), listener, hour, minute,
+                    DateFormat.is24HourFormat(getActivity()));
+        }
+
     }
 
     public static class DatePickerFragment extends DialogFragment {
@@ -137,6 +179,7 @@ public class AddAParty extends  AppCompatActivity implements DatePickerDialog.On
             return new DatePickerDialog(getActivity(), listener, year, month, day);
         }
     }
+
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
         // store the values selected into a Calendar instance
@@ -144,8 +187,10 @@ public class AddAParty extends  AppCompatActivity implements DatePickerDialog.On
         c.set(Calendar.YEAR, year);
         c.set(Calendar.MONTH, monthOfYear);
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        dates.setText(dayOfMonth+"/"+(monthOfYear+1)+"/"+year);
+        dates.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
     }
+
+
 
 
     private void prepareChooser() {
@@ -241,7 +286,6 @@ public class AddAParty extends  AppCompatActivity implements DatePickerDialog.On
         }
 
     }
-
 
 
 }

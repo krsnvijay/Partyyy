@@ -11,6 +11,7 @@
     <item
         android:id="@+id/action_booze"
         android:icon="@drawable/ic_confetti"
+
         android:title="booze" />
     <item
         android:id="@+id/action_shisha"
