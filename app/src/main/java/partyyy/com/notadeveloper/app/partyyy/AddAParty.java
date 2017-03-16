@@ -6,26 +6,31 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.icu.text.DateFormat;
-import android.icu.text.SimpleDateFormat;
-import android.icu.util.Calendar;
+
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
+
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -39,12 +44,14 @@ import com.mikelau.croperino.CroperinoConfig;
 import com.mikelau.croperino.CroperinoFileUtil;
 
 
+import java.util.Calendar;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static android.text.Html.fromHtml;
 
-public class AddAParty extends AppCompatActivity{
+public class AddAParty extends  AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     @BindView(R.id.picture)
     ImageButton mProfile;
     @BindView(R.id.title)
@@ -73,8 +80,8 @@ public class AddAParty extends AppCompatActivity{
     private StorageReference storageRef;
     private StorageReference imagesRef;
     private DatabaseReference ref;
-    private TextView dates;
-
+    private  TextView dates;
+    static String datetxt;
 
 
     @Override
@@ -85,11 +92,13 @@ public class AddAParty extends AppCompatActivity{
 
         dates = (TextView) findViewById(R.id.dates);
 
+
         dates.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-
+                DatePickerFragment newFragment = new DatePickerFragment();
+                newFragment.show(getFragmentManager(), "datePicker");
 
             }
         });
@@ -109,6 +118,33 @@ public class AddAParty extends AppCompatActivity{
                     prepareChooser();
             }
         });
+    }
+
+    public static class DatePickerFragment extends DialogFragment {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the current time as the default values for the picker
+            final Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+
+            // Activity needs to implement this interface
+            DatePickerDialog.OnDateSetListener listener = (DatePickerDialog.OnDateSetListener) getActivity();
+
+            // Create a new instance of TimePickerDialog and return it
+            return new DatePickerDialog(getActivity(), listener, year, month, day);
+        }
+    }
+    @Override
+    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+        // store the values selected into a Calendar instance
+        final Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, year);
+        c.set(Calendar.MONTH, monthOfYear);
+        c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        dates.setText(dayOfMonth+"/"+(monthOfYear+1)+"/"+year);
     }
 
 
@@ -203,8 +239,11 @@ public class AddAParty extends AppCompatActivity{
                 prepareChooser();
             }
         }
+
     }
 
 
+
 }
+
 
