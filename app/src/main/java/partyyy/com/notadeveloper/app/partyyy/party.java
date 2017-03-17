@@ -5,29 +5,25 @@ package partyyy.com.notadeveloper.app.partyyy;
  */
 
 public class party {
-    String name;
+    String title;
     String picture;
+    String dates;
+    String time;
+    String time1;
     String email;
     String number;
-    String description;
-    int tickets;
+    String address1;
+    String address2;
+    String address3;
+    String pincode;
+    String location;
 
-    public party(String name, String picture, String email, String number, String description, int tickets) {
-        this.name = name;
-        this.picture = picture;
-        this.email = email;
-        this.number = number;
-        this.description = description;
-        this.tickets = tickets;
+    public String getTitle() {
+        return title;
     }
 
-    public String getName() {
-
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getPicture() {
@@ -36,6 +32,30 @@ public class party {
 
     public void setPicture(String picture) {
         this.picture = picture;
+    }
+
+    public String getDates() {
+        return dates;
+    }
+
+    public void setDates(String dates) {
+        this.dates = dates;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getTime1() {
+        return time1;
+    }
+
+    public void setTime1(String time1) {
+        this.time1 = time1;
     }
 
     public String getEmail() {
@@ -54,6 +74,46 @@ public class party {
         this.number = number;
     }
 
+    public String getAddress1() {
+        return address1;
+    }
+
+    public void setAddress1(String address1) {
+        this.address1 = address1;
+    }
+
+    public String getAddress2() {
+        return address2;
+    }
+
+    public void setAddress2(String address2) {
+        this.address2 = address2;
+    }
+
+    public String getAddress3() {
+        return address3;
+    }
+
+    public void setAddress3(String address3) {
+        this.address3 = address3;
+    }
+
+    public String getPincode() {
+        return pincode;
+    }
+
+    public void setPincode(String pincode) {
+        this.pincode = pincode;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -69,4 +129,27 @@ public class party {
     public void setTickets(int tickets) {
         this.tickets = tickets;
     }
+
+    public party(String title, String picture, String dates, String time, String time1, String email, String number, String address1, String address2, String address3, String pincode, String location, String description, int tickets) {
+
+        this.title = title;
+        this.picture = picture;
+        this.dates = dates;
+        this.time = time;
+        this.time1 = time1;
+        this.email = email;
+        this.number = number;
+        this.address1 = address1;
+        this.address2 = address2;
+        this.address3 = address3;
+        this.pincode = pincode;
+        this.location = location;
+        this.description = description;
+        this.tickets = tickets;
+    }
+
+    String description;
+    int tickets;
+
+
 }

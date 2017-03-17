@@ -34,15 +34,17 @@
                 android:maxLines="1"
                 />
         </android.support.design.widget.TextInputLayout>
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+
             <TextView
+                android:id="@+id/datet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Select date"
-                android:textSize="27dp"
-                android:id="@+id/datet"/>
+                android:textSize="27dp" />
 
             <TextView
                 android:id="@+id/dates"
@@ -55,6 +57,7 @@
                 android:textColor="#808080"
                 android:textSize="20dp" />
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -227,6 +230,13 @@
             android:text="Click to add location (optional)"
             android:theme="@style/AccentButton"
             android:id="@+id/location"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="20dp"
+            android:textSize="20dp"
+            android:id="@+id/loca"
+            />
         <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
             android:text="Tickets:"
             android:textSize="20sp"

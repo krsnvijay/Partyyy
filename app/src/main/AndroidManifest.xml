@@ -27,5 +27,10 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".AddAParty"></activity>
     </application>
+    <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="AIzaSyBkBc8HkClqA4MqPmTAitPajONGN8DYeQY" />
+    <meta-data android:name="com.google.android.gms.version"
+        android:value="@integer/google_play_services_version" />
 
 </manifest>

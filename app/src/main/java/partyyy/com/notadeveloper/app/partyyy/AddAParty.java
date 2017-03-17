@@ -40,6 +40,7 @@ import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
     @BindView(R.id.picture)
@@ -70,6 +71,10 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
     LinearLayout activitySignup;
     @BindView(R.id.time1)
     TextView time1;
+    @BindView(R.id.location)
+    Button location;
+    @BindView(R.id.loca)
+    TextView loca;
 
     private String photoUrl;
     private FirebaseStorage storage;
@@ -102,14 +107,14 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
             @Override
             public void onClick(View v) {
                 TimePickerFragment newFragment = new TimePickerFragment();
-                newFragment.show(getFragmentManager(),"timePicker1");
+                newFragment.show(getFragmentManager(), "timePicker1");
             }
         });
         time1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 TimePickerFragment newFragment = new TimePickerFragment();
-                newFragment.show(getFragmentManager(),"timePicker2");
+                newFragment.show(getFragmentManager(), "timePicker2");
             }
         });
 
@@ -132,15 +137,17 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
     }
 
     @Override
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute)
-    {
-       int a = view.getId();
-        if(a == R.id.time1)
-        {
-            time1.setText(hourOfDay+"/"+minute);
-        }
-        else
-            time.setText(hourOfDay+"/"+minute);
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        int a = view.getId();
+        if (a == R.id.time1) {
+            time1.setText(hourOfDay + "/" + minute);
+        } else
+            time.setText(hourOfDay + "/" + minute);
+    }
+
+    @OnClick(R.id.location)
+    public void onClick() {
+
     }
 
     public static class TimePickerFragment extends DialogFragment {
@@ -189,8 +196,6 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
         dates.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
     }
-
-
 
 
     private void prepareChooser() {
