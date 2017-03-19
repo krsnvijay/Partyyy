@@ -8,25 +8,34 @@ import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.text.format.DateFormat;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -37,10 +46,13 @@ import com.mikelau.croperino.CroperinoConfig;
 import com.mikelau.croperino.CroperinoFileUtil;
 
 import java.util.Calendar;
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static android.text.TextUtils.isEmpty;
 
 public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
     @BindView(R.id.picture)
@@ -75,6 +87,26 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
     Button location;
     @BindView(R.id.loca)
     TextView loca;
+    @BindView(R.id.address1)
+    EditText address1;
+    @BindView(R.id.add1lt)
+    TextInputLayout add1lt;
+    @BindView(R.id.address2)
+    AutoCompleteTextView address2;
+    @BindView(R.id.add2lt)
+    TextInputLayout add2lt;
+    @BindView(R.id.imageView2)
+    ImageView imageView2;
+    @BindView(R.id.address3)
+    AutoCompleteTextView address3;
+    @BindView(R.id.add3lt)
+    TextInputLayout add3lt;
+    @BindView(R.id.imageView1)
+    ImageView imageView1;
+    @BindView(R.id.pincode)
+    EditText pincode;
+    @BindView(R.id.pinlt)
+    TextInputLayout pinlt;
 
     private String photoUrl;
     private FirebaseStorage storage;
@@ -83,6 +115,8 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
     private DatabaseReference ref;
     private TextView dates;
     static String datetxt;
+    private FirebaseAuth mAuth;
+    private FirebaseUser mUser;
 
 
     @Override
@@ -146,7 +180,172 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
     }
 
     @OnClick(R.id.location)
-    public void onClick() {
+    public void onClickloc() {
+
+    }
+
+    @OnClick(R.id.confirm)
+    public void onClickcon() {
+
+        boolean cancel = false;
+        View focusView = null;
+
+
+        String a = mTitle.getText().toString();
+        String b = dates.getText().toString();
+        String c = time.getText().toString();
+        String d = time1.getText().toString();
+        String e = mEmail.getText().toString();
+        String f = mNumber.getText().toString();
+        String g = address1.getText().toString();
+        String h = address2.getText().toString();
+        String i = address3.getText().toString();
+        String j = pincode.getText().toString();
+        String k = mTickets.getText().toString();
+        String l = mText.getText().toString();
+
+        if (isEmpty(a))
+        {
+            mTitle1.setError("Field cannot be empty");
+            focusView = mTitle1;
+            cancel = true;
+        }
+        else mTitle1.setError(null);
+        if (b.equals("DD/MM/YYYY"))
+        {
+
+            Snackbar.make(findViewById(android.R.id.content), "Please fill date first", Snackbar.LENGTH_SHORT)
+                    .setActionTextColor(getResources().getColor(R.color.mdtp_red))
+                    .show();
+            focusView = null;
+            cancel = true;
+        }
+        if (c.equals("MM:HH"))
+        {
+
+            Snackbar.make(findViewById(android.R.id.content), "Please fill from time first", Snackbar.LENGTH_SHORT)
+                    .setActionTextColor(getResources().getColor(R.color.mdtp_red))
+                    .show();
+            focusView = null;
+            cancel = true;
+        }
+        /*if (d.equals("MM:HH"))
+        {
+
+            Snackbar.make(findViewById(android.R.id.content), "Please fill to time first", Snackbar.LENGTH_SHORT)
+                    .setActionTextColor(getResources().getColor(R.color.mdtp_red))
+                    .show();
+            focusView = null;
+            cancel = true;
+        }*/
+        if (isEmpty(e))
+        {
+            mEmaila.setError("Field cannot be empty");
+            focusView = mEmaila;
+            cancel = true;
+        }
+        else mEmaila.setError(null);
+        if (isEmpty(f))
+        {
+            mNumber1.setError("Field cannot be empty");
+            focusView = mNumber1;
+            cancel = true;
+        }
+        else mNumber1.setError(null);
+        if (isEmpty(g))
+        {
+            add1lt.setError("Field cannot be empty");
+            focusView = add1lt;
+            cancel = true;
+        }
+        else add1lt.setError(null);
+        if (isEmpty(h))
+        {
+            add2lt.setError("Field cannot be empty");
+            focusView = add2lt;
+            cancel = true;
+        }
+        else add2lt.setError(null);
+        if (isEmpty(i))
+        {
+            add3lt.setError("Field cannot be empty");
+            focusView = add3lt;
+            cancel = true;
+        }
+        else add3lt.setError(null);
+        if (isEmpty(j))
+        {
+            pinlt.setError("Field cannot be empty");
+            focusView = pinlt;
+            cancel = true;
+        }
+        else pinlt.setError(null);
+        if (isEmpty(k))
+        {
+            mTickets1.setError("Field cannot be empty");
+            focusView = mTickets1;
+            cancel = true;
+        }
+        else mTickets1.setError(null);
+        if (l.equals("Enter description here..."))
+        {
+            Snackbar.make(findViewById(android.R.id.content), "Please give a description", Snackbar.LENGTH_SHORT)
+                    .setActionTextColor(getResources().getColor(R.color.mdtp_red))
+                    .show();
+            focusView = null;
+            cancel = true;
+        }
+        if (!isValidPhone(f)) {
+            mNumber1.setError("Invalid Phone");
+            focusView = mNumber1;
+            cancel = true;
+        }
+        else mNumber1.setError(null);
+        if (!isValidEmail(e)) {
+            mEmaila.setError("Invalid Email");
+            focusView = mEmaila;
+            cancel = true;
+        }
+        else mEmaila.setError(null);
+        if (cancel==true) {
+            // There was an error; don't attempt login and focus the first
+            // form field with an error.
+            focusView.requestFocus();
+        } else {
+
+            if (photoUrl == null) {
+                mAuth = FirebaseAuth.getInstance();
+                mUser = mAuth.getCurrentUser();
+                if (mAuth.getCurrentUser().getPhotoUrl() == null) {
+                    photoUrl = null;
+                } else {
+
+                    for (UserInfo profile : mUser.getProviderData()) {
+                        // check if the provider id matches "facebook.com"
+                        if (profile.getProviderId().equals("facebook.com")) {
+                            String facebookUserId = profile.getUid();
+                            photoUrl = "https://graph.facebook.com/" + facebookUserId + "/picture?type=large&width=720&height=720";
+                        } else if (profile.getProviderId().equals("google.com")) {
+                            photoUrl = mAuth.getCurrentUser().getPhotoUrl().toString();
+                            photoUrl = photoUrl.replace("/s96-c/", "/s300-c/");
+                        }
+                    }
+                    //photoUrl = mAuth.getCurrentUser().getPhotoUrl().toString();
+                }
+            }
+            DatabaseReference mDatabase = ref.child("parties").child(a);
+            final String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            final String nam = (storageRef.child(userid).child("name")).toString();
+            party p = new party(a,photoUrl,b,c,d,e,f,g,h,i,j,null,l,Integer.parseInt(k),userid,nam);
+            mDatabase.setValue(p);
+            Intent myIntent = new Intent(AddAParty.this, MainActivity.class);
+            startActivity(myIntent);
+            finish();
+
+
+        }
+
+
 
     }
 
@@ -290,6 +489,15 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
             }
         }
 
+    }
+    private boolean isValidEmail(String email) {
+
+        Pattern pattern = Patterns.EMAIL_ADDRESS;
+        return !isEmpty(email) && pattern.matcher(email).matches();
+    }
+
+    private boolean isValidPhone(CharSequence target) {
+        return !isEmpty(target) && android.util.Patterns.PHONE.matcher(target).matches() && target.length() == 10;
     }
 
 

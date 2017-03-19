@@ -17,6 +17,26 @@ public class party {
     String address3;
     String pincode;
     String location;
+    String uid;
+    String nam;
+
+    public String getNam() {
+        return nam;
+    }
+
+    public void setNam(String nam) {
+        this.nam = nam;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+
 
     public String getTitle() {
         return title;
@@ -130,7 +150,7 @@ public class party {
         this.tickets = tickets;
     }
 
-    public party(String title, String picture, String dates, String time, String time1, String email, String number, String address1, String address2, String address3, String pincode, String location, String description, int tickets) {
+    public party(String title, String picture, String dates, String time, String time1, String email, String number, String address1, String address2, String address3, String pincode, String location, String description, int tickets, String uid, String nam) {
 
         this.title = title;
         this.picture = picture;
@@ -146,6 +166,8 @@ public class party {
         this.location = location;
         this.description = description;
         this.tickets = tickets;
+        this.uid = uid;
+        this.nam = nam;
     }
 
     String description;
