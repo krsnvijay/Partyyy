@@ -30,14 +30,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -45,7 +49,10 @@ import com.mikelau.croperino.Croperino;
 import com.mikelau.croperino.CroperinoConfig;
 import com.mikelau.croperino.CroperinoFileUtil;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 import butterknife.BindView;
@@ -54,7 +61,7 @@ import butterknife.OnClick;
 
 import static android.text.TextUtils.isEmpty;
 
-public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     @BindView(R.id.picture)
     ImageButton mProfile;
     @BindView(R.id.title)
@@ -107,7 +114,7 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
     EditText pincode;
     @BindView(R.id.pinlt)
     TextInputLayout pinlt;
-
+    private long estimatedServerTimeMs;
     private String photoUrl;
     private FirebaseStorage storage;
     private StorageReference storageRef;
@@ -140,18 +147,39 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
         time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TimePickerFragment newFragment = new TimePickerFragment();
-                newFragment.show(getFragmentManager(), "timePicker1");
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(AddAParty.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        time.setText( selectedHour + ":" + selectedMinute);
+                    }
+                }, hour, minute, false);//Yes 24 hour time
+                mTimePicker.setTitle("Select Time");
+                mTimePicker.show();
+
+
             }
         });
         time1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TimePickerFragment newFragment = new TimePickerFragment();
-                newFragment.show(getFragmentManager(), "timePicker2");
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(AddAParty.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        time1.setText( selectedHour + ":" + selectedMinute);
+                    }
+                }, hour, minute, false);//Yes 24 hour time
+                mTimePicker.setTitle("Select Time");
+                mTimePicker.show();
             }
         });
-
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReferenceFromUrl("gs://partyyy-5e773.appspot.com");
         ref = FirebaseDatabase.getInstance().getReference();
@@ -170,14 +198,7 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
         });
     }
 
-    @Override
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        int a = view.getId();
-        if (a == R.id.time1) {
-            time1.setText(hourOfDay + "/" + minute);
-        } else
-            time.setText(hourOfDay + "/" + minute);
-    }
+
 
     @OnClick(R.id.location)
     public void onClickloc() {
@@ -191,18 +212,18 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
         View focusView = null;
 
 
-        String a = mTitle.getText().toString();
-        String b = dates.getText().toString();
-        String c = time.getText().toString();
-        String d = time1.getText().toString();
-        String e = mEmail.getText().toString();
-        String f = mNumber.getText().toString();
-        String g = address1.getText().toString();
-        String h = address2.getText().toString();
-        String i = address3.getText().toString();
-        String j = pincode.getText().toString();
-        String k = mTickets.getText().toString();
-        String l = mText.getText().toString();
+        final String a = mTitle.getText().toString();
+        final String b = dates.getText().toString();
+        final String c = time.getText().toString();
+        final String d = time1.getText().toString();
+        final String e = mEmail.getText().toString();
+        final String f = mNumber.getText().toString();
+        final String g = address1.getText().toString();
+        final String h = address2.getText().toString();
+        final String i = address3.getText().toString();
+        final String j = pincode.getText().toString();
+        final String k = mTickets.getText().toString();
+        final String l = mText.getText().toString();
 
         if (isEmpty(a))
         {
@@ -215,7 +236,7 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
         {
 
             Snackbar.make(findViewById(android.R.id.content), "Please fill date first", Snackbar.LENGTH_SHORT)
-                    .setActionTextColor(getResources().getColor(R.color.mdtp_red))
+                 //   .setActionTextColor(ContextCompat.getColor(AddAParty.this, R.color.tw__composer_red))
                     .show();
             focusView = null;
             cancel = true;
@@ -224,7 +245,8 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
         {
 
             Snackbar.make(findViewById(android.R.id.content), "Please fill from time first", Snackbar.LENGTH_SHORT)
-                    .setActionTextColor(getResources().getColor(R.color.mdtp_red))
+                   // .setActionTextColor(ContextCompat.getColor(AddAParty.this, R.color.tw__composer_red))
+
                     .show();
             focusView = null;
             cancel = true;
@@ -290,7 +312,8 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
         if (l.equals("Enter description here..."))
         {
             Snackbar.make(findViewById(android.R.id.content), "Please give a description", Snackbar.LENGTH_SHORT)
-                    .setActionTextColor(getResources().getColor(R.color.mdtp_red))
+
+
                     .show();
             focusView = null;
             cancel = true;
@@ -307,40 +330,40 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
             cancel = true;
         }
         else mEmaila.setError(null);
-        if (cancel==true) {
+        if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
+            if (focusView!=null)
             focusView.requestFocus();
         } else {
 
-            if (photoUrl == null) {
-                mAuth = FirebaseAuth.getInstance();
-                mUser = mAuth.getCurrentUser();
-                if (mAuth.getCurrentUser().getPhotoUrl() == null) {
-                    photoUrl = null;
-                } else {
-
-                    for (UserInfo profile : mUser.getProviderData()) {
-                        // check if the provider id matches "facebook.com"
-                        if (profile.getProviderId().equals("facebook.com")) {
-                            String facebookUserId = profile.getUid();
-                            photoUrl = "https://graph.facebook.com/" + facebookUserId + "/picture?type=large&width=720&height=720";
-                        } else if (profile.getProviderId().equals("google.com")) {
-                            photoUrl = mAuth.getCurrentUser().getPhotoUrl().toString();
-                            photoUrl = photoUrl.replace("/s96-c/", "/s300-c/");
-                        }
-                    }
-                    //photoUrl = mAuth.getCurrentUser().getPhotoUrl().toString();
-                }
-            }
-            DatabaseReference mDatabase = ref.child("parties").child(a);
             final String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-            final String nam = (storageRef.child(userid).child("name")).toString();
-            party p = new party(a,photoUrl,b,c,d,e,f,g,h,i,j,null,l,Integer.parseInt(k),userid,nam);
-            mDatabase.setValue(p);
-            Intent myIntent = new Intent(AddAParty.this, MainActivity.class);
-            startActivity(myIntent);
-            finish();
+            final String nam = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+
+            DatabaseReference offsetRef = FirebaseDatabase.getInstance().getReference(".info/serverTimeOffset");
+            offsetRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                    long offset = snapshot.getValue(Long.class);
+                    estimatedServerTimeMs = System.currentTimeMillis() + offset;
+                    DatabaseReference mDatabase = ref.child("parties").child(String.valueOf(estimatedServerTimeMs));
+                    party p = new party(a,photoUrl,b,c,d,e,f,g,h,i,j,null,l,Integer.parseInt(k),userid,nam);
+                    mDatabase.setValue(p);
+                    Intent myIntent = new Intent(AddAParty.this, MainActivity.class);
+                    startActivity(myIntent);
+                    finish();
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    System.err.println("Listener was cancelled");
+                }
+            });
+
+
+
+
 
 
         }
@@ -349,24 +372,7 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
 
     }
 
-    public static class TimePickerFragment extends DialogFragment {
 
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            // Use the current time as the default values for the picker
-            final Calendar c = Calendar.getInstance();
-            int hour = c.get(Calendar.HOUR_OF_DAY);
-            int minute = c.get(Calendar.MINUTE);
-
-            // Activity has to implement this interface
-            TimePickerDialog.OnTimeSetListener listener = (TimePickerDialog.OnTimeSetListener) getActivity();
-
-            // Create a new instance of TimePickerDialog and return it
-            return new TimePickerDialog(getActivity(), listener, hour, minute,
-                    DateFormat.is24HourFormat(getActivity()));
-        }
-
-    }
 
     public static class DatePickerFragment extends DialogFragment {
 
