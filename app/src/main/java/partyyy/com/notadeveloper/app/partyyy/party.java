@@ -37,8 +37,11 @@ public class party {
     }
 
 
+    public party() {
+    }
 
     public String getTitle() {
+
         return title;
     }
 

@@ -80,7 +80,8 @@
         android:layout_toRightOf="@+id/line"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="2dp"
-        android:background="@drawable/ic_location_on_black_24dp"
+        app:srcCompat="@drawable/ic_location_on_black_24dp"
+        android:tint="#727272"
         android:id="@+id/locicon"
         />
     <TextView
@@ -90,7 +91,8 @@
         android:textSize="17dp"
         android:layout_below="@+id/pname"
         android:layout_toRightOf="@+id/locicon"
-        android:layout_marginTop="3dp"
+        android:layout_alignBottom="@+id/locicon"
+        android:gravity="bottom"
         android:layout_marginLeft="3dp"
         android:id="@+id/loct"
         android:textColor="#727272"/>
@@ -101,7 +103,8 @@
         android:layout_toRightOf="@+id/line"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="6dp"
-        android:background="@drawable/ic_access_time_black_24dp"
+        app:srcCompat="@drawable/ic_access_time_black_24dp"
+        android:tint="#5b5b5b"
         android:id="@+id/timicon"
         />
     <TextView
@@ -111,7 +114,8 @@
         android:textSize="17dp"
         android:layout_below="@+id/loct"
         android:layout_toRightOf="@+id/locicon"
-        android:layout_marginTop="10dp"
+        android:layout_alignBottom="@+id/timicon"
+        android:gravity="bottom"
         android:layout_marginLeft="3dp"
         android:textColor="#5b5b5b"
         android:id="@+id/timet"/>
@@ -122,7 +126,7 @@
         android:layout_toRightOf="@+id/line"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="6dp"
-        android:background="@drawable/ticket"
+        app:srcCompat="@drawable/ticket"
         android:id="@+id/ticicon"
         />
     <TextView
@@ -132,7 +136,8 @@
         android:textSize="17dp"
         android:layout_below="@+id/timet"
         android:layout_toRightOf="@+id/locicon"
-        android:layout_marginTop="5dp"
+        android:layout_alignBottom="@+id/ticicon"
+        android:gravity="bottom"
         android:layout_marginLeft="5dp"
         android:textColor="#5b5b5b"/>
     <TextView
@@ -241,16 +246,19 @@
         android:layout_below="@+id/contactt"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="4dp"
-        android:background="@drawable/ic_email_black_24dp"
+        app:srcCompat="@drawable/ic_email_black_24dp"
+        android:tint="#727272"
         android:id="@+id/emailicon"
         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="partyyy@gmail.com"
+        android:textColor="#727272"
         android:layout_below="@+id/contactt"
         android:layout_toRightOf="@+id/emailicon"
-        android:layout_marginTop="3dp"
+        android:layout_alignBottom="@+id/emailicon"
+        android:gravity="bottom"
         android:layout_marginLeft="3dp"
         android:id="@+id/email" />
     <ImageView
@@ -259,16 +267,19 @@
         android:layout_below="@+id/emailicon"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="4dp"
-        android:background="@drawable/ic_phone_black_24dp"
+        app:srcCompat="@drawable/ic_phone_black_24dp"
+        android:tint="#727272"
         android:id="@+id/phoneicon"
         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="9996857423"
+        android:textColor="#727272"
         android:layout_below="@+id/email"
         android:layout_toRightOf="@+id/phoneicon"
-        android:layout_marginTop="6dp"
+        android:layout_alignBottom="@+id/phoneicon"
+        android:gravity="bottom"
         android:layout_marginLeft="3dp"
         android:id="@+id/phone" />
 

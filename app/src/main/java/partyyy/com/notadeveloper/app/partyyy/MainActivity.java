@@ -9,40 +9,70 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import io.github.yavski.fabspeeddial.FabSpeedDial;
 import io.github.yavski.fabspeeddial.SimpleMenuListenerAdapter;
 
+import static android.text.Html.fromHtml;
+
 public class MainActivity extends AppCompatActivity {
-    @BindView(R.id.book)
-    Button book;
+    @BindView(R.id.recyclerview)
+    RecyclerView recyclerview;
     private DrawerLayout dl;
     private ActionBarDrawerToggle abdt;
+    private FirebaseRecyclerAdapter<party, PartyHolder> mAdapter;
+    private List<party> pli = new ArrayList<>();
+    String cat;
+    DatabaseReference ref;
+    LinearLayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.partycard2);
+        setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         dl = (DrawerLayout) findViewById(R.id.dl);
         abdt = new ActionBarDrawerToggle(this, dl, R.string.Open, R.string.Close);
 
+        mLayoutManager = new LinearLayoutManager(this);
+        recyclerview.setHasFixedSize(true);
+        recyclerview.setLayoutManager(mLayoutManager);
+
+
 
         dl.addDrawerListener(abdt);
         abdt.syncState();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+        myToolbar.setTitle(fromHtml("<font color='#ffffff'>Partyyy</font>"));
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.keepSynced(true);
+        ref = mDatabase.child("parties");
+
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -91,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-        /*FabSpeedDial fabSpeedDial = (FabSpeedDial) findViewById(R.id.fab_speed_dial);
+        FabSpeedDial fabSpeedDial = (FabSpeedDial) findViewById(R.id.fab_speed_dial);
         fabSpeedDial.setMenuListener(new SimpleMenuListenerAdapter() {
             @Override
             public boolean onMenuItemSelected(MenuItem menuItem) {
@@ -110,9 +140,20 @@ public class MainActivity extends AppCompatActivity {
                 }
                 return false;
             }
-        });*/
+        });
+
+        mAdapter = new FirebaseRecyclerAdapter<party, PartyHolder>(party.class, R.layout.partycard2, PartyHolder.class, ref) {
+            @Override
+            public void populateViewHolder(PartyHolder ViewHolder, final party product, int position) {
+                ViewHolder.setData(product, MainActivity.this);
+            }
+        };
+
+        recyclerview.setAdapter(mAdapter);
+
 
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -124,9 +165,5 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @OnClick(R.id.book)
-    public void onClick() {
-        Intent i = new Intent(MainActivity.this, detailedpartyactivity.class);
-        startActivity(i);
-    }
+
 }

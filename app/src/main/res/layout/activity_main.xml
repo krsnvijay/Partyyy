@@ -30,6 +30,31 @@
             app:miniFabTitleTextColor="?attr/colorPrimaryDark" />
 
     </FrameLayout>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/activity_display_products"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.notadeveloper.app.sgnpharmacy.DisplayProducts">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/my_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            android:titleTextColor="@color/white"
+            app:menu="@menu/disptoolmenu"
+            />
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:layout_below="@id/my_toolbar"
+            android:id="@+id/recyclerview"/>
+
+
+    </RelativeLayout>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"

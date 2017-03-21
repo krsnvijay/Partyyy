@@ -36,7 +36,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Register" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"
+            android:theme="@style/AppThemenotool"/>
         <activity android:name=".AddAParty" />
         <activity android:name=".detailedpartyactivity"></activity>
     </application>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <item
+        android:id="@+id/actbarm"
+        android:icon="@drawable/ic_sort_black_24dp"
+        android:title="Sort By"
+
+        app:showAsAction="always" android:orderInCategory="7">
+        <menu>
+            <item android:id="@+id/namesort"
+                android:checked="false"
+                android:title="Sort By Name"
+                app:showAsAction="never"
+                />
+            <item android:id="@+id/lowprice"
+                android:checked="false"
+                android:title="Sort By Lowest Price"
+                app:showAsAction="never"/>
+            <item android:id="@+id/highprice"
+                android:checked="false"
+                android:title="Sort By Highest price"
+                app:showAsAction="never"/>
+
+        </menu>
+
+
+    </item>
+
+
+</menu>
