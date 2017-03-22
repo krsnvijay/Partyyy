@@ -1,6 +1,7 @@
 package partyyy.com.notadeveloper.app.partyyy;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -52,7 +53,7 @@ public class PartyHolder extends RecyclerView.ViewHolder {
         ButterKnife.bind(this, itemView);
     }
 
-    public void setData(party p, Context mContext) {
+    public void setData(party p, final Context mContext) {
         this.p = p;
         this.mContext = mContext;
         Glide.with(mContext).load(p.getPicture()).into(iv);
@@ -60,8 +61,40 @@ public class PartyHolder extends RecyclerView.ViewHolder {
         loct.setText(p.getAddress3());
         timet.setText(p.getTime()+" to "+p.getTime1());
         String d = p.getDates();
-        String a[] = new String[3];
-        date.setText("17");
+        String a[] = d.split("/");
+        date.setText(a[0]);
+        if(a[1].equals("1"))
+            month.setText("JAN");
+        else if(a[1].equals("2"))
+            month.setText("FEB");
+        else if(a[1].equals("3"))
+            month.setText("MAR");
+        else if(a[1].equals("4"))
+            month.setText("APR");
+        else if(a[1].equals("5"))
+            month.setText("MAY");
+        else if(a[1].equals("6"))
+            month.setText("JUN");
+        else if(a[1].equals("7"))
+            month.setText("JLY");
+        else if(a[1].equals("8"))
+            month.setText("AUG");
+        else if(a[1].equals("9"))
+            month.setText("SEP");
+        else if(a[1].equals("10"))
+            month.setText("OCT");
+        else if(a[1].equals("11"))
+            month.setText("NOV");
+        else if(a[1].equals("12"))
+            month.setText("DEC");
+
+        book.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(mContext, detailedpartyactivity.class);
+                mContext.startActivity(i);
+            }
+        });
 
 
     }

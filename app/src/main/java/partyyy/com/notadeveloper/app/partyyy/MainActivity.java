@@ -59,12 +59,12 @@ public class MainActivity extends AppCompatActivity {
 
         dl.addDrawerListener(abdt);
         abdt.syncState();
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        setSupportActionBar(myToolbar);
-        myToolbar.setTitle(fromHtml("<font color='#ffffff'>Partyyy</font>"));
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        //Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        //setSupportActionBar(myToolbar);
+        //myToolbar.setTitle(fromHtml("<font color='#ffffff'>Partyyy</font>"));
+        //getSupportActionBar().setDisplayShowHomeEnabled(true);
+        //getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+        //getSupportActionBar().setDisplayUseLogoEnabled(true);
 
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
