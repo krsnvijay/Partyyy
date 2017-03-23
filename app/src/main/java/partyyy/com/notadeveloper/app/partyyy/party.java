@@ -19,6 +19,15 @@ public class party {
     String location;
     String uid;
     String nam;
+    long pid;
+
+    public long getPid() {
+        return pid;
+    }
+
+    public void setPid(long pid) {
+        this.pid = pid;
+    }
 
     public String getNam() {
         return nam;
@@ -153,7 +162,7 @@ public class party {
         this.tickets = tickets;
     }
 
-    public party(String title, String picture, String dates, String time, String time1, String email, String number, String address1, String address2, String address3, String pincode, String location, String description, int tickets, String uid, String nam) {
+    public party(String title, String picture, String dates, String time, String time1, String email, String number, String address1, String address2, String address3, String pincode, String location, String description, int tickets, String uid, String nam,long pid) {
 
         this.title = title;
         this.picture = picture;
@@ -171,6 +180,7 @@ public class party {
         this.tickets = tickets;
         this.uid = uid;
         this.nam = nam;
+        this.pid = pid;
     }
 
     String description;

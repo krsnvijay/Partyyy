@@ -53,15 +53,20 @@ public class PartyHolder extends RecyclerView.ViewHolder {
         ButterKnife.bind(this, itemView);
     }
 
-    public void setData(party p, final Context mContext) {
-        this.p = p;
+    public void setData(party p1, final Context mContext) {
+        this.p = p1;
         this.mContext = mContext;
         Glide.with(mContext).load(p.getPicture()).into(iv);
         pname.setText(p.getTitle());
         loct.setText(p.getAddress3());
         timet.setText(p.getTime()+" to "+p.getTime1());
         String d = p.getDates();
+
+
+
         String a[] = d.split("/");
+        if (a[0].length()<2)
+            a[0]="0"+a[0];
         date.setText(a[0]);
         if(a[1].equals("1"))
             month.setText("JAN");
@@ -91,8 +96,9 @@ public class PartyHolder extends RecyclerView.ViewHolder {
         book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(mContext, detailedpartyactivity.class);
-                mContext.startActivity(i);
+                Intent intent = new Intent(mContext, detailedpartyactivity.class);
+                intent.putExtra("party_id", String.valueOf(p.getPid()));
+                mContext.startActivity(intent);
             }
         });
 

@@ -53,10 +53,10 @@
         android:layout_width="1dp"
         android:layout_height="90dp"
         android:background="#808080"
-        android:layout_toRightOf="@+id/date"
+        android:layout_toRightOf="@+id/month"
         android:layout_below="@+id/iv"
         android:layout_marginTop="40dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="23dp"
         android:id="@+id/line">
 
     </RelativeLayout>

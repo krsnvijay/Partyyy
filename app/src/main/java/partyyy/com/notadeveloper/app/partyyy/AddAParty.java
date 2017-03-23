@@ -347,7 +347,8 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
                     long offset = snapshot.getValue(Long.class);
                     estimatedServerTimeMs = System.currentTimeMillis() + offset;
                     DatabaseReference mDatabase = ref.child("parties").child(String.valueOf(estimatedServerTimeMs));
-                    party p = new party(a,photoUrl,b,c,d,e,f,g,h,i,j,null,l,Integer.parseInt(k),userid,nam);
+
+                    party p = new party(a,photoUrl,b,c,d,e,f,g,h,i,j,null,l,Integer.parseInt(k),userid,nam,estimatedServerTimeMs);
                     mDatabase.setValue(p);
                     Intent myIntent = new Intent(AddAParty.this, MainActivity.class);
                     startActivity(myIntent);
