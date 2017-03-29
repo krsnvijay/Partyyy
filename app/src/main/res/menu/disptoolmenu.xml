@@ -13,16 +13,16 @@
             <item android:id="@+id/namesort"
                 android:checked="false"
                 android:title="Sort By Name"
-                app:showAsAction="never"
+                app:showAsAction="always"
                 />
             <item android:id="@+id/lowprice"
                 android:checked="false"
                 android:title="Sort By Lowest Price"
-                app:showAsAction="never"/>
+                app:showAsAction="always"/>
             <item android:id="@+id/highprice"
                 android:checked="false"
                 android:title="Sort By Highest price"
-                app:showAsAction="never"/>
+                app:showAsAction="always"/>
 
         </menu>
 

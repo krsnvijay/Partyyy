@@ -29,42 +29,67 @@
             android:titleTextColor="@color/white"
             app:menu="@menu/disptoolmenu"
             />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rl"
+            android:layout_below="@+id/my_toolbar"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="20dp">
+                <TextView
+                    android:id="@+id/address2"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:text="DD/MM/YYYY"
+                    android:paddingTop="7dp"
+                    />
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/address2"
+                android:layout_alignRight="@+id/address2"
+                android:layout_alignTop="@+id/address2"
+                android:padding="5dp"
+                app:srcCompat="@drawable/ic_arrow_drop_down_black_24dp" />
+        </RelativeLayout>
+        <Button
+            android:id="@+id/confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:filterTouchesWhenObscured="true"
+            android:text="Add filters"
+            android:layout_gravity="right"
+            android:layout_below="@+id/rl"
+            android:theme="@style/AccentButton" />
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:layout_below="@id/my_toolbar"
+            android:layout_below="@id/confirm"
             android:id="@+id/recyclerview"/>
 
 
     </RelativeLayout>
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp">
-
-        <io.github.yavski.fabspeeddial.FabSpeedDial
-            android:id="@+id/fab_speed_dial"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            app:fabGravity="bottom_end"
-            app:fabMenu="@menu/speeddial_menu"
-            app:miniFabBackgroundTint="@color/tw__composer_red"
-            app:miniFabDrawableTint="?attr/colorPrimaryDark"
-            app:miniFabTitleTextColor="?attr/colorPrimaryDark" />
-
-    </FrameLayout>
 
     <android.support.design.widget.NavigationView
-        android:id="@+id/nav_view"
+    android:id="@+id/nav_view"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    app:headerLayout="@layout/navigation_header"
+
+    app:menu="@menu/navigation_menu">
+</android.support.design.widget.NavigationView>
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view1"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
+        android:layout_gravity="right"
         app:headerLayout="@layout/navigation_header"
 
-        app:menu="@menu/navigation_menu">
+        app:menu="@menu/speeddial_menu">
     </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>

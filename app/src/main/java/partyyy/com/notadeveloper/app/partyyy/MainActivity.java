@@ -11,8 +11,11 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
@@ -27,14 +30,14 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.github.yavski.fabspeeddial.FabSpeedDial;
-import io.github.yavski.fabspeeddial.SimpleMenuListenerAdapter;
-
-import static android.text.Html.fromHtml;
 
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.recyclerview)
     RecyclerView recyclerview;
+    @BindView(R.id.address2)
+    TextView address2;
+    @BindView(R.id.imageView2)
+    ImageView imageView2;
     private DrawerLayout dl;
     private ActionBarDrawerToggle abdt;
     private FirebaseRecyclerAdapter<party, PartyHolder> mAdapter;
@@ -57,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
         dl.addDrawerListener(abdt);
         abdt.syncState();
         //Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -68,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView1 = (NavigationView) findViewById(R.id.nav_view1);
 
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.keepSynced(true);
@@ -116,31 +121,14 @@ public class MainActivity extends AppCompatActivity {
                 } else if (id == R.id.add) {
                     Intent i = new Intent(MainActivity.this, AddAParty.class);
                     startActivity(i);
+                } else if (id == R.id.action_car) {
+                    Toast.makeText(MainActivity.this, "CAR",
+                            Toast.LENGTH_LONG).show();
                 }
-
                 return true;
             }
         });
-        FabSpeedDial fabSpeedDial = (FabSpeedDial) findViewById(R.id.fab_speed_dial);
-        fabSpeedDial.setMenuListener(new SimpleMenuListenerAdapter() {
-            @Override
-            public boolean onMenuItemSelected(MenuItem menuItem) {
-                if (menuItem.getItemId() == R.id.action_car) {
-                    Toast.makeText(MainActivity.this, "CAR",
-                            Toast.LENGTH_LONG).show();
-                } else if (menuItem.getItemId() == R.id.action_food) {
-                    Toast.makeText(MainActivity.this, "FOOD",
-                            Toast.LENGTH_LONG).show();
-                } else if (menuItem.getItemId() == R.id.action_booze) {
-                    Toast.makeText(MainActivity.this, "BOOZE",
-                            Toast.LENGTH_LONG).show();
-                } else if (menuItem.getItemId() == R.id.action_shisha) {
-                    Toast.makeText(MainActivity.this, "SHISHA",
-                            Toast.LENGTH_LONG).show();
-                }
-                return false;
-            }
-        });
+
 
         mAdapter = new FirebaseRecyclerAdapter<party, PartyHolder>(party.class, R.layout.partycard2, PartyHolder.class, ref) {
             @Override
@@ -161,8 +149,22 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.namesort) {
+            return true;
+        }
+
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.disptoolmenu, menu);
+        return true;
     }
 
 

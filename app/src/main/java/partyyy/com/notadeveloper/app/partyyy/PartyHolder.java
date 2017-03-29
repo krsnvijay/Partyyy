@@ -101,7 +101,14 @@ public class PartyHolder extends RecyclerView.ViewHolder {
                 mContext.startActivity(intent);
             }
         });
-
+        cv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, detailedpartyactivity.class);
+                intent.putExtra("party_id", String.valueOf(p.getPid()));
+                mContext.startActivity(intent);
+            }
+        });
 
     }
 
