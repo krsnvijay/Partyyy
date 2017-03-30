@@ -5,18 +5,25 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -31,13 +38,13 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+
+
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.recyclerview)
     RecyclerView recyclerview;
-    @BindView(R.id.address2)
-    TextView address2;
-    @BindView(R.id.imageView2)
-    ImageView imageView2;
+    @BindView(R.id.rl)
+    Spinner rl;
     private DrawerLayout dl;
     private ActionBarDrawerToggle abdt;
     private FirebaseRecyclerAdapter<party, PartyHolder> mAdapter;
@@ -45,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     String cat;
     DatabaseReference ref;
     LinearLayoutManager mLayoutManager;
-
+    NavigationView navigationView1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         dl = (DrawerLayout) findViewById(R.id.dl);
         abdt = new ActionBarDrawerToggle(this, dl, R.string.Open, R.string.Close);
-
+        abdt.setDrawerIndicatorEnabled(true);
         mLayoutManager = new LinearLayoutManager(this);
         recyclerview.setHasFixedSize(true);
         recyclerview.setLayoutManager(mLayoutManager);
@@ -63,21 +70,29 @@ public class MainActivity extends AppCompatActivity {
 
         dl.addDrawerListener(abdt);
         abdt.syncState();
-        //Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        //setSupportActionBar(myToolbar);
-        //myToolbar.setTitle(fromHtml("<font color='#ffffff'>Partyyy</font>"));
-        //getSupportActionBar().setDisplayShowHomeEnabled(true);
-        //getSupportActionBar().setLogo(R.mipmap.ic_launcher);
-        //getSupportActionBar().setDisplayUseLogoEnabled(true);
+     Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+        myToolbar.setTitle(fromHtml("<font color='#ffffff'>    Partyyy</font>"));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_dehaze_black_24dp);
+
 
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        NavigationView navigationView1 = (NavigationView) findViewById(R.id.nav_view1);
+       navigationView1 = (NavigationView) findViewById(R.id.nav_view1);
 
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.keepSynced(true);
         ref = mDatabase.child("parties");
+navigationView1.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Snackbar.make(findViewById(android.R.id.content),"asdasd", Snackbar.LENGTH_SHORT).show();
 
+
+        return true;
+    }
+});
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -152,7 +167,8 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.namesort) {
+        if (id == R.id.actbarm) {
+            dl.openDrawer(navigationView1);
             return true;
         }
 
@@ -166,6 +182,15 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.disptoolmenu, menu);
         return true;
     }
-
+    @SuppressWarnings("deprecation")
+    public static Spanned fromHtml(String html) {
+        Spanned result;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            result = Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY);
+        } else {
+            result = Html.fromHtml(html);
+        }
+        return result;
+    }
 
 }

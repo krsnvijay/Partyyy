@@ -5,26 +5,11 @@
     >
     <item
         android:id="@+id/actbarm"
-        android:icon="@drawable/ic_sort_black_24dp"
-        android:title="Sort By"
+
+        android:title="More"
 
         app:showAsAction="always" android:orderInCategory="7">
-        <menu>
-            <item android:id="@+id/namesort"
-                android:checked="false"
-                android:title="Sort By Name"
-                app:showAsAction="always"
-                />
-            <item android:id="@+id/lowprice"
-                android:checked="false"
-                android:title="Sort By Lowest Price"
-                app:showAsAction="always"/>
-            <item android:id="@+id/highprice"
-                android:checked="false"
-                android:title="Sort By Highest price"
-                app:showAsAction="always"/>
-
-        </menu>
+  
 
 
     </item>

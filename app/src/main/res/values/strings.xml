@@ -10,4 +10,11 @@
     <string name="unknown_error">Unknown Error</string>
     <string name="Open">Open</string>
     <string name="Close">Close</string>
+    <array name="spinne">
+        <item> DD/MM/YYYY</item>
+        <item> ggb</item>
+        <item> ggc</item>
+        <item> ggd</item>
+        <item> gge</item>
+    </array>
 </resources>

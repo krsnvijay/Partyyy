@@ -50,6 +50,8 @@ dependencies {
     compile 'io.github.yavski:fab-speed-dial:1.0.6'
     compile 'com.google.android.gms:play-services-location:10.2.0'
     compile 'com.android.support:multidex:1.0.1'
+    compile 'com.mxn.soul:flowingdrawer-core:2.0.0'
+    compile 'com.nineoldandroids:library:2.4.0'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 }
