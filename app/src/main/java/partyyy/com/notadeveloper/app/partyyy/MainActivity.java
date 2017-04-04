@@ -31,6 +31,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +44,6 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.recyclerview)
     RecyclerView recyclerview;
-    @BindView(R.id.rl)
-    Spinner rl;
     private DrawerLayout dl;
     private ActionBarDrawerToggle abdt;
     private FirebaseRecyclerAdapter<party, PartyHolder> mAdapter;
@@ -52,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     String cat;
     DatabaseReference ref;
     LinearLayoutManager mLayoutManager;
-    NavigationView navigationView1;
+    boolean called=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         abdt.setDrawerIndicatorEnabled(true);
         mLayoutManager = new LinearLayoutManager(this);
         recyclerview.setHasFixedSize(true);
-        recyclerview.setLayoutManager(mLayoutManager);
+
 
 
 
@@ -79,20 +78,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-       navigationView1 = (NavigationView) findViewById(R.id.nav_view1);
+
 
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.keepSynced(true);
         ref = mDatabase.child("parties");
-navigationView1.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Snackbar.make(findViewById(android.R.id.content),"asdasd", Snackbar.LENGTH_SHORT).show();
-
-
-        return true;
-    }
-});
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -144,15 +134,18 @@ navigationView1.setNavigationItemSelectedListener(new NavigationView.OnNavigatio
             }
         });
 
+        if (!called) {
+            recyclerview.setLayoutManager(mLayoutManager);
+            mAdapter = new FirebaseRecyclerAdapter<party, PartyHolder>(party.class, R.layout.partycard2, PartyHolder.class, ref) {
+                @Override
+                public void populateViewHolder(PartyHolder ViewHolder, final party product, int position) {
+                    ViewHolder.setData(product, MainActivity.this);
+                }
+            };
 
-        mAdapter = new FirebaseRecyclerAdapter<party, PartyHolder>(party.class, R.layout.partycard2, PartyHolder.class, ref) {
-            @Override
-            public void populateViewHolder(PartyHolder ViewHolder, final party product, int position) {
-                ViewHolder.setData(product, MainActivity.this);
-            }
-        };
-
-        recyclerview.setAdapter(mAdapter);
+            recyclerview.setAdapter(mAdapter);
+            called=true;
+        }
 
 
     }
@@ -162,18 +155,32 @@ navigationView1.setNavigationItemSelectedListener(new NavigationView.OnNavigatio
     public boolean onOptionsItemSelected(MenuItem item) {
         if (abdt.onOptionsItemSelected(item)) {
             return true;
+
         }
 
-        int id = item.getItemId();
+        switch (item.getItemId()) {
+            case R.id.datehigh:
+                setmAdapter(1);
+                return true;
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.actbarm) {
-            dl.openDrawer(navigationView1);
-            return true;
+            case R.id.datelow:
+                setmAdapter(2);
+                return true;
+            case R.id.costhigh:
+                setmAdapter(3);
+                return true;
+            case R.id.costlow:
+                setmAdapter(4);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
 
 
-        return super.onOptionsItemSelected(item);
+
+
+
     }
 
     @Override
@@ -191,6 +198,40 @@ navigationView1.setNavigationItemSelectedListener(new NavigationView.OnNavigatio
             result = Html.fromHtml(html);
         }
         return result;
+    }
+    void setmAdapter(int x)
+
+    {
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        Query q=mDatabase.child("parties");
+        LinearLayoutManager LayoutManager = new LinearLayoutManager(MainActivity.this);
+
+        if (x==1)
+        {q=mDatabase.child("parties").orderByChild("pid");
+         LayoutManager.setStackFromEnd(true);
+            LayoutManager.setReverseLayout(true);}
+     else   if (x==2)
+        {
+            q=mDatabase.child("parties").orderByChild("pid");
+        }
+        else if (x==3)
+        {
+            q=mDatabase.child("parties").orderByChild("tickets");
+            LayoutManager.setStackFromEnd(true);
+            LayoutManager.setReverseLayout(true);
+        }
+        else if (x==4)
+        {
+            q=mDatabase.child("parties").orderByChild("tickets");
+        }
+        mAdapter = new FirebaseRecyclerAdapter<party, PartyHolder>(party.class, R.layout.partycard2, PartyHolder.class, q) {
+            @Override
+            public void populateViewHolder(PartyHolder ViewHolder, final party product, int position) {
+                ViewHolder.setData(product, MainActivity.this);
+            }
+        };
+        recyclerview.setLayoutManager(LayoutManager);
+        recyclerview.setAdapter(mAdapter);
     }
 
 }

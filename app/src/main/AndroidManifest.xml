@@ -36,10 +36,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".Register" />
-        <activity android:name=".MainActivity"
-            android:theme="@style/AppThemenotool"/>
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppThemenotool" />
         <activity android:name=".AddAParty" />
-        <activity android:name=".detailedpartyactivity"></activity>
+        <activity android:name=".detailedpartyactivity" />
     </application>
 
 </manifest>

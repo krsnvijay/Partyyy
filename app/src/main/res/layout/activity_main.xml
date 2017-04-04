@@ -7,6 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+
     tools:context=".MainActivity"
 
 
@@ -30,26 +31,11 @@
             app:menu="@menu/disptoolmenu"
             />
 
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/rl"
-            android:entries="@array/spinne"
-            android:layout_below="@+id/my_toolbar" />
-        <Button
-            android:id="@+id/confirm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:filterTouchesWhenObscured="true"
-            android:text="Add filters"
-            android:layout_gravity="right"
-            android:layout_below="@+id/rl"
-            android:theme="@style/AccentButton" />
+
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:layout_below="@id/confirm"
+            android:layout_below="@id/my_toolbar"
             android:id="@+id/recyclerview"/>
 
 
@@ -61,17 +47,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="start"
     app:headerLayout="@layout/navigation_header"
-
     app:menu="@menu/navigation_menu">
 </android.support.design.widget.NavigationView>
-    <android.support.design.widget.NavigationView
-        android:id="@+id/nav_view1"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="end"
-        app:headerLayout="@layout/navigation_header"
-
-        app:menu="@menu/speeddial_menu">
-    </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>

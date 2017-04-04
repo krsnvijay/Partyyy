@@ -5,12 +5,24 @@
     >
     <item
         android:id="@+id/actbarm"
-
-        android:title="More"
+        android:icon="@drawable/ic_sort_black_24dp"
+        android:title="sort"
 
         app:showAsAction="always" android:orderInCategory="7">
-
-
+        <menu>
+        <item
+            android:id="@+id/datehigh"
+            android:title="Sort by Date ▲"/>
+        <item
+            android:id="@+id/datelow"
+            android:title="Sort by Date ▼"/>
+        <item
+            android:id="@+id/costhigh"
+            android:title="Sort by Cost ▲"/>
+        <item
+            android:id="@+id/costlow"
+            android:title="Sort by Cost ▼"/>
+        </menu>
 
     </item>
 
