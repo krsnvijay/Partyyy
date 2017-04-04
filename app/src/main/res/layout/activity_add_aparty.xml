@@ -230,16 +230,11 @@
             android:text="Click to add location (optional)"
             android:theme="@style/AccentButton"
             android:id="@+id/location"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="20dp"
-            android:textSize="20dp"
-            android:id="@+id/loca"
-            />
+
         <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
             android:text="Tickets:"
             android:textSize="20sp"
+            android:layout_marginTop="15dp"
 
             />
 
@@ -257,6 +252,39 @@
                 android:maxLength="4"
                 />
         </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+        android:id="@+id/pricestag1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <AutoCompleteTextView
+            android:id="@+id/pricestag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Price per person (Stag)"
+            android:maxLines="1"
+            android:maxLength="4"
+            />
+    </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/pricecouple1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <AutoCompleteTextView
+                android:id="@+id/pricecouple"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="Price per couple"
+                android:maxLines="1"
+                android:maxLength="4"
+                />
+        </android.support.design.widget.TextInputLayout>
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="Description of party:"
+            android:textSize="20sp"
+            android:layout_marginTop="15dp"
+            />
         <TextView
             android:id="@+id/text"
             android:textSize="18dp"

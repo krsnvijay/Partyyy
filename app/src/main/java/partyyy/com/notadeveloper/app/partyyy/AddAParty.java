@@ -8,7 +8,6 @@ import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -17,8 +16,6 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
-import android.text.format.DateFormat;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
@@ -30,13 +27,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -49,10 +44,7 @@ import com.mikelau.croperino.Croperino;
 import com.mikelau.croperino.CroperinoConfig;
 import com.mikelau.croperino.CroperinoFileUtil;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 import java.util.regex.Pattern;
 
 import butterknife.BindView;
@@ -92,8 +84,6 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
     TextView time1;
     @BindView(R.id.location)
     Button location;
-    @BindView(R.id.loca)
-    TextView loca;
     @BindView(R.id.address1)
     EditText address1;
     @BindView(R.id.add1lt)
@@ -114,6 +104,14 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
     EditText pincode;
     @BindView(R.id.pinlt)
     TextInputLayout pinlt;
+    @BindView(R.id.pricestag)
+    AutoCompleteTextView pricestag;
+    @BindView(R.id.pricestag1)
+    TextInputLayout pricestag1;
+    @BindView(R.id.pricecouple)
+    AutoCompleteTextView pricecouple;
+    @BindView(R.id.pricecouple1)
+    TextInputLayout pricecouple1;
     private long estimatedServerTimeMs;
     private String photoUrl;
     private FirebaseStorage storage;
@@ -154,7 +152,7 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
                 mTimePicker = new TimePickerDialog(AddAParty.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        time.setText( selectedHour + ":" + selectedMinute);
+                        time.setText(selectedHour + ":" + selectedMinute);
                     }
                 }, hour, minute, false);//Yes 24 hour time
                 mTimePicker.setTitle("Select Time");
@@ -173,7 +171,7 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
                 mTimePicker = new TimePickerDialog(AddAParty.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        time1.setText( selectedHour + ":" + selectedMinute);
+                        time1.setText(selectedHour + ":" + selectedMinute);
                     }
                 }, hour, minute, false);//Yes 24 hour time
                 mTimePicker.setTitle("Select Time");
@@ -197,7 +195,6 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
             }
         });
     }
-
 
 
     @OnClick(R.id.location)
@@ -224,28 +221,26 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
         final String j = pincode.getText().toString();
         final String k = mTickets.getText().toString();
         final String l = mText.getText().toString();
+        final String m = pricestag.getText().toString();
+        final String n = pricecouple.getText().toString();
 
-        if (isEmpty(a))
-        {
+        if (isEmpty(a)) {
             mTitle1.setError("Field cannot be empty");
             focusView = mTitle1;
             cancel = true;
-        }
-        else mTitle1.setError(null);
-        if (b.equals("DD/MM/YYYY"))
-        {
+        } else mTitle1.setError(null);
+        if (b.equals("DD/MM/YYYY")) {
 
             Snackbar.make(findViewById(android.R.id.content), "Please fill date first", Snackbar.LENGTH_SHORT)
-                 //   .setActionTextColor(ContextCompat.getColor(AddAParty.this, R.color.tw__composer_red))
+                    //   .setActionTextColor(ContextCompat.getColor(AddAParty.this, R.color.tw__composer_red))
                     .show();
             focusView = null;
             cancel = true;
         }
-        if (c.equals("MM:HH"))
-        {
+        if (c.equals("MM:HH")) {
 
             Snackbar.make(findViewById(android.R.id.content), "Please fill from time first", Snackbar.LENGTH_SHORT)
-                   // .setActionTextColor(ContextCompat.getColor(AddAParty.this, R.color.tw__composer_red))
+                    // .setActionTextColor(ContextCompat.getColor(AddAParty.this, R.color.tw__composer_red))
 
                     .show();
             focusView = null;
@@ -260,57 +255,52 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
             focusView = null;
             cancel = true;
         }*/
-        if (isEmpty(e))
-        {
+        if (isEmpty(e)) {
             mEmaila.setError("Field cannot be empty");
             focusView = mEmaila;
             cancel = true;
-        }
-        else mEmaila.setError(null);
-        if (isEmpty(f))
-        {
+        } else mEmaila.setError(null);
+        if (isEmpty(f)) {
             mNumber1.setError("Field cannot be empty");
             focusView = mNumber1;
             cancel = true;
-        }
-        else mNumber1.setError(null);
-        if (isEmpty(g))
-        {
+        } else mNumber1.setError(null);
+        if (isEmpty(g)) {
             add1lt.setError("Field cannot be empty");
             focusView = add1lt;
             cancel = true;
-        }
-        else add1lt.setError(null);
-        if (isEmpty(h))
-        {
+        } else add1lt.setError(null);
+        if (isEmpty(h)) {
             add2lt.setError("Field cannot be empty");
             focusView = add2lt;
             cancel = true;
-        }
-        else add2lt.setError(null);
-        if (isEmpty(i))
-        {
+        } else add2lt.setError(null);
+        if (isEmpty(i)) {
             add3lt.setError("Field cannot be empty");
             focusView = add3lt;
             cancel = true;
-        }
-        else add3lt.setError(null);
-        if (isEmpty(j))
-        {
+        } else add3lt.setError(null);
+        if (isEmpty(j)) {
             pinlt.setError("Field cannot be empty");
             focusView = pinlt;
             cancel = true;
-        }
-        else pinlt.setError(null);
-        if (isEmpty(k))
-        {
+        } else pinlt.setError(null);
+        if (isEmpty(k)) {
             mTickets1.setError("Field cannot be empty");
             focusView = mTickets1;
             cancel = true;
-        }
-        else mTickets1.setError(null);
-        if (l.equals("Enter description here..."))
-        {
+        } else mTickets1.setError(null);
+        if (isEmpty(m)) {
+            pricestag1.setError("Field cannot be empty");
+            focusView = pricestag1;
+            cancel = true;
+        } else pricestag1.setError(null);
+        if (isEmpty(n)) {
+            pricecouple1.setError("Field cannot be empty");
+            focusView = pricecouple1;
+            cancel = true;
+        } else pricecouple1.setError(null);
+        if (l.equals("Enter description here...")) {
             Snackbar.make(findViewById(android.R.id.content), "Please give a description", Snackbar.LENGTH_SHORT)
 
 
@@ -322,19 +312,17 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
             mNumber1.setError("Invalid Phone");
             focusView = mNumber1;
             cancel = true;
-        }
-        else mNumber1.setError(null);
+        } else mNumber1.setError(null);
         if (!isValidEmail(e)) {
             mEmaila.setError("Invalid Email");
             focusView = mEmaila;
             cancel = true;
-        }
-        else mEmaila.setError(null);
+        } else mEmaila.setError(null);
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
-            if (focusView!=null)
-            focusView.requestFocus();
+            if (focusView != null)
+                focusView.requestFocus();
         } else {
 
             final String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -348,7 +336,7 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
                     estimatedServerTimeMs = System.currentTimeMillis() + offset;
                     DatabaseReference mDatabase = ref.child("parties").child(String.valueOf(estimatedServerTimeMs));
 
-                    party p = new party(a,photoUrl,b,c,d,e,f,g,h,i,j,null,l,Integer.parseInt(k),userid,nam,estimatedServerTimeMs);
+                    party p = new party(a, photoUrl, b, c, d, e, f, g, h, i, j, null, l, Integer.parseInt(k), userid, nam, estimatedServerTimeMs,m,n);
                     mDatabase.setValue(p);
                     Intent myIntent = new Intent(AddAParty.this, MainActivity.class);
                     startActivity(myIntent);
@@ -363,16 +351,10 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
             });
 
 
-
-
-
-
         }
 
 
-
     }
-
 
 
     public static class DatePickerFragment extends DialogFragment {
@@ -497,6 +479,7 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
         }
 
     }
+
     private boolean isValidEmail(String email) {
 
         Pattern pattern = Patterns.EMAIL_ADDRESS;
@@ -504,7 +487,7 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
     }
 
     private boolean isValidPhone(CharSequence target) {
-        return !isEmpty(target) && android.util.Patterns.PHONE.matcher(target).matches() && target.length() == 10;
+        return !isEmpty(target) && Patterns.PHONE.matcher(target).matches() && target.length() == 10;
     }
 
 

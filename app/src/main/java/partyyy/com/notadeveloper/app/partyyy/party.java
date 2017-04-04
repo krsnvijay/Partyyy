@@ -20,6 +20,24 @@ public class party {
     String uid;
     String nam;
     long pid;
+    String pricestag;
+    String pricecouple;
+
+    public String getPricestag() {
+        return pricestag;
+    }
+
+    public void setPricestag(String pricestag) {
+        this.pricestag = pricestag;
+    }
+
+    public String getPricecouple() {
+        return pricecouple;
+    }
+
+    public void setPricecouple(String pricecouple) {
+        this.pricecouple = pricecouple;
+    }
 
     public long getPid() {
         return pid;
@@ -162,7 +180,7 @@ public class party {
         this.tickets = tickets;
     }
 
-    public party(String title, String picture, String dates, String time, String time1, String email, String number, String address1, String address2, String address3, String pincode, String location, String description, int tickets, String uid, String nam,long pid) {
+    public party(String title, String picture, String dates, String time, String time1, String email, String number, String address1, String address2, String address3, String pincode, String location, String description, int tickets, String uid, String nam,long pid,String pricestag,String pricecouple) {
 
         this.title = title;
         this.picture = picture;
@@ -181,6 +199,8 @@ public class party {
         this.uid = uid;
         this.nam = nam;
         this.pid = pid;
+        this.pricestag = pricestag;
+        this.pricecouple = pricecouple;
     }
 
     String description;
