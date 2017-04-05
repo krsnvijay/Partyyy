@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
                 } else if (id == R.id.settings) {
 
                 } else if (id == R.id.add) {
-                    Intent i = new Intent(MainActivity.this, AddAParty.class);
+                    Intent i = new Intent(MainActivity.this, BecomeOrganiser.class);
                     startActivity(i);
                 } else if (id == R.id.action_car) {
                     Toast.makeText(MainActivity.this, "CAR",

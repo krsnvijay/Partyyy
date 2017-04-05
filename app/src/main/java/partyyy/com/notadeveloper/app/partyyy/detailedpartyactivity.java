@@ -60,6 +60,12 @@ public class detailedpartyactivity extends AppCompatActivity {
 
     DatabaseReference ref;
     party p = new party();
+    @BindView(R.id.noticket)
+    TextView noticket;
+    @BindView(R.id.stagprice)
+    TextView stagprice;
+    @BindView(R.id.coupleprice)
+    TextView coupleprice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +81,7 @@ public class detailedpartyactivity extends AppCompatActivity {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                p=dataSnapshot.getValue(party.class);
+                p = dataSnapshot.getValue(party.class);
 
 
                 Glide.with(detailedpartyactivity.this).load(p.getPicture()).into(iv);
@@ -83,42 +89,41 @@ public class detailedpartyactivity extends AppCompatActivity {
                 String d = p.getDates();
 
 
-
                 String a[] = d.split("/");
 
-                if (a[0].length()<2)
-                    a[0]="0"+a[0];
+                if (a[0].length() < 2)
+                    a[0] = "0" + a[0];
 
                 date.setText(a[0]);
-                if(a[1].equals("1"))
+                if (a[1].equals("1"))
                     month.setText("JAN");
-                else if(a[1].equals("2"))
+                else if (a[1].equals("2"))
                     month.setText("FEB");
-                else if(a[1].equals("3"))
+                else if (a[1].equals("3"))
                     month.setText("MAR");
-                else if(a[1].equals("4"))
+                else if (a[1].equals("4"))
                     month.setText("APR");
-                else if(a[1].equals("5"))
+                else if (a[1].equals("5"))
                     month.setText("MAY");
-                else if(a[1].equals("6"))
+                else if (a[1].equals("6"))
                     month.setText("JUN");
-                else if(a[1].equals("7"))
+                else if (a[1].equals("7"))
                     month.setText("JLY");
-                else if(a[1].equals("8"))
+                else if (a[1].equals("8"))
                     month.setText("AUG");
-                else if(a[1].equals("9"))
+                else if (a[1].equals("9"))
                     month.setText("SEP");
-                else if(a[1].equals("10"))
+                else if (a[1].equals("10"))
                     month.setText("OCT");
-                else if(a[1].equals("11"))
+                else if (a[1].equals("11"))
                     month.setText("NOV");
-                else if(a[1].equals("12"))
+                else if (a[1].equals("12"))
                     month.setText("DEC");
 
 
                 pname.setText(p.getTitle());
                 loct.setText(p.getAddress3());
-                timet.setText(p.getTime()+" to "+p.getTime1());
+                timet.setText(p.getTime() + " to " + p.getTime1());
                 descrip.setText(p.getDescription());
                 add1.setText(p.getAddress1());
                 add2.setText(p.getAddress2());
@@ -126,6 +131,9 @@ public class detailedpartyactivity extends AppCompatActivity {
                 pin.setText(p.getPincode());
                 phone.setText(p.getNumber());
                 email.setText(p.getEmail());
+                noticket.setText(p.getTickets() + " Available");
+                stagprice.setText("(Stag) ₹"+p.getPricestag());
+                coupleprice.setText("(Couple) ₹"+p.getPricecouple());
             }
 
             @Override

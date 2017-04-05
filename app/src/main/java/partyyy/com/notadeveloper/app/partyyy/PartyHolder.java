@@ -46,11 +46,14 @@ public class PartyHolder extends RecyclerView.ViewHolder {
     Context mContext;
     @BindView(R.id.timet)
     TextView timet;
+    @BindView(R.id.price)
+    TextView price;
 
 
     public PartyHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
+
     }
 
     public void setData(party p1, final Context mContext) {
@@ -59,38 +62,43 @@ public class PartyHolder extends RecyclerView.ViewHolder {
         Glide.with(mContext).load(p.getPicture()).into(iv);
         pname.setText(p.getTitle());
         loct.setText(p.getAddress3());
-        timet.setText(p.getTime()+" to "+p.getTime1());
+        timet.setText(p.getTime() + " to " + p.getTime1());
         String d = p.getDates();
-
+        int as= Integer.parseInt(p.getPricestag());
+        int b = Integer.parseInt(p.getPricecouple());
+        if(as>b||as==b)
+            price.setText("₹ "+p.getPricecouple()+" onwards");
+        else
+            price.setText("₹ "+p.getPricestag()+" onwards");
 
 
         String a[] = d.split("/");
-        if (a[0].length()<2)
-            a[0]="0"+a[0];
+        if (a[0].length() < 2)
+            a[0] = "0" + a[0];
         date.setText(a[0]);
-        if(a[1].equals("1"))
+        if (a[1].equals("1"))
             month.setText("JAN");
-        else if(a[1].equals("2"))
+        else if (a[1].equals("2"))
             month.setText("FEB");
-        else if(a[1].equals("3"))
+        else if (a[1].equals("3"))
             month.setText("MAR");
-        else if(a[1].equals("4"))
+        else if (a[1].equals("4"))
             month.setText("APR");
-        else if(a[1].equals("5"))
+        else if (a[1].equals("5"))
             month.setText("MAY");
-        else if(a[1].equals("6"))
+        else if (a[1].equals("6"))
             month.setText("JUN");
-        else if(a[1].equals("7"))
+        else if (a[1].equals("7"))
             month.setText("JLY");
-        else if(a[1].equals("8"))
+        else if (a[1].equals("8"))
             month.setText("AUG");
-        else if(a[1].equals("9"))
+        else if (a[1].equals("9"))
             month.setText("SEP");
-        else if(a[1].equals("10"))
+        else if (a[1].equals("10"))
             month.setText("OCT");
-        else if(a[1].equals("11"))
+        else if (a[1].equals("11"))
             month.setText("NOV");
-        else if(a[1].equals("12"))
+        else if (a[1].equals("12"))
             month.setText("DEC");
 
         book.setOnClickListener(new View.OnClickListener() {
