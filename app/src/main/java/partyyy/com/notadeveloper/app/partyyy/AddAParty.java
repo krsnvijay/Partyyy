@@ -16,6 +16,7 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+
 import android.util.Patterns;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
@@ -44,7 +45,11 @@ import com.mikelau.croperino.Croperino;
 import com.mikelau.croperino.CroperinoConfig;
 import com.mikelau.croperino.CroperinoFileUtil;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 import butterknife.BindView;
@@ -111,7 +116,9 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
     @BindView(R.id.pricecouple)
     AutoCompleteTextView pricecouple;
     @BindView(R.id.pricecouple1)
+
     TextInputLayout pricecouple1;
+    long esttime;
     private long estimatedServerTimeMs;
     private String photoUrl;
     private FirebaseStorage storage;
@@ -189,7 +196,10 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
         mProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                imagesRef = storageRef.child("images").child("picture");
+                getEstimatedServerTimeMs();
+
+                imagesRef = storageRef.child("images").child("parties");
+
                 if (CroperinoFileUtil.verifyStoragePermissions(AddAParty.this))
                     prepareChooser();
             }
@@ -334,9 +344,18 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
                 public void onDataChange(DataSnapshot snapshot) {
                     long offset = snapshot.getValue(Long.class);
                     estimatedServerTimeMs = System.currentTimeMillis() + offset;
-                    DatabaseReference mDatabase = ref.child("parties").child(String.valueOf(estimatedServerTimeMs));
 
-                    party p = new party(a, photoUrl, b, c, d, e, f, g, h, i, j, null, l, Integer.parseInt(k), userid, nam, estimatedServerTimeMs,m,n);
+                    DateFormat dfm = new SimpleDateFormat("dd/MM/yyyy hh:mm", Locale.UK);
+
+                    long unixtime=estimatedServerTimeMs;
+                    try {
+                        unixtime = dfm.parse(b+c).getTime();
+                        unixtime=unixtime/1000;
+                    } catch (ParseException e1) {
+                        e1.printStackTrace();
+                    }
+                    DatabaseReference mDatabase = ref.child("parties").child(String.valueOf(unixtime));
+                    party p = new party(a, photoUrl, b, c, d, e, f, g, h, i, j, null, l, Integer.parseInt(k), userid, nam, unixtime,m,n);
                     mDatabase.setValue(p);
                     Intent myIntent = new Intent(AddAParty.this, MainActivity.class);
                     startActivity(myIntent);
@@ -489,7 +508,24 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
     private boolean isValidPhone(CharSequence target) {
         return !isEmpty(target) && Patterns.PHONE.matcher(target).matches() && target.length() == 10;
     }
+    private void getEstimatedServerTimeMs() {
 
+        DatabaseReference offsetRef = FirebaseDatabase.getInstance().getReference(".info/serverTimeOffset");
+        offsetRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                long offset = snapshot.getValue(Long.class);
+                esttime = System.currentTimeMillis() + offset;
+                imagesRef = storageRef.child("images").child("parties").child(String.valueOf(esttime));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                System.err.println("Listener was cancelled");
+            }
+        });
+
+    }
 
 }
 
