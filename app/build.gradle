@@ -45,7 +45,6 @@ dependencies {
     compile 'com.android.support:support-v4:25.2.0'
     compile 'com.android.support:appcompat-v7:25.2.0'
     compile 'com.android.support:design:25.2.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.1'
     compile 'com.github.ekimual:croperino:1.1.2'
     compile 'io.github.yavski:fab-speed-dial:1.0.6'
     compile 'com.google.android.gms:play-services-location:10.2.0'
