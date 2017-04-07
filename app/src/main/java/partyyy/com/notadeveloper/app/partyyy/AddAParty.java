@@ -17,6 +17,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
@@ -49,6 +50,7 @@ import com.mikelau.croperino.CroperinoFileUtil;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.regex.Pattern;
@@ -60,6 +62,8 @@ import butterknife.OnClick;
 import static android.text.TextUtils.isEmpty;
 
 public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+    users u= new users();
+    final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     @BindView(R.id.picture)
     ImageButton mProfile;
     @BindView(R.id.title)
@@ -130,6 +134,7 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
     static String datetxt;
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
+    private ArrayList myparties = new ArrayList();
 
 
     @Override
@@ -137,6 +142,7 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_aparty);
         ButterKnife.bind(this);
+        getUser();
 
         dates = (TextView) findViewById(R.id.dates);
 
@@ -350,12 +356,21 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
 
                     long unixtime=estimatedServerTimeMs;
                     try {
-                        unixtime = dfm.parse(b+c).getTime();
+                        unixtime = dfm.parse(b+" "+c).getTime();
                         unixtime=unixtime/1000;
                     } catch (ParseException e1) {
                         e1.printStackTrace();
                     }
                     DatabaseReference mDatabase = ref.child("parties").child(String.valueOf(unixtime));
+                    Log.e("usr", "u.ge"+u.getEmail()+u.getOrgname());
+                    myparties = u.getMyparties();
+                    if(myparties==null)
+                        myparties=new ArrayList<>();
+                    String f = String.valueOf(unixtime);
+                     myparties.add(f);
+
+
+                    ref.child("users").child(uid).child("myparties").setValue(myparties);
                     party p = new party(a, photoUrl, b, c, d, e, f, g, h, i, j, null, l, Integer.parseInt(k), userid, nam, unixtime,m,n);
                     mDatabase.setValue(p);
                     Toast.makeText(AddAParty.this, "Redirect to payment gateway",
@@ -529,7 +544,25 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
         });
 
     }
+void getUser()
+{
+    FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
+    final String uid=mUser.getUid();
+    final DatabaseReference mDatabase= FirebaseDatabase.getInstance().getReference().child("users").child(uid);
 
+    mDatabase.addValueEventListener(new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            u=dataSnapshot.getValue(users.class);
+
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+
+        }
+    });
+}
 }
 
 

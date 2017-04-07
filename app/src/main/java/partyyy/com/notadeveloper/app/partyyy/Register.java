@@ -158,7 +158,7 @@ public class Register extends AppCompatActivity {
                 }
                 else
                 {
-                    users user=new users(a,b,f,false,null);
+                    users user=new users(a,b,f,false,null,null);
 
                     mDatabase.child(uid).setValue(user);
                     Intent i=new Intent(Register.this,MainActivity.class);

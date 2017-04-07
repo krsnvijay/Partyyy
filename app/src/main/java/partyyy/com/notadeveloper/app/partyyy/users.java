@@ -1,5 +1,7 @@
 package partyyy.com.notadeveloper.app.partyyy;
 
+import java.util.ArrayList;
+
 /**
  * Created by Chirag on 26-Feb-17.
  */
@@ -11,6 +13,15 @@ public class users {
     String email;
     Boolean b;
     String orgname;
+    ArrayList<String> myparties= new ArrayList<>();
+
+    public ArrayList<String> getMyparties() {
+        return myparties;
+    }
+
+    public void setMyparties(ArrayList<String> myparties) {
+        this.myparties = myparties;
+    }
 
     public Boolean getB() {
         return b;
@@ -31,12 +42,13 @@ public class users {
     public users() {
     }
 
-    public users(String name, String number, String email, Boolean b, String orgname) {
+    public users(String name, String number, String email, Boolean b, String orgname,ArrayList myparties) {
         this.name = name;
         this.number = number;
         this.email = email;
         this.b=b;
         this.orgname = orgname;
+        this.myparties = myparties;
     }
 
     public String getName() {

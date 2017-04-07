@@ -1,8 +1,15 @@
 package partyyy.com.notadeveloper.app.partyyy;
 
+import android.app.Dialog;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -16,6 +23,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static partyyy.com.notadeveloper.app.partyyy.MainActivity.fromHtml;
 
 public class detailedpartyactivity extends AppCompatActivity {
 
@@ -134,7 +143,83 @@ public class detailedpartyactivity extends AppCompatActivity {
                 noticket.setText(p.getTickets() + " Available");
                 stagprice.setText("(Stag) ₹"+p.getPricestag());
                 coupleprice.setText("(Couple) ₹"+p.getPricecouple());
+                book.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+
+                        final Dialog dialog;
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            dialog = new Dialog(detailedpartyactivity.this, R.style.dialogthemez);
+                        } else {
+                            dialog = new Dialog(detailedpartyactivity.this);
+                        }
+                        dialog.setContentView(R.layout.ticketdialog);
+
+
+                        Button dialogbutton = (Button) dialog.findViewById(R.id.okedittext);
+                        final EditText edittextdial1 = (EditText) dialog.findViewById(R.id.address1);
+                        final AutoCompleteTextView edittextdial2 = (AutoCompleteTextView) dialog.findViewById(R.id.address2);
+                        final AutoCompleteTextView edittextdial3 = (AutoCompleteTextView) dialog.findViewById(R.id.address3);
+                        final EditText edittextdial4 = (EditText) dialog.findViewById(R.id.pincode);
+                        final TextInputLayout edittexttil1 = (TextInputLayout) dialog.findViewById(R.id.add1lt);
+                        final TextInputLayout edittexttil2 = (TextInputLayout) dialog.findViewById(R.id.add2lt);
+                        final TextInputLayout edittexttil3 = (TextInputLayout) dialog.findViewById(R.id.add3lt);
+                        final TextInputLayout edittexttil4 = (TextInputLayout) dialog.findViewById(R.id.pinlt);
+                        final ImageView iv1= (ImageView)dialog.findViewById(R.id.imageView2);
+                        final ImageView iv2= (ImageView)dialog.findViewById(R.id.imageView3);
+
+                        iv1.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                edittextdial2.showDropDown();
+                            }
+                        });
+                        iv2.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                edittextdial3.showDropDown();
+                            }
+                        });
+                        edittextdial1.setText("");
+
+
+                        edittextdial2.setText("");
+
+
+                        edittextdial3.setText("");
+
+                        edittextdial4.setText("");
+
+                        dialogbutton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {View focusView = null;
+                                edittexttil4.setError(null);
+                                edittexttil3.setError(null);
+                                edittexttil2.setError(null);
+                                edittexttil1.setError(null);
+                                String pin = edittextdial4.getText().toString();
+                                String a1 = edittextdial1.getText().toString();
+                                String a2 = edittextdial2.getText().toString();
+                                String a3 = edittextdial3.getText().toString();
+
+
+
+
+
+                                    dialog.dismiss();
+
+
+                            }
+                        });
+
+                        dialog.show();
+                    }
+                });
             }
+
+
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
