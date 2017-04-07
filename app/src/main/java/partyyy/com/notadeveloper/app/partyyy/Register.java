@@ -14,6 +14,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -145,7 +146,13 @@ public class Register extends AppCompatActivity {
                     cancel = true;
                 }else number1.setError(null);
 
-
+                if(check.isChecked()==false)
+                {
+                    cancel = true;
+                    focusView = null;
+                    Toast.makeText(Register.this, "Accept the terms and conditions first!",
+                            Toast.LENGTH_LONG).show();
+                }
 
 
 

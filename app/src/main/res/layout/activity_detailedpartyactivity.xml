@@ -51,7 +51,7 @@
         android:id="@+id/day"/>
     <RelativeLayout
         android:layout_width="1dp"
-        android:layout_height="123dp"
+        android:layout_height="100dp"
         android:background="#808080"
         android:layout_toRightOf="@+id/month"
         android:layout_below="@+id/iv"
@@ -141,57 +141,61 @@
         android:layout_marginLeft="5dp"
         android:textColor="#5b5b5b"
         android:id="@+id/noticket"/>
-    <ImageView
-        android:layout_width="22dp"
-        android:layout_height="22dp"
-        android:layout_below="@+id/ticicon"
-        android:layout_toRightOf="@+id/line"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="6dp"
-        app:srcCompat="@drawable/man"
-        android:tint="#727272"
-        android:id="@+id/stagicon"
-        />
-    <TextView
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="(Stag) ₹250"
-        android:textSize="17dp"
-        android:layout_below="@+id/noticket"
-        android:layout_toRightOf="@+id/locicon"
-        android:layout_alignBottom="@+id/stagicon"
-        android:gravity="bottom"
-        android:layout_marginLeft="5dp"
-        android:textColor="#5b5b5b"
-        android:id="@+id/stagprice"/>
-    <ImageView
-        android:layout_width="22dp"
-        android:layout_height="22dp"
-        android:layout_below="@+id/noticket"
-        android:layout_toRightOf="@+id/stagprice"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="6dp"
-        app:srcCompat="@drawable/couple"
-        android:tint="#727272"
-        android:id="@+id/coupleicon"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="(Couple) ₹400"
-        android:textSize="17dp"
-        android:layout_below="@+id/noticket"
-        android:layout_toRightOf="@+id/coupleicon"
-        android:layout_alignBottom="@+id/coupleicon"
-        android:gravity="bottom"
-        android:layout_marginLeft="5dp"
-        android:textColor="#5b5b5b"
-        android:id="@+id/coupleprice"/>
+        android:layout_centerHorizontal="true"
+        android:id="@+id/fgh"
+        android:layout_below="@id/day"
+        android:layout_marginTop="15dp">
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="6dp"
+            app:srcCompat="@drawable/man"
+            android:tint="#727272"
+            android:id="@+id/stagicon"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(Stag) ₹250"
+            android:textSize="17dp"
+            android:layout_toRightOf="@+id/stagicon"
+            android:layout_alignBottom="@+id/stagicon"
+            android:gravity="bottom"
+            android:layout_marginLeft="5dp"
+            android:textColor="#5b5b5b"
+            android:id="@+id/stagprice"/>
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_toRightOf="@+id/stagprice"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="6dp"
+            app:srcCompat="@drawable/couple"
+            android:tint="#727272"
+            android:id="@+id/coupleicon"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(Couple) ₹400"
+            android:textSize="17dp"
+            android:layout_toRightOf="@+id/coupleicon"
+            android:layout_alignBottom="@+id/coupleicon"
+            android:gravity="bottom"
+            android:layout_marginLeft="5dp"
+            android:textColor="#5b5b5b"
+            android:id="@+id/coupleprice"/>
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="300dp"
         android:layout_height="1dp"
-        android:layout_below="@+id/stagprice"
+        android:layout_below="@+id/fgh"
         android:layout_centerHorizontal="true"
         android:background="#808080"
         android:layout_marginTop="15dp"

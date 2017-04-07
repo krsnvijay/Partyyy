@@ -6,6 +6,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -15,6 +16,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
 import android.util.Log;
@@ -563,6 +565,22 @@ void getUser()
         }
     });
 }
+    @Override
+    public void onBackPressed() {
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(AddAParty.this, R.style.pop);
+        builder.setMessage("Data will be lost. Continue?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent bum=new Intent(AddAParty.this,MainActivity.class);
+                startActivity(bum);
+            }
+        });
+        builder.setNegativeButton("No", null);
+        builder.show();
+        //  super.onBackPressed();
+    }
 }
 
 

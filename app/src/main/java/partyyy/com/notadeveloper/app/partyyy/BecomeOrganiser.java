@@ -3,12 +3,14 @@ package partyyy.com.notadeveloper.app.partyyy;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -41,6 +43,18 @@ public class BecomeOrganiser extends AppCompatActivity {
         setContentView(R.layout.activity_become_organiser);
         ButterKnife.bind(this);
 
+        terms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(BecomeOrganiser.this, R.style.pop);
+                builder.setTitle("Terms and conditions");
+                builder.setMessage("T & C");
+                builder.setPositiveButton("OK", null);
+                // builder.setNegativeButton("Cancel", null);
+                builder.show();
+            }
+        });
+
     }
 
     @OnClick(R.id.register)
@@ -59,6 +73,13 @@ public class BecomeOrganiser extends AppCompatActivity {
             focusView = orgname1;
             cancel = true;
         } else orgname1.setError(null);
+        if(check.isChecked()==false)
+        {
+            cancel = true;
+            focusView = null;
+            Toast.makeText(BecomeOrganiser.this, "Accept the terms and conditions first!",
+                    Toast.LENGTH_LONG).show();
+        }
 
         if (cancel) {
             // form field with an error.

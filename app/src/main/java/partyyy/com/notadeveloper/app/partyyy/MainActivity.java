@@ -29,9 +29,14 @@ import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +47,7 @@ import butterknife.ButterKnife;
 
 
 public class MainActivity extends AppCompatActivity {
+    users u= new users();
     @BindView(R.id.recyclerview)
     RecyclerView recyclerview;
     private DrawerLayout dl;
@@ -52,17 +58,20 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference ref;
     LinearLayoutManager mLayoutManager;
     boolean called=false;
+    private DatabaseReference mDatabase;
+    final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        getUser();
         dl = (DrawerLayout) findViewById(R.id.dl);
         abdt = new ActionBarDrawerToggle(this, dl, R.string.Open, R.string.Close);
         abdt.setDrawerIndicatorEnabled(true);
         mLayoutManager = new LinearLayoutManager(this);
         recyclerview.setHasFixedSize(true);
-
+       mDatabase = FirebaseDatabase.getInstance().getReference();
 
 
 
@@ -80,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 
 
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.keepSynced(true);
         ref = mDatabase.child("parties");
 
@@ -124,12 +133,22 @@ public class MainActivity extends AppCompatActivity {
                 } else if (id == R.id.settings) {
 
                 } else if (id == R.id.add) {
-                    Intent i = new Intent(MainActivity.this, BecomeOrganiser.class);
-                    startActivity(i);
+                    boolean p = u.getB();
+                    if(p==true)
+                    {
+                        Intent i = new Intent(MainActivity.this, AddAParty.class);
+                        startActivity(i);
+                    }
+                    else
+                    {
+                        Intent i = new Intent(MainActivity.this, BecomeOrganiser.class);
+                        startActivity(i);
+                    }
                 } else if (id == R.id.action_car) {
                     Toast.makeText(MainActivity.this, "CAR",
                             Toast.LENGTH_LONG).show();
                 }
+
                 return true;
             }
         });
@@ -233,5 +252,39 @@ public class MainActivity extends AppCompatActivity {
         recyclerview.setLayoutManager(LayoutManager);
         recyclerview.setAdapter(mAdapter);
     }
+    void getUser()
+    {
+        FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
+        final String uid=mUser.getUid();
+        final DatabaseReference mDatabase= FirebaseDatabase.getInstance().getReference().child("users").child(uid);
 
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                u=dataSnapshot.getValue(users.class);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+    @Override
+    public void onBackPressed() {
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.pop);
+        builder.setMessage("Are You Sure you want to exit?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                android.os.Process.killProcess(android.os.Process.myPid());
+                System.exit(1);
+            }
+        });
+        builder.setNegativeButton("No", null);
+        builder.show();
+        //  super.onBackPressed();
+    }
 }
