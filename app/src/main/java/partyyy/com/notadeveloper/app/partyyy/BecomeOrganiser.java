@@ -10,6 +10,10 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -28,6 +32,8 @@ public class BecomeOrganiser extends AppCompatActivity {
     CheckBox check;
     @BindView(R.id.terms)
     TextView terms;
+    private DatabaseReference mDatabase;
+    final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +45,8 @@ public class BecomeOrganiser extends AppCompatActivity {
 
     @OnClick(R.id.register)
     public void onViewClicked() {
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         boolean cancel = false;
         View focusView = null;
@@ -57,8 +65,11 @@ public class BecomeOrganiser extends AppCompatActivity {
             if (focusView != null)
                 focusView.requestFocus();
         } else {
+            mDatabase.child("users").child(uid).child("orgname").setValue(a);
+            mDatabase.child("users").child(uid).child("b").setValue(true);
 
-        Intent i = new Intent(BecomeOrganiser.this, AddAParty.class);
+
+            Intent i = new Intent(BecomeOrganiser.this, AddAParty.class);
         startActivity(i);}
     }
 }

@@ -9,15 +9,34 @@ public class users {
     String name;
     String number;
     String email;
+    Boolean b;
+    String orgname;
 
+    public Boolean getB() {
+        return b;
+    }
+
+    public void setB(Boolean b) {
+        this.b = b;
+    }
+
+    public String getOrgname() {
+        return orgname;
+    }
+
+    public void setOrgname(String orgname) {
+        this.orgname = orgname;
+    }
 
     public users() {
     }
 
-    public users(String name, String number, String email) {
+    public users(String name, String number, String email, Boolean b, String orgname) {
         this.name = name;
         this.number = number;
         this.email = email;
+        this.b=b;
+        this.orgname = orgname;
     }
 
     public String getName() {

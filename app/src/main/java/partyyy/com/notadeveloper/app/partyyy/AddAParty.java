@@ -28,6 +28,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -357,6 +358,8 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
                     DatabaseReference mDatabase = ref.child("parties").child(String.valueOf(unixtime));
                     party p = new party(a, photoUrl, b, c, d, e, f, g, h, i, j, null, l, Integer.parseInt(k), userid, nam, unixtime,m,n);
                     mDatabase.setValue(p);
+                    Toast.makeText(AddAParty.this, "Redirect to payment gateway",
+                            Toast.LENGTH_LONG).show();
                     Intent myIntent = new Intent(AddAParty.this, MainActivity.class);
                     startActivity(myIntent);
                     finish();
