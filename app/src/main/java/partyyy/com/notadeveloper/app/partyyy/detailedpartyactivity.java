@@ -88,7 +88,7 @@ public class detailedpartyactivity extends AppCompatActivity {
 
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         ref = mDatabase.child("parties").child(s);
-        ref.addValueEventListener(new ValueEventListener() {
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 p = dataSnapshot.getValue(party.class);

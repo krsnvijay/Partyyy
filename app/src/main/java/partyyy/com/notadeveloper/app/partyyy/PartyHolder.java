@@ -2,6 +2,8 @@ package partyyy.com.notadeveloper.app.partyyy;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.support.v7.graphics.Palette;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -11,6 +13,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,7 +52,8 @@ public class PartyHolder extends RecyclerView.ViewHolder {
     TextView timet;
     @BindView(R.id.price)
     TextView price;
-
+    @BindView(R.id.daterel)
+    RelativeLayout mDaterel;
 
     public PartyHolder(View itemView) {
         super(itemView);
@@ -59,17 +64,56 @@ public class PartyHolder extends RecyclerView.ViewHolder {
     public void setData(party p1, final Context mContext) {
         this.p = p1;
         this.mContext = mContext;
-        Glide.with(mContext).load(p.getPicture()).into(iv);
+        Glide.with(mContext)
+                .load(p.getPicture())
+                .asBitmap()
+                .placeholder(R.drawable.ima)
+                .into(new BitmapImageViewTarget(iv) {
+                    @Override
+                    public void onResourceReady(Bitmap bitmap, GlideAnimation anim) {
+                        super.onResourceReady(bitmap, anim);
+                        Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
+                            @Override
+                            public void onGenerated(Palette palette) {
+                                // Get the "vibrant" color swatch based on the bitmap
+                                Palette.Swatch dominate = palette.getVibrantSwatch();
+                                Palette.Swatch vibrant = palette.getDarkVibrantSwatch();
+                                Palette.Swatch light=palette.getLightVibrantSwatch();
+                                Palette.Swatch muted=palette.getDarkMutedSwatch();
+                                if (dominate!=null){
+                                    book.setBackgroundColor(dominate.getBodyTextColor());
+
+                                }
+                                if (muted != null) {
+                                    cv.setCardBackgroundColor(muted.getRgb());
+                                    pname.setTextColor(muted.getTitleTextColor());
+                                    book.setTextColor(muted.getRgb());
+                                    locicon.setColorFilter(muted.getBodyTextColor());
+                                    timicon.setColorFilter(muted.getBodyTextColor());
+                                    loct.setTextColor(muted.getBodyTextColor());
+                                    timet.setTextColor(muted.getBodyTextColor());
+                                    price.setTextColor(muted.getBodyTextColor());
+                                    date.setTextColor(muted.getBodyTextColor());
+                                    month.setTextColor(muted.getBodyTextColor());
+
+                                }
+                            }
+                        });
+                    }
+                });
+
+
+        // Glide.with(mContext).load(p.getPicture()).into(iv);
         pname.setText(p.getTitle());
         loct.setText(p.getAddress3());
         timet.setText(p.getTime() + " to " + p.getTime1());
         String d = p.getDates();
-        int as= Integer.parseInt(p.getPricestag());
+        int as = Integer.parseInt(p.getPricestag());
         int b = Integer.parseInt(p.getPricecouple());
-        if(as>b||as==b)
-            price.setText("₹ "+p.getPricecouple()+" onwards");
+        if (as > b || as == b)
+            price.setText("₹ " + p.getPricecouple() + " onwards");
         else
-            price.setText("₹ "+p.getPricestag()+" onwards");
+            price.setText("₹ " + p.getPricestag() + " onwards");
 
 
         String a[] = d.split("/");

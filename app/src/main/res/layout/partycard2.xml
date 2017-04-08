@@ -6,7 +6,6 @@
 
     card_view:cardCornerRadius="4dp"
     card_view:cardElevation="2dp"
-    card_view:contentPadding="10dp"
     android:clickable="false"
     android:focusable="true"
     android:layout_width="match_parent"
@@ -15,140 +14,145 @@
 
 
     android:id="@+id/cv">
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
+    >
         <ImageView
+            android:id="@+id/iv"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:id="@+id/iv"
-            android:scaleType="fitXY"
-            android:background="@drawable/ima"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="DEC"
-            android:textColor="@color/colorAccent"
-            android:layout_below="@+id/iv"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="20dp"
-            android:id="@+id/month"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="8"
-            android:textColor="@color/tw__composer_black"
-            android:layout_below="@+id/month"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="3dp"
-            android:textSize="28dp"
-            android:id="@+id/date"
+            android:scaleType="fitXY"/>
+        <RelativeLayout android:id="@+id/daterel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/iv"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="20dp"
+                        android:padding="2dp">
+            <TextView
+                android:id="@+id/month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DEC"
+                android:textColor="@color/colorAccent"
+
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_below="@+id/month"
+                android:text="8"
+
+                android:textColor="@color/tw__composer_black"
+                android:textSize="28dp"
             />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="FRI"
-            android:layout_below="@+id/date"
-            android:textColor="#4C4C4C"
-            android:layout_marginLeft="16dp"
-            android:id="@+id/day"/>
+            <TextView
+                android:id="@+id/day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/date"
+                android:text="FRI"
+
+                android:textColor="#4C4C4C"/>
+        </RelativeLayout>
+
         <RelativeLayout
+            android:id="@+id/line"
             android:layout_width="1dp"
             android:layout_height="57dp"
-            android:background="#808080"
-            android:layout_toRightOf="@+id/month"
             android:layout_below="@+id/iv"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="25dp"
-            android:layout_marginLeft="10dp"
-            android:id="@+id/line">
+            android:layout_toRightOf="@+id/daterel"
+            android:background="#808080">
 
         </RelativeLayout>
         <TextView
+            android:id="@+id/pname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Party Name"
-            android:textStyle="bold"
             android:layout_below="@+id/iv"
-            android:layout_toLeftOf="@id/book"
-            android:layout_toRightOf="@+id/line"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
-            android:textSize="20dp"
+            android:layout_toLeftOf="@id/book"
+            android:layout_toRightOf="@+id/line"
+            android:text="Party Name"
             android:textColor="#4C4C4C"
-            android:id="@+id/pname"
-            />
+            android:textSize="20dp"
+            android:textStyle="bold"
+        />
         <ImageView
+            android:id="@+id/locicon"
             android:layout_width="18dp"
             android:layout_height="18dp"
             android:layout_below="@+id/pname"
-            android:layout_toRightOf="@+id/line"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="2dp"
+            android:layout_toRightOf="@+id/line"
             android:tint="#727272"
             card_view:srcCompat="@drawable/ic_location_on_black_24dp"
-            android:id="@+id/locicon"
-            />
+        />
         <TextView
+            android:id="@+id/loct"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SRM, Ramapuram"
-            android:layout_below="@+id/pname"
-            android:layout_toRightOf="@+id/locicon"
-            android:layout_marginLeft="3dp"
-            android:gravity="bottom"
             android:layout_alignBottom="@+id/locicon"
-            android:id="@+id/loct"
+            android:layout_below="@+id/pname"
+            android:layout_marginLeft="3dp"
+            android:layout_toRightOf="@+id/locicon"
+            android:gravity="bottom"
+            android:text="SRM, Ramapuram"
             android:textColor="#727272"/>
         <ImageView
+            android:id="@+id/timicon"
             android:layout_width="18dp"
             android:layout_height="18dp"
             android:layout_below="@+id/locicon"
-            android:layout_toRightOf="@+id/line"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="6dp"
-            card_view:srcCompat="@drawable/ic_access_time_black_24dp"
+            android:layout_toRightOf="@+id/line"
             android:tint="#5b5b5b"
-            android:id="@+id/timicon"
-            />
+            card_view:srcCompat="@drawable/ic_access_time_black_24dp"
+        />
         <TextView
+            android:id="@+id/timet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="12:00 to 4:00"
-            android:layout_below="@+id/loct"
-            android:layout_toRightOf="@+id/timicon"
             android:layout_alignBottom="@+id/timicon"
-            android:gravity="bottom"
+            android:layout_below="@+id/loct"
             android:layout_marginLeft="3dp"
-            android:textColor="#5b5b5b"
-            android:id="@+id/timet"/>
+            android:layout_toRightOf="@+id/timicon"
+            android:gravity="bottom"
+            android:text="12:00 to 4:00"
+            android:textColor="#5b5b5b"/>
         <Button
             android:id="@+id/book"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:filterTouchesWhenObscured="true"
-            android:text="BOOK"
-            android:theme="@style/AccentButton"
-
             android:layout_alignParentRight="true"
             android:layout_below="@+id/iv"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:filterTouchesWhenObscured="true"
+            android:text="BOOK"
+            android:theme="@style/AccentButton"/>
         <TextView
+            android:id="@+id/price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#5b5b5b"
-            android:text="₹ 200 onwards"
             android:layout_alignRight="@+id/book"
             android:layout_below="@+id/book"
-            android:textSize="12dp"
-            android:layout_marginTop="18dp"
             android:layout_marginRight="10dp"
-            android:id="@+id/price"/>
-
-
+            android:layout_marginTop="18dp"
+            android:text="₹ 200 onwards"
+            android:textColor="#5b5b5b"
+            android:textSize="12dp"/>
 
 
     </RelativeLayout>
