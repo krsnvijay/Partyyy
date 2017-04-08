@@ -1,109 +1,257 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minWidth="300dp"
-    android:orientation="vertical"
     android:padding="8dp">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/add1lt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/address1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Flat / House No. / Street"
-            android:inputType="textPostalAddress"
-            android:maxLines="1"
-            />
-
-
-
-    </android.support.design.widget.TextInputLayout>
-
-    <RelativeLayout
+    <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/add2lt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <AutoCompleteTextView
-                android:id="@+id/address2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
-                android:hint="Colony / Locality / Area"
-                android:inputType="textPostalAddress"
-                android:maxLines="1"
-                />
-
-        </android.support.design.widget.TextInputLayout>
-        <ImageView
-            android:id="@+id/imageView2"
-            android:padding="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/add2lt"
-            android:layout_alignBottom="@+id/add2lt"
-            android:layout_alignRight="@+id/add2lt"
-            app:srcCompat="@drawable/ic_arrow_drop_down_black_24dp" />
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/add3lt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <AutoCompleteTextView
-                android:id="@+id/address3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
-                android:hint="Town/City"
-                android:inputType="textPostalAddress"
-                android:maxLines="1"
-                />
-        </android.support.design.widget.TextInputLayout>
-        <ImageView
-            android:id="@+id/imageView3"
-            android:padding="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/add3lt"
-            android:layout_alignBottom="@+id/add3lt"
-            android:layout_alignRight="@+id/add3lt"
-            app:srcCompat="@drawable/ic_arrow_drop_down_black_24dp" />
-    </RelativeLayout>
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/pinlt"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:counterEnabled="true"
-        app:counterMaxLength="6">
-        <EditText
-            android:id="@+id/pincode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Pincode"
-            android:inputType="number"
-            android:maxLength="6"
-
-            android:maxLines="1"
+        android:text="Select number of tickets:"
+        android:textSize="20dp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/tictext"
+        android:layout_marginBottom="23dp"/>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rl"
+        android:layout_below="@+id/tictext">
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="6dp"
+            app:srcCompat="@drawable/man"
+            android:id="@+id/stagicon"
             />
-    </android.support.design.widget.TextInputLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(Stag):"
+            android:textSize="17dp"
+            android:layout_toRightOf="@+id/stagicon"
+            android:layout_alignBottom="@+id/stagicon"
+            android:gravity="bottom"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/stagprice"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/rl"
+        android:id="@+id/ll">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="₹250"
+            android:textSize="18dp"
+            android:id="@+id/pricesta"
+            android:layout_marginLeft="10dp"
+
+            />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="×"
+        android:textSize="30dp"
+        android:id="@+id/mul"
+        android:layout_below="@id/rl"
+        android:layout_marginLeft="10dp"
+
+        />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rl1"
+        android:layout_toRightOf="@+id/mul"
+        android:layout_below="@+id/tictext">
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="6dp"
+            app:srcCompat="@drawable/minus"
+            android:tint="@color/colorAccent"
+            android:id="@+id/minusicon"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2"
+            android:layout_toRightOf="@+id/minusicon"
+            android:gravity="bottom"
+            android:layout_alignBottom="@+id/minusicon"
+            android:textSize="17dp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/notic"/>
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="6dp"
+            app:srcCompat="@drawable/plus"
+            android:tint="@color/colorAccent"
+            android:id="@+id/addicon"
+            android:layout_toRightOf="@+id/notic"
+            />
+
+    </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/rl1"
+        android:layout_below="@+id/tictext"
+        android:text="="
+        android:textSize="30dp"
+        android:layout_alignBottom="@+id/rl"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/equals"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/equals"
+        android:layout_below="@+id/tictext"
+        android:text="₹500"
+        android:textSize="18dp"
+        android:gravity="bottom"
+        android:layout_alignBottom="@+id/rl"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/stprice"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rl2"
+        android:layout_below="@+id/ll">
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="6dp"
+            app:srcCompat="@drawable/couple"
+            android:id="@+id/coupleicon"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(Couple):"
+            android:textSize="17dp"
+            android:layout_toRightOf="@+id/coupleicon"
+            android:layout_alignBottom="@+id/coupleicon"
+            android:gravity="bottom"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/coupleprice"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/rl2"
+        android:id="@+id/lll">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="₹250"
+            android:textSize="18dp"
+            android:id="@+id/pricecou"
+            android:layout_marginLeft="10dp"
+
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="×"
+            android:textSize="30dp"
+            android:id="@+id/mul1"
+            android:layout_below="@id/rl"
+            android:layout_marginLeft="10dp"
+
+            />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rl3"
+            android:layout_toRightOf="@+id/mul"
+            android:layout_below="@+id/tictext">
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="6dp"
+                app:srcCompat="@drawable/minus"
+                android:tint="@color/colorAccent"
+                android:id="@+id/minusicon1"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2"
+                android:layout_toRightOf="@+id/minusicon1"
+                android:gravity="bottom"
+                android:layout_alignBottom="@+id/minusicon1"
+                android:textSize="17dp"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/notic1"/>
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="6dp"
+                app:srcCompat="@drawable/plus"
+                android:tint="@color/colorAccent"
+                android:id="@+id/addicon1"
+                android:layout_toRightOf="@+id/notic1"
+                />
+
+        </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/rl1"
+            android:layout_below="@+id/tictext"
+            android:text="="
+            android:textSize="30dp"
+            android:layout_alignBottom="@+id/rl"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/equals1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/equals"
+            android:layout_below="@+id/tictext"
+            android:text="₹500"
+            android:textSize="18dp"
+            android:gravity="bottom"
+            android:layout_alignBottom="@+id/rl"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/coprice"/>
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lll"
+        android:text="Total:₹1000"
+        android:textSize="23dp"
+        android:layout_alignRight="@+id/lll"
+        android:layout_marginTop="20dp"
+        android:id="@+id/total"/>
     <Button
-        android:id="@+id/okedittext"
+        android:id="@+id/book1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:filterTouchesWhenObscured="true"
-        android:text="Ok"
-
+        android:text="Book"
+        android:layout_below="@+id/total"
         android:theme="@style/AccentButton"/>
 
-</LinearLayout>
+
+</RelativeLayout>

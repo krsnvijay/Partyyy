@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
@@ -157,56 +158,20 @@ public class detailedpartyactivity extends AppCompatActivity {
                         }
                         dialog.setContentView(R.layout.ticketdialog);
 
-
-                        Button dialogbutton = (Button) dialog.findViewById(R.id.okedittext);
-                        final EditText edittextdial1 = (EditText) dialog.findViewById(R.id.address1);
-                        final AutoCompleteTextView edittextdial2 = (AutoCompleteTextView) dialog.findViewById(R.id.address2);
-                        final AutoCompleteTextView edittextdial3 = (AutoCompleteTextView) dialog.findViewById(R.id.address3);
-                        final EditText edittextdial4 = (EditText) dialog.findViewById(R.id.pincode);
-                        final TextInputLayout edittexttil1 = (TextInputLayout) dialog.findViewById(R.id.add1lt);
-                        final TextInputLayout edittexttil2 = (TextInputLayout) dialog.findViewById(R.id.add2lt);
-                        final TextInputLayout edittexttil3 = (TextInputLayout) dialog.findViewById(R.id.add3lt);
-                        final TextInputLayout edittexttil4 = (TextInputLayout) dialog.findViewById(R.id.pinlt);
-                        final ImageView iv1= (ImageView)dialog.findViewById(R.id.imageView2);
-                        final ImageView iv2= (ImageView)dialog.findViewById(R.id.imageView3);
-
-                        iv1.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                edittextdial2.showDropDown();
-                            }
-                        });
-                        iv2.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                edittextdial3.showDropDown();
-                            }
-                        });
-                        edittextdial1.setText("");
+                        Button book1 = (Button)dialog.findViewById(R.id.book1);
 
 
-                        edittextdial2.setText("");
 
 
-                        edittextdial3.setText("");
-
-                        edittextdial4.setText("");
-
-                        dialogbutton.setOnClickListener(new View.OnClickListener() {
+                        book1.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {View focusView = null;
-                                edittexttil4.setError(null);
-                                edittexttil3.setError(null);
-                                edittexttil2.setError(null);
-                                edittexttil1.setError(null);
-                                String pin = edittextdial4.getText().toString();
-                                String a1 = edittextdial1.getText().toString();
-                                String a2 = edittextdial2.getText().toString();
-                                String a3 = edittextdial3.getText().toString();
 
 
 
 
+                                Toast.makeText(detailedpartyactivity.this, "Payment and then verification(OTP)",
+                                        Toast.LENGTH_LONG).show();
 
                                     dialog.dismiss();
 
