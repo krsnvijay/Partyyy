@@ -232,19 +232,28 @@ public class party {
         String pid;
         double tprice;
         int people;
-
+        boolean validated;
         String qrcode;
+
+        public boolean isValidated() {
+            return validated;
+        }
+
+        public void setValidated(boolean validated) {
+            this.validated = validated;
+        }
 
         public BookedTickets() {
         }
 
-        public BookedTickets(String tid, String uid, String uname, String pid, double tprice, int people, String qrcode) {
+        public BookedTickets(String tid, String uid, String uname, String pid, double tprice, int people, boolean validated, String qrcode) {
             this.tid = tid;
             this.uid = uid;
             this.uname = uname;
             this.pid = pid;
             this.tprice = tprice;
             this.people = people;
+            this.validated = validated;
             this.qrcode = qrcode;
         }
 

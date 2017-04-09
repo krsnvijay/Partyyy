@@ -570,22 +570,7 @@ void getUser()
         }
     });
 }
-    @Override
-    public void onBackPressed() {
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(AddAParty.this, R.style.pop);
-        builder.setMessage("Data will be lost. Continue?");
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Intent bum=new Intent(AddAParty.this,MainActivity.class);
-                startActivity(bum);
-            }
-        });
-        builder.setNegativeButton("No", null);
-        builder.show();
-        //  super.onBackPressed();
-    }
 }
 
 

@@ -90,7 +90,7 @@ public class BecomeOrganiser extends AppCompatActivity {
             mDatabase.child("users").child(uid).child("isorganizer").setValue(true);
 
 
-            Intent i = new Intent(BecomeOrganiser.this, AddAParty.class);
+            Intent i = new Intent(BecomeOrganiser.this, OrganizerActivity.class);
         startActivity(i);}
     }
 }

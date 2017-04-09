@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference ref;
     LinearLayoutManager mLayoutManager;
     boolean called=false;
+    private Menu menu;
     private DatabaseReference mDatabase;
     final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     @Override
@@ -139,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
                     else p=false;
                     if(p)
                     {
-                        Intent i = new Intent(MainActivity.this, AddAParty.class);
+                        Intent i = new Intent(MainActivity.this, OrganizerActivity.class);
                         startActivity(i);
                     }
                     else
@@ -208,6 +209,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+        this.menu=menu;
+
         getMenuInflater().inflate(R.menu.disptoolmenu, menu);
         return true;
     }
