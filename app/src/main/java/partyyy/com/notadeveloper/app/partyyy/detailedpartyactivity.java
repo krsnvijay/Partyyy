@@ -1,33 +1,42 @@
 package partyyy.com.notadeveloper.app.partyyy;
 
 import android.app.Dialog;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TextInputLayout;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import net.glxn.qrgen.android.QRCode;
+import net.glxn.qrgen.core.image.ImageType;
+
+import java.io.File;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static partyyy.com.notadeveloper.app.partyyy.MainActivity.fromHtml;
 
 public class detailedpartyactivity extends AppCompatActivity {
 
@@ -69,7 +78,7 @@ public class detailedpartyactivity extends AppCompatActivity {
     TextView phone;
     @BindView(R.id.book)
     Button book;
-
+    users u= new users();
     DatabaseReference ref;
     party p = new party();
     @BindView(R.id.noticket)
@@ -78,14 +87,17 @@ public class detailedpartyactivity extends AppCompatActivity {
     TextView stagprice;
     @BindView(R.id.coupleprice)
     TextView coupleprice;
-
+    private String photoUrl;
+    private FirebaseStorage storage;
+    private StorageReference storageRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailedpartyactivity);
         ButterKnife.bind(this);
-
+        getUser();
         String s = getIntent().getStringExtra("party_id");
+        storage = FirebaseStorage.getInstance();
 
 
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -98,7 +110,7 @@ public class detailedpartyactivity extends AppCompatActivity {
 
                 Glide.with(detailedpartyactivity.this).load(p.getPicture()).into(iv);
 
-                String d = p.getDates();
+                final String d = p.getDates();
 
 
                 String a[] = d.split("/");
@@ -147,9 +159,26 @@ public class detailedpartyactivity extends AppCompatActivity {
                 stagprice.setText("(Stag) ₹"+p.getPricestag());
                 coupleprice.setText("(Couple) ₹"+p.getPricecouple());
                 book.setOnClickListener(new View.OnClickListener() {
+                    TextView tictext;
+
+                    TextView pricesta;
+                    ImageView minusicon;
+                    TextView notic;
+                    ImageView addicon;
+                    TextView stprice;
+
+                    TextView pricecoup;
+                    ImageView minuscoup;
+                    TextView noticcoup;
+                    ImageView addiconcoup;
+                    TextView coupprice;
+                    RelativeLayout rl;
+                    TextView total;
+                    Button book1;
+
+
                     @Override
                     public void onClick(View v) {
-
 
                         final Dialog dialog;
 
@@ -159,15 +188,125 @@ public class detailedpartyactivity extends AppCompatActivity {
                             dialog = new Dialog(detailedpartyactivity.this);
                         }
                         dialog.setContentView(R.layout.ticketdialog);
+                        notic=(TextView)dialog.findViewById(R.id.notic);
+                        noticcoup=(TextView)dialog.findViewById(R.id.noticcoup);
+                        pricesta=(TextView)dialog.findViewById(R.id.pricesta);
+                        pricesta.setText("₹"+p.getPricestag()+" x");
+                        pricecoup=(TextView)dialog.findViewById(R.id.pricecoup);
+                        pricecoup.setText("₹"+p.getPricecouple()+" x");
+                        stprice=(TextView)dialog.findViewById(R.id.stprice);
+                        coupprice=(TextView)dialog.findViewById(R.id.coupprice);
+                        total=(TextView)dialog.findViewById(R.id.total);
+                      book1=(Button)dialog.findViewById(R.id.book1);
+                        addicon=(ImageView)dialog.findViewById(R.id.addicon);
+                        minusicon=(ImageView)dialog.findViewById(R.id.minusicon);
+                        addiconcoup=(ImageView)dialog.findViewById(R.id.addiconcoup);
+                        minuscoup=(ImageView)dialog.findViewById(R.id.minuscoup);
 
-                        Button book1 = (Button)dialog.findViewById(R.id.book1);
+                        addicon.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                if (Integer.parseInt(notic.getText().toString())>=0) {
+                                    notic.setText(String.valueOf(Integer.parseInt(notic.getText().toString()) + 1));
+                                    double tamt=Integer.parseInt(notic.getText().toString())*Double.parseDouble(p.getPricestag());
+                                    stprice.setText(String.format(Locale.UK,"%.2f",tamt));
+                                    total.setText(String.valueOf(Double.parseDouble(stprice.getText().toString())+Double.parseDouble(coupprice.getText().toString())));
+                                }
+
+                            }
+                        });
+                        minusicon.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                if (Integer.parseInt(notic.getText().toString())>0){
+                                    notic.setText(String.valueOf(Integer.parseInt(notic.getText().toString()) - 1));
+                                double tamt=Integer.parseInt(notic.getText().toString())*Double.parseDouble(p.getPricestag());
+                                stprice.setText(String.format(Locale.UK,"%.2f",tamt));}
+                                total.setText(String.valueOf(Double.parseDouble(stprice.getText().toString())+Double.parseDouble(coupprice.getText().toString())));
+
+                            }
+                        });
+                        addiconcoup.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                if (Integer.parseInt(noticcoup.getText().toString())>=0){
+                                    noticcoup.setText(String.valueOf(Integer.parseInt(noticcoup.getText().toString())+1));
+                                double tamt=Integer.parseInt(noticcoup.getText().toString())*Double.parseDouble(p.getPricecouple());
+                                coupprice.setText(String.format(Locale.UK,"%.2f",tamt));}
+                                total.setText(String.valueOf(Double.parseDouble(stprice.getText().toString())+Double.parseDouble(coupprice.getText().toString())));
+
+                            }
+                        });
+                        minuscoup.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                if (Integer.parseInt(noticcoup.getText().toString())>0){
+                                    noticcoup.setText(String.valueOf(Integer.parseInt(noticcoup.getText().toString())-1));
+                                double tamt=Integer.parseInt(noticcoup.getText().toString())*Double.parseDouble(p.getPricecouple());
+                                coupprice.setText(String.format(Locale.UK,"%.2f",tamt));}
+                                total.setText(String.valueOf(Double.parseDouble(stprice.getText().toString())+Double.parseDouble(coupprice.getText().toString())));
+
+                            }
+                        });
+
+
+
+
 
 
 
 
                         book1.setOnClickListener(new View.OnClickListener() {
                             @Override
-                            public void onClick(View view) {View focusView = null;
+                            public void onClick(View view) {
+                                if (Double.parseDouble(total.getText().toString())!=0)
+                                {
+                                    DatabaseReference offsetRef = FirebaseDatabase.getInstance().getReference(".info/serverTimeOffset");
+                                    offsetRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(DataSnapshot snapshot) {
+                                            long offset = snapshot.getValue(Long.class);
+                                           final long esttime = System.currentTimeMillis() + offset;
+                                            storageRef = storage.getReferenceFromUrl("gs://partyyy-5e773.appspot.com").child("tickets").child(String.valueOf(p.getPid())).child(String.valueOf(esttime)+".jpg");
+//                                            File f = QRCode.from(String.valueOf(esttime)).to(ImageType.JPG).file();
+
+                                            Uri qr= Uri.fromFile(QRCode.from(String.valueOf(esttime)).to(ImageType.JPG).withSize(512,512).file());
+                                            UploadTask uploadTask = storageRef.putFile(qr);
+                                            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                                @Override
+                                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                                    Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                                                    photoUrl = downloadUrl.toString();
+                                                   DatabaseReference mDb=FirebaseDatabase.getInstance().getReference().child("users").child(u.getUid()).child("mytickets").child(String.valueOf(esttime));
+                                                    DatabaseReference mDb2=FirebaseDatabase.getInstance().getReference().child("parties").child(String.valueOf(p.getPid())).child("Bookedtickets").child(String.valueOf(esttime));
+                                                    party.BookedTickets b=new party.BookedTickets(String.valueOf(esttime),u.getUid(),u.getName(),String.valueOf(p.getPid()),Double.parseDouble(total.getText().toString()),Integer.parseInt(notic.getText().toString())+Integer.parseInt(noticcoup.getText().toString()),photoUrl);
+                                                   mDb.setValue(b);
+                                                    mDb2.setValue(b);
+                                                    dialog.dismiss();
+                                                    finish();
+                                                }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+
+                                                }
+                                            });
+
+
+
+                                            party.BookedTickets b=new party.BookedTickets(String.valueOf(esttime),u.getUid(),u.getName(),String.valueOf(p.getPid()),Double.parseDouble(total.getText().toString()),Integer.parseInt(notic.getText().toString())+Integer.parseInt(noticcoup.getText().toString()),"");
+                                        }
+
+                                        @Override
+                                        public void onCancelled(DatabaseError error) {
+                                            System.err.println("Listener was cancelled");
+                                        }
+                                    });
+                                }
+                                else Toast.makeText(detailedpartyactivity.this, "Invalid Tickets",
+                                        Toast.LENGTH_LONG).show();
+
+                                View focusView = null;
 
 
 
@@ -187,6 +326,25 @@ public class detailedpartyactivity extends AppCompatActivity {
             }
 
 
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+    void getUser()
+    {
+        FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
+        final String uid=mUser.getUid();
+        final DatabaseReference mDatabase= FirebaseDatabase.getInstance().getReference().child("users").child(uid);
+
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                u=dataSnapshot.getValue(users.class);
+
+            }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {

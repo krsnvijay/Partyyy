@@ -1,5 +1,7 @@
 package partyyy.com.notadeveloper.app.partyyy;
 
+import java.util.HashMap;
+
 /**
  * Created by Chirag on 14-Mar-17.
  */
@@ -20,8 +22,28 @@ public class party {
     String uid;
     String nam;
     long pid;
+    long partytime;
     String pricestag;
     String pricecouple;
+    String description;
+    int tickets;
+    HashMap<String,BookedTickets> Bookedtickets;
+
+    public long getPartytime() {
+        return partytime;
+    }
+
+    public void setPartytime(long partytime) {
+        this.partytime = partytime;
+    }
+
+    public HashMap<String, BookedTickets> getBookedtickets() {
+        return Bookedtickets;
+    }
+
+    public void setBookedtickets(HashMap<String, BookedTickets> bookedtickets) {
+        Bookedtickets = bookedtickets;
+    }
 
     public String getPricestag() {
         return pricestag;
@@ -180,7 +202,7 @@ public class party {
         this.tickets = tickets;
     }
 
-    public party(String title, String picture, String dates, String time, String time1, String email, String number, String address1, String address2, String address3, String pincode, String location, String description, int tickets, String uid, String nam,long pid,String pricestag,String pricecouple) {
+    public party(String title, String picture, String dates, String time, String time1, String email, String number, String address1, String address2, String address3, String pincode, String location, String description, int tickets, String uid, String nam,long pid,String pricestag,String pricecouple,long ptime) {
 
         this.title = title;
         this.picture = picture;
@@ -201,10 +223,89 @@ public class party {
         this.pid = pid;
         this.pricestag = pricestag;
         this.pricecouple = pricecouple;
+        this.partytime=ptime;
+    }
+    public static class BookedTickets{
+        String tid;
+        String uid;
+        String uname;
+        String pid;
+        double tprice;
+        int people;
+
+        String qrcode;
+
+        public BookedTickets() {
+        }
+
+        public BookedTickets(String tid, String uid, String uname, String pid, double tprice, int people, String qrcode) {
+            this.tid = tid;
+            this.uid = uid;
+            this.uname = uname;
+            this.pid = pid;
+            this.tprice = tprice;
+            this.people = people;
+            this.qrcode = qrcode;
+        }
+
+        public String getTid() {
+            return tid;
+        }
+
+        public void setTid(String tid) {
+            this.tid = tid;
+        }
+
+        public String getUid() {
+            return uid;
+        }
+
+        public void setUid(String uid) {
+            this.uid = uid;
+        }
+
+        public String getUname() {
+            return uname;
+        }
+
+        public void setUname(String uname) {
+            this.uname = uname;
+        }
+
+        public String getPid() {
+            return pid;
+        }
+
+        public void setPid(String pid) {
+            this.pid = pid;
+        }
+
+        public double getTprice() {
+            return tprice;
+        }
+
+        public void setTprice(double tprice) {
+            this.tprice = tprice;
+        }
+
+        public int getPeople() {
+            return people;
+        }
+
+        public void setPeople(int people) {
+            this.people = people;
+        }
+
+
+        public String getQrcode() {
+            return qrcode;
+        }
+
+        public void setQrcode(String qrcode) {
+            this.qrcode = qrcode;
+        }
     }
 
-    String description;
-    int tickets;
 
 
 }

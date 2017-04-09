@@ -133,8 +133,11 @@ public class MainActivity extends AppCompatActivity {
                 } else if (id == R.id.settings) {
 
                 } else if (id == R.id.add) {
-                    boolean p = u.getB();
-                    if(p==true)
+                    boolean p;
+                    if (u.isorganizer!=null)
+                    p = u.getIsorganizer();
+                    else p=false;
+                    if(p)
                     {
                         Intent i = new Intent(MainActivity.this, AddAParty.class);
                         startActivity(i);

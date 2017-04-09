@@ -1,19 +1,46 @@
 package partyyy.com.notadeveloper.app.partyyy;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Chirag on 26-Feb-17.
  */
 
 public class users {
-
+    String uid;
     String name;
+
     String number;
     String email;
-    Boolean b;
+    Boolean isorganizer;
     String orgname;
     ArrayList<String> myparties= new ArrayList<>();
+    HashMap<String,party.BookedTickets> mytickets= new HashMap<>();
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public HashMap<String, party.BookedTickets> getMytickets() {
+        return mytickets;
+    }
+
+    public void setMytickets(HashMap<String, party.BookedTickets> mytickets) {
+        this.mytickets = mytickets;
+    }
+
+    public Boolean getIsorganizer() {
+        return isorganizer;
+    }
+
+    public void setIsorganizer(Boolean isorganizer) {
+        this.isorganizer = isorganizer;
+    }
 
     public ArrayList<String> getMyparties() {
         return myparties;
@@ -23,13 +50,6 @@ public class users {
         this.myparties = myparties;
     }
 
-    public Boolean getB() {
-        return b;
-    }
-
-    public void setB(Boolean b) {
-        this.b = b;
-    }
 
     public String getOrgname() {
         return orgname;
@@ -42,13 +62,11 @@ public class users {
     public users() {
     }
 
-    public users(String name, String number, String email, Boolean b, String orgname,ArrayList myparties) {
+    public users(String uid, String name, String number, String email) {
+        this.uid = uid;
         this.name = name;
         this.number = number;
         this.email = email;
-        this.b=b;
-        this.orgname = orgname;
-        this.myparties = myparties;
     }
 
     public String getName() {

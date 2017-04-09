@@ -54,7 +54,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 import java.util.regex.Pattern;
 
 import butterknife.BindView;
@@ -168,7 +170,7 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
                 mTimePicker = new TimePickerDialog(AddAParty.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        time.setText(selectedHour + ":" + selectedMinute);
+                        time.setText(String.format(Locale.UK,"%02d:%02d",selectedHour,selectedMinute));
                     }
                 }, hour, minute, false);//Yes 24 hour time
                 mTimePicker.setTitle("Select Time");
@@ -187,7 +189,7 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
                 mTimePicker = new TimePickerDialog(AddAParty.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        time1.setText(selectedHour + ":" + selectedMinute);
+                        time1.setText(String.format(Locale.UK,"%02d:%02d",selectedHour,selectedMinute));
                     }
                 }, hour, minute, false);//Yes 24 hour time
                 mTimePicker.setTitle("Select Time");
@@ -205,9 +207,10 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
         mProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getEstimatedServerTimeMs();
 
                 imagesRef = storageRef.child("images").child("parties");
+
+                getEstimatedServerTimeMs();
 
                 if (CroperinoFileUtil.verifyStoragePermissions(AddAParty.this))
                     prepareChooser();
@@ -352,28 +355,30 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
                 @Override
                 public void onDataChange(DataSnapshot snapshot) {
                     long offset = snapshot.getValue(Long.class);
-                    estimatedServerTimeMs = System.currentTimeMillis() + offset;
+                    estimatedServerTimeMs =( System.currentTimeMillis() + offset);
 
-                    DateFormat dfm = new SimpleDateFormat("dd/MM/yyyy hh:mm", Locale.UK);
-
+                    DateFormat dfm = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.UK);
+                    dfm.setTimeZone(TimeZone.getTimeZone("GMT+5:30"));
                     long unixtime=estimatedServerTimeMs;
                     try {
+
                         unixtime = dfm.parse(b+" "+c).getTime();
                         unixtime=unixtime/1000;
+                        Log.e("asdxz", "onDataChange: "+b+" "+c+" "+unixtime );
                     } catch (ParseException e1) {
                         e1.printStackTrace();
                     }
-                    DatabaseReference mDatabase = ref.child("parties").child(String.valueOf(unixtime));
+                    DatabaseReference mDatabase = ref.child("parties").child(String.valueOf(estimatedServerTimeMs));
                     Log.e("usr", "u.ge"+u.getEmail()+u.getOrgname());
                     myparties = u.getMyparties();
                     if(myparties==null)
                         myparties=new ArrayList<>();
-                    String f = String.valueOf(unixtime);
+                    String f = String.valueOf(estimatedServerTimeMs);
                      myparties.add(f);
 
 
                     ref.child("users").child(uid).child("myparties").setValue(myparties);
-                    party p = new party(a, photoUrl, b, c, d, e, f, g, h, i, j, null, l, Integer.parseInt(k), userid, nam, unixtime,m,n);
+                    party p = new party(a, photoUrl, b, c, d, e, f, g, h, i, j, null, l, Integer.parseInt(k), userid, nam, estimatedServerTimeMs,m,n,unixtime);
                     mDatabase.setValue(p);
                     Toast.makeText(AddAParty.this, "Redirect to payment gateway",
                             Toast.LENGTH_LONG).show();
@@ -421,7 +426,7 @@ public class AddAParty extends AppCompatActivity implements DatePickerDialog.OnD
         c.set(Calendar.YEAR, year);
         c.set(Calendar.MONTH, monthOfYear);
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        dates.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+        dates.setText(String.format(Locale.UK,"%02d"+"/"+"%02d"+"/"+"%s",dayOfMonth,(monthOfYear + 1),year));
     }
 
 

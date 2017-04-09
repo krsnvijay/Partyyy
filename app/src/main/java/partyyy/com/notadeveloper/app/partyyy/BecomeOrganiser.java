@@ -87,7 +87,7 @@ public class BecomeOrganiser extends AppCompatActivity {
                 focusView.requestFocus();
         } else {
             mDatabase.child("users").child(uid).child("orgname").setValue(a);
-            mDatabase.child("users").child(uid).child("b").setValue(true);
+            mDatabase.child("users").child(uid).child("isorganizer").setValue(true);
 
 
             Intent i = new Intent(BecomeOrganiser.this, AddAParty.class);
