@@ -278,7 +278,7 @@ public class detailedpartyactivity extends AppCompatActivity {
                                                     Uri downloadUrl = taskSnapshot.getDownloadUrl();
                                                     photoUrl = downloadUrl.toString();
                                                    DatabaseReference mDb=FirebaseDatabase.getInstance().getReference().child("users").child(u.getUid()).child("mytickets").child(String.valueOf(esttime));
-                                                    DatabaseReference mDb2=FirebaseDatabase.getInstance().getReference().child("parties").child(String.valueOf(p.getPid())).child("Bookedtickets").child(String.valueOf(esttime));
+                                                    DatabaseReference mDb2=FirebaseDatabase.getInstance().getReference().child("parties").child(String.valueOf(p.getPid())).child("ticketsBooked").child(String.valueOf(esttime));
                                                     party.BookedTickets b=new party.BookedTickets(String.valueOf(esttime),u.getUid(),u.getName(),String.valueOf(p.getPid()),Double.parseDouble(total.getText().toString()),Integer.parseInt(notic.getText().toString())+Integer.parseInt(noticcoup.getText().toString()),false,photoUrl);
                                                    mDb.setValue(b);
                                                     mDb2.setValue(b);

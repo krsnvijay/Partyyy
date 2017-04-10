@@ -27,7 +27,7 @@ public class party {
     String pricecouple;
     String description;
     int tickets;
-    HashMap<String,BookedTickets> Bookedtickets;
+    HashMap<String,BookedTickets> ticketsBooked;
 
     public long getPartytime() {
         return partytime;
@@ -37,12 +37,12 @@ public class party {
         this.partytime = partytime;
     }
 
-    public HashMap<String, BookedTickets> getBookedtickets() {
-        return Bookedtickets;
+    public HashMap<String, BookedTickets> getTicketsBooked() {
+        return ticketsBooked;
     }
 
-    public void setBookedtickets(HashMap<String, BookedTickets> bookedtickets) {
-        Bookedtickets = bookedtickets;
+    public void setTicketsBooked(HashMap<String, BookedTickets> ticketsBooked) {
+        this.ticketsBooked = ticketsBooked;
     }
 
     public String getPricestag() {
