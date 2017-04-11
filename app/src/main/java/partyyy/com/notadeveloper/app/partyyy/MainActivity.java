@@ -131,9 +131,11 @@ public class MainActivity extends AppCompatActivity {
                     builder.setPositiveButton("OK", null);
                     // builder.setNegativeButton("Cancel", null);
                     builder.show();
-                } else if (id == R.id.settings) {
+                } else if (id == R.id.settings)
+                {
 
-                } else if (id == R.id.add) {
+                }
+                else if (id == R.id.add) {
                     boolean p;
                     if (u.isorganizer!=null)
                     p = u.getIsorganizer();
@@ -148,9 +150,16 @@ public class MainActivity extends AppCompatActivity {
                         Intent i = new Intent(MainActivity.this, BecomeOrganiser.class);
                         startActivity(i);
                     }
-                } else if (id == R.id.action_car) {
+                }
+                else if (id == R.id.action_car)
+                {
                     Toast.makeText(MainActivity.this, "CAR",
                             Toast.LENGTH_LONG).show();
+                }
+                else if (id == R.id.mytick)
+                {
+                    Intent i = new Intent(MainActivity.this, TicketActivity.class);
+                    startActivity(i);
                 }
 
                 return true;
