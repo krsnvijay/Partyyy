@@ -45,8 +45,9 @@
         <activity
             android:name=".OrganizerActivity"
             android:label="@string/title_activity_organizer"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".TicketActivity"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".DetailedTicketActivity" />
+        <activity android:name=".MyTickets"></activity>
     </application>
 
 </manifest>
