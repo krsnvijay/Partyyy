@@ -47,7 +47,8 @@
             android:label="@string/title_activity_organizer"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".DetailedTicketActivity" />
-        <activity android:name=".MyTickets"></activity>
+        <activity android:name=".MyTickets" />
+        <activity android:name=".Sheesha"></activity>
     </application>
 
 </manifest>

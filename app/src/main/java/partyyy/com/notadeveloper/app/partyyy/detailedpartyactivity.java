@@ -280,7 +280,8 @@ public class detailedpartyactivity extends AppCompatActivity {
                                                    DatabaseReference mDb=FirebaseDatabase.getInstance().getReference().child("users").child(u.getUid()).child("mytickets").child(String.valueOf(esttime));
                                                     DatabaseReference mDb2=FirebaseDatabase.getInstance().getReference().child("parties").child(String.valueOf(p.getPid())).child("ticketsBooked").child(String.valueOf(esttime));
                                                     party.BookedTickets b=new party.BookedTickets(String.valueOf(esttime),u.getUid(),u.getName(),String.valueOf(p.getPid()),Double.parseDouble(total.getText().toString()),Integer.parseInt(notic.getText().toString())+Integer.parseInt(noticcoup.getText().toString()),false,photoUrl);
-                                                   mDb.setValue(b);
+                                                    users.mytickets c = new users.mytickets(u.getName(),total.getText().toString(),"20/04/2017","Chennai","2:30","4:40",notic.getText().toString(),noticcoup.getText().toString());
+                                                   mDb.setValue(c);
                                                     mDb2.setValue(b);
                                                     dialog.dismiss();
                                                     finish();

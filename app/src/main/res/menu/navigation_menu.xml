@@ -56,8 +56,8 @@ android:actionMenuTextColor="#32ff12"
 
             android:title="booze" />
         <item
-            android:id="@+id/action_shisha"
+            android:id="@+id/action_sheesha"
             android:icon="@drawable/ic_confetti"
-            android:title="rent shisha" />
+            android:title="rent sheesha" />
     </group>
 </menu>

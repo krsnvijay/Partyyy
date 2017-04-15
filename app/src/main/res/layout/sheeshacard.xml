@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    card_view:cardCornerRadius="4dp"
+    card_view:cardElevation="3dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:clickable="false"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardUseCompatPadding="true"
+
+    android:id="@+id/cv1">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lemon and Mint"
+            android:textSize="18dp"
+            android:id="@+id/flavor"
+            android:layout_alignBottom="@+id/price"
+            android:layout_marginRight="12dp"
+            android:layout_marginLeft="12dp"/>
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@+id/flavor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="₹250 ×"
+            android:textSize="18dp"
+            android:id="@+id/price"
+
+            />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/price"
+            android:layout_alignBottom="@+id/price"
+            android:layout_toRightOf="@+id/price"
+            card_view:srcCompat="@drawable/minus"
+            android:tint="@color/colorAccent"
+            android:id="@+id/minusicon"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:text="0"
+            android:layout_alignTop="@+id/minusicon"
+            android:layout_toRightOf="@+id/minusicon"
+            android:gravity="bottom"
+            android:layout_alignBottom="@+id/minusicon"
+            android:textSize="17dp"
+            android:id="@+id/nopot"/>
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            card_view:srcCompat="@drawable/plus"
+            android:tint="@color/colorAccent"
+            android:layout_alignTop="@+id/minusicon"
+            android:layout_alignBottom="@+id/minusicon"
+            android:background="?selectableItemBackgroundBorderless"
+
+            android:id="@+id/addicon"
+            android:layout_toRightOf="@+id/nopot"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/addicon"
+            android:layout_alignTop="@+id/minusicon"
+
+            android:layout_alignBottom="@+id/minusicon"
+            android:layout_marginLeft="10dp"
+            android:text="₹"
+            android:textSize="20dp"
+            android:id="@+id/stpricet"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/stpricet"
+            android:layout_alignTop="@+id/minusicon"
+
+            android:layout_alignBottom="@+id/minusicon"
+            android:text="0"
+            android:textSize="20dp"
+            android:id="@+id/stprice"/>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

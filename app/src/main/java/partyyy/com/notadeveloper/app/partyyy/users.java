@@ -97,7 +97,7 @@ public class users {
         this.email = email;
     }
 
-    class mytickets
+    public static class mytickets
     {
          String name;
          String orderprice;
@@ -107,6 +107,10 @@ public class users {
          String time1;
          String stagnumber;
          String couplenumber;
+         public mytickets()
+         {
+
+         }
 
         public mytickets(String name, String orderprice, String date, String loct, String time, String time1, String stagnumber, String couplenumber) {
             this.name = name;

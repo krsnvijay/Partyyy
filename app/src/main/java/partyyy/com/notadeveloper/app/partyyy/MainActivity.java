@@ -152,7 +152,12 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else if (id == R.id.mytick)
                 {
-                    Intent i = new Intent(MainActivity.this, DetailedTicketActivity.class);
+                    Intent i = new Intent(MainActivity.this, MyTickets.class);
+                    startActivity(i);
+                }
+                else if (id == R.id.action_sheesha)
+                {
+                    Intent i = new Intent(MainActivity.this, Sheesha.class);
                     startActivity(i);
                 }
 
