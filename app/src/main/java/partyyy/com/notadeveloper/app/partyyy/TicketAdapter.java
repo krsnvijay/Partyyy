@@ -47,7 +47,9 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketHolder> {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, DetailedTicketActivity.class);
+                intent.putExtra("Ticket_id", String.valueOf(c.getTid()));
                 mContext.startActivity(intent);
+
             }
         });
     }

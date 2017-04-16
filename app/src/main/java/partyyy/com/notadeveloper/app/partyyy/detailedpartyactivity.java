@@ -89,8 +89,7 @@ public class detailedpartyactivity extends AppCompatActivity {
     @BindView(R.id.coupleprice)
     TextView coupleprice;
     private String photoUrl;
-    private FirebaseStorage storage;
-    private StorageReference storageRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,7 +97,6 @@ public class detailedpartyactivity extends AppCompatActivity {
         ButterKnife.bind(this);
         getUser();
         String s = getIntent().getStringExtra("party_id");
-        storage = FirebaseStorage.getInstance();
 
 
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -270,41 +268,29 @@ public class detailedpartyactivity extends AppCompatActivity {
                                         @Override
                                         public void onDataChange(DataSnapshot snapshot) {
                                             long offset = snapshot.getValue(Long.class);
-                                           final long esttime = System.currentTimeMillis() + offset;
-                                            storageRef = storage.getReferenceFromUrl("gs://partyyy-5e773.appspot.com").child("tickets").child(String.valueOf(p.getPid())).child(String.valueOf(esttime)+".jpg");
-//                                            File f = QRCode.from(String.valueOf(esttime)).to(ImageType.JPG).file();
 
-                                            Uri qr= Uri.fromFile(QRCode.from(String.valueOf(esttime)).to(ImageType.JPG).withSize(512,512).file());
-                                            UploadTask uploadTask = storageRef.putFile(qr);
-                                            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                                @Override
-                                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                                    Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                                                    photoUrl = downloadUrl.toString();
-                                                   DatabaseReference mDb=FirebaseDatabase.getInstance().getReference().child("users").child(u.getUid()).child("mytickets").child(String.valueOf(esttime));
-                                                    DatabaseReference mDb2=FirebaseDatabase.getInstance().getReference().child("parties").child(String.valueOf(p.getPid())).child("ticketsBooked").child(String.valueOf(esttime));
-                                                    party.BookedTickets b=new party.BookedTickets(String.valueOf(esttime),u.getUid(),u.getName(),String.valueOf(p.getPid()),Double.parseDouble(total.getText().toString()),Integer.parseInt(notic.getText().toString()),Integer.parseInt(noticcoup.getText().toString()),false,photoUrl);
-                                                    mDb2.setValue(b);
-                                                    b.setLoct(p.getAddress1()+p.getAddress2()+p.getAddress3());
-                                                    b.setDate(p.getDates());
-                                                    b.setPname(p.getTitle());
-                                                    b.setTime(p.getTime()+" to "+p.getTime1());
-                                                   mDb.setValue(b);
+                                            final long esttime = System.currentTimeMillis() + offset;
+                                            photoUrl = "https://api.qrserver.com/v1/create-qr-code/?size=512x512&data="+String.valueOf(esttime);
+                                            DatabaseReference mDb = FirebaseDatabase.getInstance().getReference().child("users").child(u.getUid()).child("mytickets").child(String.valueOf(esttime));
+                                            DatabaseReference mDb2 = FirebaseDatabase.getInstance().getReference().child("parties").child(String.valueOf(p.getPid())).child("ticketsBooked").child(String.valueOf(esttime));
+                                            party.BookedTickets b = new party.BookedTickets(String.valueOf(esttime), u.getUid(), u.getName(), String.valueOf(p.getPid()), Double.parseDouble(total.getText().toString()), Integer.parseInt(notic.getText().toString()), Integer.parseInt(noticcoup.getText().toString()), false, photoUrl);
+                                            mDb2.setValue(b);
+                                            b.setLoct(p.getAddress1() + p.getAddress2() + p.getAddress3());
+                                            b.setDate(p.getDates());
+                                            b.setPname(p.getTitle());
+                                            b.setTime(p.getTime() + " to " + p.getTime1());
+                                            mDb.setValue(b);
 
-                                                    dialog.dismiss();
-                                                    pd.dismiss();
-                                                    finish();
-                                                }
-                                            }).addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    pd.dismiss();
-                                                }
-                                            });
-
-
+                                            dialog.dismiss();
+                                            pd.dismiss();
+                                            finish();
 
                                         }
+
+
+
+
+
 
                                         @Override
                                         public void onCancelled(DatabaseError error) {
