@@ -29,7 +29,7 @@ public class SheeshaAdapter extends RecyclerView.Adapter <SheeshaHolder> {
     public SheeshaHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         View itemView = LayoutInflater.from(mContext)
-                .inflate(R.layout.activity_sheesha, parent, false);
+                .inflate(R.layout.sheeshacard, parent, false);
 
         return new SheeshaHolder(itemView);
     }

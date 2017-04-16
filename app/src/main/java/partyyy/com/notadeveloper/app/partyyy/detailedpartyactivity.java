@@ -1,6 +1,7 @@
 package partyyy.com.notadeveloper.app.partyyy;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
@@ -261,6 +262,9 @@ public class detailedpartyactivity extends AppCompatActivity {
                             public void onClick(View view) {
                                 if (Double.parseDouble(total.getText().toString())!=0)
                                 {
+                                    final ProgressDialog pd=new ProgressDialog(detailedpartyactivity.this);
+                                    pd.setMessage("Booking Ticket...");
+                                    pd.show();
                                     DatabaseReference offsetRef = FirebaseDatabase.getInstance().getReference(".info/serverTimeOffset");
                                     offsetRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
@@ -279,17 +283,22 @@ public class detailedpartyactivity extends AppCompatActivity {
                                                     photoUrl = downloadUrl.toString();
                                                    DatabaseReference mDb=FirebaseDatabase.getInstance().getReference().child("users").child(u.getUid()).child("mytickets").child(String.valueOf(esttime));
                                                     DatabaseReference mDb2=FirebaseDatabase.getInstance().getReference().child("parties").child(String.valueOf(p.getPid())).child("ticketsBooked").child(String.valueOf(esttime));
-                                                    party.BookedTickets b=new party.BookedTickets(String.valueOf(esttime),u.getUid(),u.getName(),String.valueOf(p.getPid()),Double.parseDouble(total.getText().toString()),Integer.parseInt(notic.getText().toString())+Integer.parseInt(noticcoup.getText().toString()),false,photoUrl);
-                                                    users.mytickets c = new users.mytickets(u.getName(),total.getText().toString(),"20/04/2017","Chennai","2:30","4:40",notic.getText().toString(),noticcoup.getText().toString());
-                                                   mDb.setValue(c);
+                                                    party.BookedTickets b=new party.BookedTickets(String.valueOf(esttime),u.getUid(),u.getName(),String.valueOf(p.getPid()),Double.parseDouble(total.getText().toString()),Integer.parseInt(notic.getText().toString()),Integer.parseInt(noticcoup.getText().toString()),false,photoUrl);
                                                     mDb2.setValue(b);
+                                                    b.setLoct(p.getAddress1()+p.getAddress2()+p.getAddress3());
+                                                    b.setDate(p.getDates());
+                                                    b.setPname(p.getTitle());
+                                                    b.setTime(p.getTime()+" to "+p.getTime1());
+                                                   mDb.setValue(b);
+
                                                     dialog.dismiss();
+                                                    pd.dismiss();
                                                     finish();
                                                 }
                                             }).addOnFailureListener(new OnFailureListener() {
                                                 @Override
                                                 public void onFailure(@NonNull Exception e) {
-
+                                                    pd.dismiss();
                                                 }
                                             });
 

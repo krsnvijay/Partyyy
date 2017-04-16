@@ -231,9 +231,16 @@ public class party {
         String uname;
         String pid;
         double tprice;
-        int people;
+        int stagno;
+        int coupleno;
         boolean validated;
         String qrcode;
+
+        String loct;
+        String time;
+        String date;
+        String pname;
+
 
         public boolean isValidated() {
             return validated;
@@ -246,15 +253,64 @@ public class party {
         public BookedTickets() {
         }
 
-        public BookedTickets(String tid, String uid, String uname, String pid, double tprice, int people, boolean validated, String qrcode) {
+        public BookedTickets(String tid, String uid, String uname, String pid, double tprice, int stagno, int coupleno, boolean validated, String qrcode) {
             this.tid = tid;
             this.uid = uid;
             this.uname = uname;
             this.pid = pid;
             this.tprice = tprice;
-            this.people = people;
+            this.stagno = stagno;
+            this.coupleno = coupleno;
             this.validated = validated;
             this.qrcode = qrcode;
+        }
+
+        public int getStagno() {
+            return stagno;
+        }
+
+        public void setStagno(int stagno) {
+            this.stagno = stagno;
+        }
+
+        public int getCoupleno() {
+            return coupleno;
+        }
+
+        public void setCoupleno(int coupleno) {
+            this.coupleno = coupleno;
+        }
+
+        public String getLoct() {
+            return loct;
+        }
+
+        public void setLoct(String loct) {
+            this.loct = loct;
+        }
+
+        public String getTime() {
+            return time;
+        }
+
+        public void setTime(String time) {
+            this.time = time;
+        }
+
+        public String getDate() {
+            return date;
+        }
+
+        public void setDate(String date) {
+            this.date = date;
+        }
+
+        public String getPname() {
+            return pname;
+        }
+
+        public void setPname(String pname) {
+            this.pname = pname;
         }
 
         public String getTid() {
@@ -297,13 +353,7 @@ public class party {
             this.tprice = tprice;
         }
 
-        public int getPeople() {
-            return people;
-        }
 
-        public void setPeople(int people) {
-            this.people = people;
-        }
 
 
         public String getQrcode() {

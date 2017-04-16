@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
 public class MyTickets extends AppCompatActivity {
 
     @BindView(R.id.recycl)RecyclerView mRecyclerView;
-    List<users.mytickets> lc=new ArrayList<>();
+    List<party.BookedTickets> lc=new ArrayList<>();
     TicketAdapter o;
     LinearLayoutManager mLayoutManager;
 
@@ -48,17 +48,20 @@ public class MyTickets extends AppCompatActivity {
         mDatabase.child("users").child(uid).child("mytickets").orderByValue().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot datasnapshot) {
+                lc=new ArrayList<party.BookedTickets>();
                 for (DataSnapshot postSnapshot : datasnapshot.getChildren()) {
-                    users.mytickets u = postSnapshot.getValue(users.mytickets.class);
+                    party.BookedTickets u = postSnapshot.getValue(party.BookedTickets.class);
                     if (u != null) {
                         if (!lc.contains(u))
                             lc.add(u);
                     }
-                    else lc=new ArrayList<users.mytickets>();
-                    o=new TicketAdapter(lc,MyTickets.this);
 
-                    mRecyclerView.setAdapter(o);
+
+
+
                 }
+                o=new TicketAdapter(lc,MyTickets.this);
+                mRecyclerView.setAdapter(o);
 
 
             }

@@ -14,10 +14,10 @@ import java.util.List;
  */
 
 public class TicketAdapter extends RecyclerView.Adapter<TicketHolder> {
-    private List<users.mytickets> wList;
+    private List<party.BookedTickets> wList;
     private Context mContext;
 
-    public TicketAdapter(List<users.mytickets> wList, Context context) {
+    public TicketAdapter(List<party.BookedTickets> wList, Context context) {
 
 
         this.wList = wList;
@@ -34,15 +34,15 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketHolder> {
 
     @Override
     public void onBindViewHolder(TicketHolder holder, int position) {
-        final users.mytickets c =wList.get(holder.getAdapterPosition());
+        final party.BookedTickets c =wList.get(holder.getAdapterPosition());
 
-        holder.name.setText(c.getName());
+        holder.name.setText(c.getPname());
         holder.date.setText(c.getDate());
-        holder.orderprice.setText("Amount paid: ₹"+c.getOrderprice());
-        holder.stagprice.setText("(Stag): "+c.getStagnumber());
-        holder.coupleprice.setText("(Couple): "+c.getCouplenumber());
+        holder.orderprice.setText("Amount paid: ₹"+c.getTprice());
+        holder.stagprice.setText("(Stag): "+c.getStagno());
+        holder.coupleprice.setText("(Couple): "+c.getCoupleno());
         holder.loct.setText(c.getLoct());
-        holder.timet.setText(c.getTime() + " to " + c.getTime1());
+        holder.timet.setText(c.getTime());
         holder.cv1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
