@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class Sheesha extends AppCompatActivity {
+    public static TextView total;
     static {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
@@ -17,6 +19,8 @@ public class Sheesha extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sheesha);
+
+        total = (TextView) findViewById(R.id.total);
 
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         RecyclerView rv=(RecyclerView) findViewById(R.id.rv);
@@ -30,4 +34,5 @@ public class Sheesha extends AppCompatActivity {
         SheeshaAdapter s=new SheeshaAdapter(list,Sheesha.this);
         rv.setAdapter(s);
     }
+
 }
