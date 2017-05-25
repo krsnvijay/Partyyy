@@ -19,7 +19,8 @@
         android:id="@+id/activity_display_products"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.notadeveloper.app.sgnpharmacy.DisplayProducts">
+        tools:context="com.notadeveloper.app.sgnpharmacy.DisplayProducts"
+        >
         <android.support.v7.widget.Toolbar
             android:id="@+id/my_toolbar"
             android:layout_width="match_parent"

@@ -24,74 +24,16 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
-
+            android:layout_toLeftOf="@+id/check"
+            android:layout_alignBottom="@+id/check"
+            android:layout_alignTop="@+id/check"
+            android:gravity="center_vertical"
             android:text="Lemon and Mint"
             android:textSize="18dp" />
-        <TextView
-
-            android:id="@+id/price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/flavor"
-            android:layout_alignTop="@+id/stprice"
-            android:layout_marginRight="10dp"
-            android:text="₹250 ×"
-            android:textSize="18dp"
-
-            />
-
-        <ImageView
-            android:id="@+id/minusicon"
-            android:layout_width="20dp"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/price"
-            android:layout_alignTop="@+id/price"
-            android:layout_toRightOf="@+id/price"
-            android:background="?selectableItemBackgroundBorderless"
-
-            android:tint="@color/colorAccent"
-            card_view:srcCompat="@drawable/minus"
-            />
-        <TextView
-            android:id="@+id/nopot"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/price"
-            android:layout_alignTop="@+id/price"
-            android:layout_marginLeft="5dp"
-
-            android:layout_marginRight="5dp"
-            android:layout_toRightOf="@+id/minusicon"
-            android:gravity="bottom"
-
-            android:text="0"
-            android:textSize="17dp" />
-        <ImageView
-            android:id="@+id/addicon"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:layout_alignBottom="@+id/price"
-            android:layout_alignTop="@+id/price"
-
-            android:layout_toRightOf="@+id/nopot"
-            android:background="?selectableItemBackgroundBorderless"
-
-            android:tint="@color/colorAccent"
-            card_view:srcCompat="@drawable/plus"
-            />
-
-        <TextView
-            android:id="@+id/stprice"
+        <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/flavor"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="14dp"
-            android:layout_marginRight="14dp"
-            android:layout_toRightOf="@+id/addicon"
-            android:gravity="end"
-            android:text="0"
-            android:textSize="20dp" />
+            android:id="@+id/check"/>
     </RelativeLayout>
 </android.support.v7.widget.CardView>

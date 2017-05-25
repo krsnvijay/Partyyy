@@ -145,19 +145,19 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(i);
                     }
                 }
-                else if (id == R.id.action_car)
-                {
-                    Toast.makeText(MainActivity.this, "CAR",
-                            Toast.LENGTH_LONG).show();
-                }
-                else if (id == R.id.mytick)
-                {
-                    Intent i = new Intent(MainActivity.this, MyTickets.class);
-                    startActivity(i);
-                }
+//                else if (id == R.id.action_car)
+//                {
+//                    Toast.makeText(MainActivity.this, "CAR",
+//                            Toast.LENGTH_LONG).show();
+//                }
+//                else if (id == R.id.mytick)
+//                {
+//                    Intent i = new Intent(MainActivity.this, MyTickets.class);
+//                    startActivity(i);
+//                }
                 else if (id == R.id.action_sheesha)
                 {
-                    Intent i = new Intent(MainActivity.this, Sheesha.class);
+                    Intent i = new Intent(MainActivity.this, SheeshaActivity.class);
                     startActivity(i);
                 }
 

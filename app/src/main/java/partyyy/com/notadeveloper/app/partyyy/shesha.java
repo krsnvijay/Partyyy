@@ -5,34 +5,23 @@ package partyyy.com.notadeveloper.app.partyyy;
  */
 
 public class shesha {
-    String flavor;
-    String price;
+    String flavour;
 
     public shesha()
     {
 
     }
-    public shesha(String flavor, String price) {
+    public shesha(String flavour) {
 
-        this.flavor = flavor;
-        this.price = price;
+        this.flavour = flavour;
+
     }
 
-    public String getFlavor() {
-        return flavor;
+    public String getFlavour() {
+        return flavour;
     }
 
-    public void setFlavor(String flavor) {
-        this.flavor = flavor;
+    public void setFlavor(String flavou) {
+        this.flavour = flavour;
     }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-
 }

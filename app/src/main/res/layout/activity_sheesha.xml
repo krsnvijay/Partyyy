@@ -5,13 +5,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/smoke"
-    tools:context="partyyy.com.notadeveloper.app.partyyy.Sheesha">
+    tools:context="partyyy.com.notadeveloper.app.partyyy.SheeshaActivity"
+    android:background="@drawable/pot">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rl1"
+        android:layout_centerHorizontal="true">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Number of pots:"
+            android:textSize="23dp"
+            android:id="@+id/potstext"/>
+        <ImageView
+            android:id="@+id/minusicon"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/potstext"
+            android:layout_alignTop="@+id/potstext"
+            android:layout_toRightOf="@+id/potstext"
+            android:layout_marginLeft="10dp"
+            android:background="?selectableItemBackgroundBorderless"
+
+            android:tint="@color/colorAccent"
+            app:srcCompat="@drawable/minus"
+            />
+        <TextView
+            android:id="@+id/nopot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/minusicon"
+            android:layout_alignTop="@+id/minusicon"
+            android:layout_marginLeft="5dp"
+
+            android:layout_marginRight="5dp"
+            android:layout_toRightOf="@+id/minusicon"
+            android:gravity="bottom"
+
+            android:text="0"
+            android:textSize="17dp" />
+        <ImageView
+            android:id="@+id/addicon"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_alignBottom="@+id/minusicon"
+            android:layout_alignTop="@+id/minusicon"
+
+            android:layout_toRightOf="@+id/nopot"
+            android:background="?selectableItemBackgroundBorderless"
+
+            android:tint="@color/colorAccent"
+            app:srcCompat="@drawable/plus"
+            />
+    </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Flavours:"
+        android:textSize="23dp"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/flavourstext"
+        android:layout_below="@id/rl1"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/total"
-        android:layout_alignParentTop="true">
+        android:layout_below="@+id/flavourstext">
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv"
             android:layout_width="match_parent"
@@ -45,7 +106,7 @@
         android:layout_alignParentRight="true"
         android:layout_gravity="end"
         android:filterTouchesWhenObscured="true"
-        android:text="Order"
+        android:text="proceed"
         android:theme="@style/AccentButton"/>
 
 
