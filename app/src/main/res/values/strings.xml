@@ -24,4 +24,13 @@
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_organizer">OrganizerActivity</string>
+    <string-array name="delivertype">
+        <item>Choose One</item>
+        <item>2 Hours</item>
+        <item>6 Hours</item>
+        <item>12 Hours</item>
+        <item>1 Day</item>
+        <item>3 Days</item>
+        <item>1 Week</item>
+    </string-array>
 </resources>

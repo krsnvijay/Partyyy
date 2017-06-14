@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        app:titleTextAppearance="@style/MyActionBar.TitleTextStyle"
+
+        app:menu="@menu/disptoolmenu"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recyclerview"
+        android:layout_above="@+id/publicparty"
+        android:layout_below="@id/my_toolbar"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:filterTouchesWhenObscured="true"
+        android:text="Throw a private party!"
+        android:theme="@style/AccentButton"
+        android:id="@+id/privateparty"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="end"
+        android:filterTouchesWhenObscured="true"
+        android:text="Add a party!"
+        android:theme="@style/AccentButton"
+        android:id="@+id/publicparty"
+        android:layout_above="@+id/privateparty"/>
+
+</RelativeLayout>

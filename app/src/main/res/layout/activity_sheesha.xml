@@ -60,6 +60,37 @@
             app:srcCompat="@drawable/plus"
             />
     </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl1"
+        android:id="@+id/rl2"
+        android:layout_centerHorizontal="true">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/tw__composer_black"
+            android:textColor="@color/white"
+            android:id="@+id/tex1"
+            android:text="(₹"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/tw__composer_black"
+            android:textColor="@color/white"
+            android:layout_toRightOf="@+id/tex1"
+            android:id="@+id/tex2"
+            android:text="360"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/tw__composer_black"
+            android:textColor="@color/white"
+            android:layout_toRightOf="@+id/tex2"
+            android:id="@+id/tex3"
+            android:text=" / pot)"/>
+    </RelativeLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -67,11 +98,20 @@
         android:textSize="23dp"
         android:layout_marginLeft="10dp"
         android:id="@+id/flavourstext"
-        android:layout_below="@id/rl1"/>
+        android:layout_below="@id/rl2"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/info"
+        android:layout_centerHorizontal="true"
+        android:background="@color/tw__composer_black"
+        android:textColor="@color/white"
+        android:text="(3 flavours can be selected per pot)"
+        android:layout_above="@+id/total"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/total"
+        android:layout_above="@+id/info"
         android:layout_below="@+id/flavourstext">
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv"

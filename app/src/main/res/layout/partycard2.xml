@@ -20,6 +20,24 @@
 
     android:id="@+id/cv">
     <RelativeLayout
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/white"></RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/white"></RelativeLayout>
+    <RelativeLayout
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:layout_gravity="right"></RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/white"
+        android:layout_gravity="bottom"></RelativeLayout>
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
     >

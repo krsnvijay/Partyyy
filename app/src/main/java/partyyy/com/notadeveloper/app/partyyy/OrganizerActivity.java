@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -27,8 +28,8 @@ public class OrganizerActivity extends AppCompatActivity {
 
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerview;
-    @BindView(R.id.fab)
-    FloatingActionButton mFab;
+    private Button publicparty;
+    private Button privateparty;
     private  users u=new users();
     String uid;
     LinearLayoutManager mLayoutManager;
@@ -36,22 +37,32 @@ public class OrganizerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_organizer);
+        setContentView(R.layout.activity_organizer1);
         ButterKnife.bind(this);
         loadadapter();
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerview.setLayoutManager(mLayoutManager);
-        mRecyclerview.setHasFixedSize(true);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+
+        publicparty = (Button)findViewById(R.id.publicparty);
+        privateparty = (Button)findViewById(R.id.privateparty);
+
+        publicparty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(OrganizerActivity.this, AddAParty.class);
                 startActivity(i);
             }
         });
+        privateparty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(OrganizerActivity.this, AddAParty.class);
+                startActivity(i);
+            }
+        });
+
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerview.setLayoutManager(mLayoutManager);
+        mRecyclerview.setHasFixedSize(true);
+
     }
     void loadadapter()
     {
