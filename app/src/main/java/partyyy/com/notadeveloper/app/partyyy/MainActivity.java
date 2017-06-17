@@ -2,9 +2,12 @@ package partyyy.com.notadeveloper.app.partyyy;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
@@ -41,33 +44,25 @@ import butterknife.ButterKnife;
 import static android.R.id.toggle;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements PartyFragment.OnFragmentInteractionListener, ClubFragment.OnFragmentInteractionListener {
+
     users u= new users();
-    @BindView(R.id.recyclerview)
-    RecyclerView recyclerview;
+    private Menu menu;
+    private FirebaseRecyclerAdapter<party, PartyHolder> mAdapter;
+
+
     private DrawerLayout dl;
     private ActionBarDrawerToggle abdt;
-    private FirebaseRecyclerAdapter<party, PartyHolder> mAdapter;
-    private List<party> pli = new ArrayList<>();
-    String cat;
-    DatabaseReference ref;
-    LinearLayoutManager mLayoutManager;
-    boolean called=false;
-    private Menu menu;
-    private DatabaseReference mDatabase;
     final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-        getUser();
+
         dl = (DrawerLayout) findViewById(R.id.dl);
         abdt = new ActionBarDrawerToggle(this, dl, R.string.Open, R.string.Close);
         abdt.setDrawerIndicatorEnabled(true);
-        mLayoutManager = new LinearLayoutManager(this);
-        recyclerview.setHasFixedSize(true);
-       mDatabase = FirebaseDatabase.getInstance().getReference();
+
 
 
 
@@ -79,16 +74,39 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_dehaze_black_24dp);
 
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout.addTab(tabLayout.newTab().setText("Parties"));
+        tabLayout.addTab(tabLayout.newTab().setText("Clubs"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+        final PagerAdapter adapter = new PagerAdapter
+                (getSupportFragmentManager(), tabLayout.getTabCount());
+        viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
 
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 
 
-        final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.keepSynced(true);
-        ref = mDatabase.child("parties");
+
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -167,18 +185,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        if (!called) {
-            recyclerview.setLayoutManager(mLayoutManager);
-            mAdapter = new FirebaseRecyclerAdapter<party, PartyHolder>(party.class, R.layout.partycard2, PartyHolder.class, ref) {
-                @Override
-                public void populateViewHolder(PartyHolder ViewHolder, final party product, int position) {
-                    ViewHolder.setData(product, MainActivity.this);
-                }
-            };
 
-            recyclerview.setAdapter(mAdapter);
-            called=true;
-        }
 
 
     }
@@ -191,27 +198,27 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        switch (item.getItemId()) {
-            case R.id.datehigh:
-                setmAdapter(1);
-                return true;
+//        switch (item.getItemId()) {
+//            case R.id.datehigh:
+//                setmAdapter(1);
+//                return true;
+//
+//            case R.id.datelow:
+//                setmAdapter(2);
+//                return true;
+//            case R.id.costhigh:
+//                setmAdapter(3);
+//                return true;
+//            case R.id.costlow:
+//                setmAdapter(4);
+//                return true;
+//
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
 
-            case R.id.datelow:
-                setmAdapter(2);
-                return true;
-            case R.id.costhigh:
-                setmAdapter(3);
-                return true;
-            case R.id.costlow:
-                setmAdapter(4);
-                return true;
 
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-
-
-
+        return super.onOptionsItemSelected(item);
 
 
     }
@@ -234,59 +241,41 @@ public class MainActivity extends AppCompatActivity {
         }
         return result;
     }
-    void setmAdapter(int x)
-
-    {
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        Query q=mDatabase.child("parties");
-        LinearLayoutManager LayoutManager = new LinearLayoutManager(MainActivity.this);
-
-        if (x==1)
-        {q=mDatabase.child("parties").orderByChild("pid");
-         LayoutManager.setStackFromEnd(true);
-            LayoutManager.setReverseLayout(true);}
-     else   if (x==2)
-        {
-            q=mDatabase.child("parties").orderByChild("pid");
-        }
-        else if (x==3)
-        {
-            q=mDatabase.child("parties").orderByChild("tickets");
-            LayoutManager.setStackFromEnd(true);
-            LayoutManager.setReverseLayout(true);
-        }
-        else if (x==4)
-        {
-            q=mDatabase.child("parties").orderByChild("tickets");
-        }
-        mAdapter = new FirebaseRecyclerAdapter<party, PartyHolder>(party.class, R.layout.partycard2, PartyHolder.class, q) {
-            @Override
-            public void populateViewHolder(PartyHolder ViewHolder, final party product, int position) {
-                ViewHolder.setData(product, MainActivity.this);
-            }
-        };
-        recyclerview.setLayoutManager(LayoutManager);
-        recyclerview.setAdapter(mAdapter);
-    }
-    void getUser()
-    {
-        FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
-        final String uid=mUser.getUid();
-        final DatabaseReference mDatabase= FirebaseDatabase.getInstance().getReference().child("users").child(uid);
-
-        mDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                u=dataSnapshot.getValue(users.class);
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
+//    void setmAdapter(int x)
+//
+//    {
+//        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+//        Query q=mDatabase.child("parties");
+//        LinearLayoutManager LayoutManager = new LinearLayoutManager(MainActivity.this);
+//
+//        if (x==1)
+//        {q=mDatabase.child("parties").orderByChild("pid");
+//         LayoutManager.setStackFromEnd(true);
+//            LayoutManager.setReverseLayout(true);}
+//     else   if (x==2)
+//        {
+//            q=mDatabase.child("parties").orderByChild("pid");
+//        }
+//        else if (x==3)
+//        {
+//            q=mDatabase.child("parties").orderByChild("tickets");
+//            LayoutManager.setStackFromEnd(true);
+//            LayoutManager.setReverseLayout(true);
+//        }
+//        else if (x==4)
+//        {
+//            q=mDatabase.child("parties").orderByChild("tickets");
+//        }
+//        mAdapter = new FirebaseRecyclerAdapter<party, PartyHolder>(party.class, R.layout.partycard2, PartyHolder.class, q) {
+//            @Override
+//            public void populateViewHolder(PartyHolder ViewHolder, final party product, int position) {
+//                ViewHolder.setData(product, MainActivity.this);
+//            }
+//        };
+//        recyclerview.setLayoutManager(LayoutManager);
+//        recyclerview.setAdapter(mAdapter);
+//    }
+//
     @Override
     public void onBackPressed() {
 
@@ -302,5 +291,9 @@ public class MainActivity extends AppCompatActivity {
         builder.setNegativeButton("No", null);
         builder.show();
         //  super.onBackPressed();
+    }
+    @Override
+    public void onFragmentInteraction(Uri uri){
+        //you can leave it empty
     }
 }
