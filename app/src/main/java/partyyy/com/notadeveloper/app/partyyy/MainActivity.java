@@ -38,6 +38,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static android.R.id.toggle;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -75,9 +76,10 @@ public class MainActivity extends AppCompatActivity {
         abdt.syncState();
      Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-        myToolbar.setTitle(fromHtml("<font color='#ffffff'>    Partyyy</font>"));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_dehaze_black_24dp);
+
+
 
 
 
