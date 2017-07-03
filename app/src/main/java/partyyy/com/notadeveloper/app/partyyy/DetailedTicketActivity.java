@@ -16,6 +16,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -86,23 +91,23 @@ public class DetailedTicketActivity extends AppCompatActivity {
                 if (a[0].length() < 2)
                     a[0] = "0" + a[0];
                 mDate.setText(a[0]);
-                if (a[1].equals("1"))
+                if (a[1].equals("01"))
                     mMonth.setText("JAN");
-                else if (a[1].equals("2"))
+                else if (a[1].equals("02"))
                     mMonth.setText("FEB");
-                else if (a[1].equals("3"))
+                else if (a[1].equals("03"))
                     mMonth.setText("MAR");
-                else if (a[1].equals("4"))
+                else if (a[1].equals("04"))
                     mMonth.setText("APR");
-                else if (a[1].equals("5"))
+                else if (a[1].equals("05"))
                     mMonth.setText("MAY");
-                else if (a[1].equals("6"))
+                else if (a[1].equals("06"))
                     mMonth.setText("JUN");
-                else if (a[1].equals("7"))
+                else if (a[1].equals("07"))
                     mMonth.setText("JLY");
-                else if (a[1].equals("8"))
+                else if (a[1].equals("08"))
                     mMonth.setText("AUG");
-                else if (a[1].equals("9"))
+                else if (a[1].equals("09"))
                     mMonth.setText("SEP");
                 else if (a[1].equals("10"))
                     mMonth.setText("OCT");
@@ -110,6 +115,39 @@ public class DetailedTicketActivity extends AppCompatActivity {
                     mMonth.setText("NOV");
                 else if (a[1].equals("12"))
                     mMonth.setText("DEC");
+                DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                Date datee = null;
+                try {
+                    datee = (Date)formatter.parse(b.getDate());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                long l = datee.getTime();
+
+                Date date3 = new Date(l);
+
+
+
+                SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
+                String dayOfTheWeek = sdf.format(datee);
+
+                if(dayOfTheWeek.equals("Monday"))
+                    dayOfTheWeek = "MON";
+                else if(dayOfTheWeek.equals("Tuesday"))
+                    dayOfTheWeek = "TUE";
+                else if(dayOfTheWeek.equals("Wednesday"))
+                    dayOfTheWeek = "WED";
+                else if(dayOfTheWeek.equals("Thursday"))
+                    dayOfTheWeek = "THU";
+                else if(dayOfTheWeek.equals("Friday"))
+                    dayOfTheWeek = "FRI";
+                else if(dayOfTheWeek.equals("Saturday"))
+                    dayOfTheWeek = "SAT";
+                else if(dayOfTheWeek.equals("Sunday"))
+                    dayOfTheWeek = "SUN";
+
+
+                mDay.setText(dayOfTheWeek);
             }
 
             @Override

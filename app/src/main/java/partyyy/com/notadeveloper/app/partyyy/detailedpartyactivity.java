@@ -33,6 +33,10 @@ import net.glxn.qrgen.android.QRCode;
 import net.glxn.qrgen.core.image.ImageType;
 
 import java.io.File;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -118,23 +122,23 @@ public class detailedpartyactivity extends AppCompatActivity {
                     a[0] = "0" + a[0];
 
                 date.setText(a[0]);
-                if (a[1].equals("1"))
+                if (a[1].equals("01"))
                     month.setText("JAN");
-                else if (a[1].equals("2"))
+                else if (a[1].equals("02"))
                     month.setText("FEB");
-                else if (a[1].equals("3"))
+                else if (a[1].equals("03"))
                     month.setText("MAR");
-                else if (a[1].equals("4"))
+                else if (a[1].equals("04"))
                     month.setText("APR");
-                else if (a[1].equals("5"))
+                else if (a[1].equals("05"))
                     month.setText("MAY");
-                else if (a[1].equals("6"))
+                else if (a[1].equals("06"))
                     month.setText("JUN");
-                else if (a[1].equals("7"))
+                else if (a[1].equals("07"))
                     month.setText("JLY");
-                else if (a[1].equals("8"))
+                else if (a[1].equals("08"))
                     month.setText("AUG");
-                else if (a[1].equals("9"))
+                else if (a[1].equals("09"))
                     month.setText("SEP");
                 else if (a[1].equals("10"))
                     month.setText("OCT");
@@ -142,6 +146,40 @@ public class detailedpartyactivity extends AppCompatActivity {
                     month.setText("NOV");
                 else if (a[1].equals("12"))
                     month.setText("DEC");
+
+                DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                Date datee = null;
+                try {
+                    datee = (Date)formatter.parse(d);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                long l = datee.getTime();
+
+                Date date3 = new Date(l);
+
+
+
+                SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
+                String dayOfTheWeek = sdf.format(datee);
+
+                if(dayOfTheWeek.equals("Monday"))
+                    dayOfTheWeek = "MON";
+                else if(dayOfTheWeek.equals("Tuesday"))
+                    dayOfTheWeek = "TUE";
+                else if(dayOfTheWeek.equals("Wednesday"))
+                    dayOfTheWeek = "WED";
+                else if(dayOfTheWeek.equals("Thursday"))
+                    dayOfTheWeek = "THU";
+                else if(dayOfTheWeek.equals("Friday"))
+                    dayOfTheWeek = "FRI";
+                else if(dayOfTheWeek.equals("Saturday"))
+                    dayOfTheWeek = "SAT";
+                else if(dayOfTheWeek.equals("Sunday"))
+                    dayOfTheWeek = "SUN";
+
+
+                day.setText(dayOfTheWeek);
 
 
                 pname.setText(p.getTitle());
