@@ -61,7 +61,7 @@ public class Login extends AppCompatActivity {
                 AuthUI.getInstance()
                         .createSignInIntentBuilder()
                         .setTheme(R.style.AppTheme_NoActionBar)
-                        .setLogo(R.drawable.ic_confettilarge)
+                        .setLogo(R.mipmap.ic_launcher)
                         .setIsSmartLockEnabled(true)
                         // .setIsSmartLockEnabled(!BuildConfig.DEBUG)
                         .setProviders(Arrays.asList(new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
