@@ -19,10 +19,12 @@ public class SheeshaHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.flavor)
     TextView flavor;
+    CheckBox cb;
 
 
     public SheeshaHolder(View itemView) {
         super(itemView);
+        cb = (CheckBox)itemView.findViewById(R.id.check);
         ButterKnife.bind(this, itemView);
 
 

@@ -117,106 +117,125 @@ public class SheeshaActivity extends AppCompatActivity {
         book1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Dialog dialog;
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    dialog = new Dialog(SheeshaActivity.this, R.style.dialogthemez);
-                } else {
-                    dialog = new Dialog(SheeshaActivity.this);
+                if (Integer.parseInt(nopot.getText().toString())==0)
+                {
+                    Toast.makeText(SheeshaActivity.this, "Cannot book 0 pots!",
+                            Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    final Dialog dialog;
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        dialog = new Dialog(SheeshaActivity.this, R.style.dialogthemez);
+                    } else {
+                        dialog = new Dialog(SheeshaActivity.this);
+                    }
+
+                    dialog.setContentView(R.layout.addresschangedialog);
+                    dialog.setTitle(fromHtml("<font color='#c83737'>Edit Address</font>"));
+
+                    Button dialogbutton = (Button) dialog.findViewById(R.id.okedittext);
+                    final EditText edittextdial1 = (EditText) dialog.findViewById(R.id.adda1);
+                    final AutoCompleteTextView edittextdial2 = (AutoCompleteTextView) dialog.findViewById(R.id.adda2);
+                    final AutoCompleteTextView edittextdial3 = (AutoCompleteTextView) dialog.findViewById(R.id.pina);
+                    final TextView noop = (TextView) dialog.findViewById(R.id.noop);
+                    final Button editorder = (Button) dialog.findViewById(R.id.editorder);
+
+
+                    final TextInputLayout edittexttil1 = (TextInputLayout) dialog.findViewById(R.id.add1);
+                    final TextInputLayout edittexttil2 = (TextInputLayout) dialog.findViewById(R.id.add2);
+                    final TextInputLayout edittexttil3 = (TextInputLayout) dialog.findViewById(R.id.pin);
+                    final Spinner spinner = (Spinner) dialog.findViewById(R.id.deliverytype);
+
+                    noop.setText("No of pots: "+nopot.getText().toString());
+                    editorder.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            dialog.dismiss();
+                        }
+                    });
+                    dialogbutton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            cancel = false;
+                            View focusView = null;
+
+
+                            String a1 = edittextdial1.getText().toString();
+                            String a2 = edittextdial2.getText().toString();
+                            String pin = edittextdial3.getText().toString();
+                            final String prescripti;
+
+
+                            if (isEditTextEmpty(pin) || pin.length() < 6) {
+                                edittexttil3.setError("Field Should be >6!");
+                                focusView = edittexttil3;
+                                cancel = true;
+                            } else edittexttil3.setError(null);
+                            if (isEditTextEmpty(a2)) {
+                                edittexttil2.setError("Field cannot be empty!");
+                                focusView = edittexttil2;
+                                cancel = true;
+                            } else edittexttil2.setError(null);
+                            if (isEditTextEmpty(a1)) {
+                                edittexttil1.setError("Field cannot be empty!");
+                                focusView = edittexttil1;
+                                cancel = true;
+                            } else edittexttil1.setError(null);
+                            if (spinner.getSelectedItem().toString().trim().equals("Choose One")) {
+                                Toast.makeText(SheeshaActivity.this, "Choose delivery type", Toast.LENGTH_SHORT).show();
+                                focusView = spinner;
+                                cancel = true;
+                            }
+
+                            if (cancel)
+                                focusView.requestFocus();
+                            else {
+
+
+                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                final String spinnertext = spinner.getSelectedItem().toString().trim();
+                                final Calendar cal = Calendar.getInstance();
+
+
+                                dialog.dismiss();
+
+                                FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
+                                final String uid = mUser.getUid();
+                                final DatabaseReference mDatabase2 = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
+                                DatabaseReference offsetRef = FirebaseDatabase.getInstance().getReference(".info/serverTimeOffset");
+                                offsetRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot snapshot) {
+                                        long offset = snapshot.getValue(Long.class);
+                                        estimatedServerTimeMs = System.currentTimeMillis() + offset;
+
+                                        cal.setTimeInMillis(estimatedServerTimeMs);
+                                        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.UK);
+                                        String date = formatter.format(new Date(cal.getTimeInMillis()));
+                                        String status="Pending";
+                                        Toast.makeText(SheeshaActivity.this, "PAYMENT!!", Toast.LENGTH_LONG).show();
+                                        finish();
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError error) {
+                                        System.err.println("Listener was cancelled");
+                                    }
+                                });
+
+
+
+                            }
+
+                        }
+                    });
+
+                    dialog.show();
                 }
 
-                dialog.setContentView(R.layout.addresschangedialog);
-                dialog.setTitle(fromHtml("<font color='#c83737'>Edit Address</font>"));
-
-                Button dialogbutton = (Button) dialog.findViewById(R.id.okedittext);
-                final EditText edittextdial1 = (EditText) dialog.findViewById(R.id.adda1);
-                final AutoCompleteTextView edittextdial2 = (AutoCompleteTextView) dialog.findViewById(R.id.adda2);
-                final AutoCompleteTextView edittextdial3 = (AutoCompleteTextView) dialog.findViewById(R.id.pina);
-
-
-                final TextInputLayout edittexttil1 = (TextInputLayout) dialog.findViewById(R.id.add1);
-                final TextInputLayout edittexttil2 = (TextInputLayout) dialog.findViewById(R.id.add2);
-                final TextInputLayout edittexttil3 = (TextInputLayout) dialog.findViewById(R.id.pin);
-                final Spinner spinner = (Spinner) dialog.findViewById(R.id.deliverytype);
-                dialogbutton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        cancel = false;
-                        View focusView = null;
-
-
-                        String a1 = edittextdial1.getText().toString();
-                        String a2 = edittextdial2.getText().toString();
-                        String pin = edittextdial3.getText().toString();
-                        final String prescripti;
-
-
-                        if (isEditTextEmpty(pin) || pin.length() < 6) {
-                            edittexttil3.setError("Field Should be >6!");
-                            focusView = edittexttil3;
-                            cancel = true;
-                        } else edittexttil3.setError(null);
-                        if (isEditTextEmpty(a2)) {
-                            edittexttil2.setError("Field cannot be empty!");
-                            focusView = edittexttil2;
-                            cancel = true;
-                        } else edittexttil2.setError(null);
-                        if (isEditTextEmpty(a1)) {
-                            edittexttil1.setError("Field cannot be empty!");
-                            focusView = edittexttil1;
-                            cancel = true;
-                        } else edittexttil1.setError(null);
-                        if (spinner.getSelectedItem().toString().trim().equals("Choose One")) {
-                            Toast.makeText(SheeshaActivity.this, "Choose delivery type", Toast.LENGTH_SHORT).show();
-                            focusView = spinner;
-                            cancel = true;
-                        }
-
-                        if (cancel)
-                            focusView.requestFocus();
-                        else {
-
-
-                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                            final String spinnertext = spinner.getSelectedItem().toString().trim();
-                            final Calendar cal = Calendar.getInstance();
-
-
-                            dialog.dismiss();
-
-                            FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
-                            final String uid = mUser.getUid();
-                            final DatabaseReference mDatabase2 = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
-                            DatabaseReference offsetRef = FirebaseDatabase.getInstance().getReference(".info/serverTimeOffset");
-                            offsetRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot snapshot) {
-                                    long offset = snapshot.getValue(Long.class);
-                                    estimatedServerTimeMs = System.currentTimeMillis() + offset;
-
-                                    cal.setTimeInMillis(estimatedServerTimeMs);
-                                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.UK);
-                                    String date = formatter.format(new Date(cal.getTimeInMillis()));
-                                    String status="Pending";
-                                    Toast.makeText(SheeshaActivity.this, "PAYMENT!!", Toast.LENGTH_LONG).show();
-                                    finish();
-
-                                }
-
-                                @Override
-                                public void onCancelled(DatabaseError error) {
-                                    System.err.println("Listener was cancelled");
-                                }
-                            });
-
-
-
-                        }
-
-                    }
-                });
-
-                dialog.show();
             }
         });
 

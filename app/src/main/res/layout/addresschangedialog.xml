@@ -60,6 +60,27 @@
                 android:maxLength="6"
                 />
         </android.support.design.widget.TextInputLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No of pots: 10"
+                android:textSize="20dp"
+                android:id="@+id/noop"
+                android:layout_centerVertical="true"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/editorder"
+                android:text="edit order"
+                android:layout_toRightOf="@+id/noop"
+                android:layout_marginLeft="20dp"
+                android:theme="@style/AccentButton"/>
+        </RelativeLayout>
+
+
 
 
 
