@@ -41,6 +41,7 @@ public class SheeshaActivity extends AppCompatActivity {
     private TextView nopot;
     private boolean cancel;
     private long estimatedServerTimeMs;
+    ArrayList<String>ll = new ArrayList<>();
     static {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
@@ -113,6 +114,7 @@ public class SheeshaActivity extends AppCompatActivity {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.keepSynced(true);
         ref = mDatabase.child("Sheesha");
+        ll=SheeshaAdapter.llist;
 
         book1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,9 +164,9 @@ public class SheeshaActivity extends AppCompatActivity {
                             View focusView = null;
 
 
-                            String a1 = edittextdial1.getText().toString();
-                            String a2 = edittextdial2.getText().toString();
-                            String pin = edittextdial3.getText().toString();
+                            final String a1 = edittextdial1.getText().toString();
+                            final String a2 = edittextdial2.getText().toString();
+                            final String pin = edittextdial3.getText().toString();
                             final String prescripti;
 
 
@@ -210,12 +212,16 @@ public class SheeshaActivity extends AppCompatActivity {
                                     public void onDataChange(DataSnapshot snapshot) {
                                         long offset = snapshot.getValue(Long.class);
                                         estimatedServerTimeMs = System.currentTimeMillis() + offset;
-
                                         cal.setTimeInMillis(estimatedServerTimeMs);
                                         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.UK);
                                         String date = formatter.format(new Date(cal.getTimeInMillis()));
                                         String status="Pending";
-                                        Toast.makeText(SheeshaActivity.this, "PAYMENT!!", Toast.LENGTH_LONG).show();
+
+
+                                        MySheesha order = new MySheesha(String.valueOf(estimatedServerTimeMs), date,total.getText().toString(),status,ll,spinner.getSelectedItem().toString(),a1,a2,pin,"8563214977","Name",nopot.getText().toString());
+                                        mDatabase2.child("myorders").child(String.valueOf(estimatedServerTimeMs)).setValue(order);
+
+                                        Toast.makeText(SheeshaActivity.this, "Order placed!! PAYMENT!!", Toast.LENGTH_LONG).show();
                                         finish();
 
                                     }

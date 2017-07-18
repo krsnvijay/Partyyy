@@ -27,7 +27,7 @@ public class SheeshaAdapter extends RecyclerView.Adapter <SheeshaHolder> {
 
     ArrayList<shesha> list;
     Context mContext;
-    List<String>llist= new ArrayList<>();
+    static ArrayList<String>llist= new ArrayList<>();
 
     public SheeshaAdapter(ArrayList<shesha> list, Context mContext) {
         this.list = list;
