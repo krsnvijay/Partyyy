@@ -21,11 +21,6 @@
         android:icon="@drawable/ic_settings_black_24dp"
         android:title="Settings" />
     <item
-        android:id="@+id/add"
-        android:checked="false"
-        android:icon="@drawable/ic_add_black_24dp"
-        android:title="Add a party" />
-    <item
         android:id="@+id/mytick"
         android:checked="false"
         android:icon="@drawable/ic_confetti"
@@ -60,6 +55,10 @@ android:actionMenuTextColor="#32ff12"
         <item
             android:id="@+id/action_sheesha"
             android:icon="@drawable/ic_confetti"
-            android:title="rent sheesha" />
+            android:title="Rent Sheesha" />
+        <item
+            android:id="@+id/order_sheesha"
+            android:icon="@drawable/ic_confetti"
+            android:title="My Sheesha Orders" />
     </group>
 </menu>

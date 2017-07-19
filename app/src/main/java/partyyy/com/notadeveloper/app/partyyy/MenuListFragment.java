@@ -80,9 +80,15 @@ public class MenuListFragment extends Fragment {
                     builder.show();
                 } else if (id == R.id.settings) {
 
-                } else if (id == R.id.add) {
-                    Intent i = new Intent(getActivity(), AddAParty.class);
+                }
+                else if (id == R.id.action_sheesha)
+                {
+                    Intent i = new Intent(getActivity(), SheeshaActivity.class);
                     startActivity(i);
+                }
+                else if (id == R.id.order_sheesha)
+                {
+
                 }
 
                 return true;

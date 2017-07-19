@@ -149,22 +149,6 @@ public class MainActivity extends AppCompatActivity implements PartyFragment.OnF
                 {
 
                 }
-                else if (id == R.id.add) {
-                    boolean p;
-                    if (u.isorganizer!=null)
-                    p = u.getIsorganizer();
-                    else p=false;
-                    if(p)
-                    {
-                        Intent i = new Intent(MainActivity.this, OrganizerActivity.class);
-                        startActivity(i);
-                    }
-                    else
-                    {
-                        Intent i = new Intent(MainActivity.this, BecomeOrganiser.class);
-                        startActivity(i);
-                    }
-                }
 //                else if (id == R.id.action_car)
 //                {
 //                    Toast.makeText(MainActivity.this, "CAR",
@@ -179,6 +163,10 @@ public class MainActivity extends AppCompatActivity implements PartyFragment.OnF
                 {
                     Intent i = new Intent(MainActivity.this, SheeshaActivity.class);
                     startActivity(i);
+                }
+                else if (id == R.id.order_sheesha)
+                {
+
                 }
 
                 return true;

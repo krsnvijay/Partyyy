@@ -42,10 +42,6 @@
         <activity android:name=".AddAParty" />
         <activity android:name=".detailedpartyactivity" />
         <activity android:name=".BecomeOrganiser" />
-        <activity
-            android:name=".OrganizerActivity"
-            android:label="@string/title_activity_organizer"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".DetailedTicketActivity" />
         <activity android:name=".MyTickets" />
         <activity android:name=".SheeshaActivity"></activity>
