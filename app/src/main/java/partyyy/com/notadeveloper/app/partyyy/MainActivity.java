@@ -166,7 +166,8 @@ public class MainActivity extends AppCompatActivity implements PartyFragment.OnF
                 }
                 else if (id == R.id.order_sheesha)
                 {
-
+                    Intent i = new Intent(MainActivity.this, SheeshaOrderActivity.class);
+                    startActivity(i);
                 }
 
                 return true;

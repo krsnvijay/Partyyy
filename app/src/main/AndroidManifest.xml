@@ -44,7 +44,8 @@
         <activity android:name=".BecomeOrganiser" />
         <activity android:name=".DetailedTicketActivity" />
         <activity android:name=".MyTickets" />
-        <activity android:name=".SheeshaActivity"></activity>
+        <activity android:name=".SheeshaActivity" />
+        <activity android:name=".SheeshaOrderActivity"></activity>
     </application>
 
 </manifest>
