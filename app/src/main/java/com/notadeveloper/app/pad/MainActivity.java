@@ -160,25 +160,6 @@ public class MainActivity extends AppCompatActivity
       return true;
     }
 
-    //        switch (item.getItemId()) {
-    //            case R.id.datehigh:
-    //                setmAdapter(1);
-    //                return true;
-    //
-    //            case R.id.datelow:
-    //                setmAdapter(2);
-    //                return true;
-    //            case R.id.costhigh:
-    //                setmAdapter(3);
-    //                return true;
-    //            case R.id.costlow:
-    //                setmAdapter(4);
-    //                return true;
-    //
-    //            default:
-    //                return super.onOptionsItemSelected(item);
-    //        }
-
     return super.onOptionsItemSelected(item);
   }
 
@@ -191,40 +172,6 @@ public class MainActivity extends AppCompatActivity
     return true;
   }
 
-  //    void setmAdapter(int x)
-  //
-  //    {
-  //        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-  //        Query q=mDatabase.child("parties");
-  //        LinearLayoutManager LayoutManager = new LinearLayoutManager(MainActivity.this);
-  //
-  //        if (x==1)
-  //        {q=mDatabase.child("parties").orderByChild("pid");
-  //         LayoutManager.setStackFromEnd(true);
-  //            LayoutManager.setReverseLayout(true);}
-  //     else   if (x==2)
-  //        {
-  //            q=mDatabase.child("parties").orderByChild("pid");
-  //        }
-  //        else if (x==3)
-  //        {
-  //            q=mDatabase.child("parties").orderByChild("tickets");
-  //            LayoutManager.setStackFromEnd(true);
-  //            LayoutManager.setReverseLayout(true);
-  //        }
-  //        else if (x==4)
-  //        {
-  //            q=mDatabase.child("parties").orderByChild("tickets");
-  //        }
-  //        mAdapter = new FirebaseRecyclerAdapter<party, PartyHolder>(party.class, R.layout.partycard2, PartyHolder.class, q) {
-  //            @Override
-  //            public void populateViewHolder(PartyHolder ViewHolder, final party product, int position) {
-  //                ViewHolder.setData(product, MainActivity.this);
-  //            }
-  //        };
-  //        recyclerview.setLayoutManager(LayoutManager);
-  //        recyclerview.setAdapter(mAdapter);
-  //    }
   //
   @Override
   public void onBackPressed() {

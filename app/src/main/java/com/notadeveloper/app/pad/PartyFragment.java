@@ -7,8 +7,10 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -18,8 +20,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class PartyFragment extends Fragment {
@@ -30,19 +34,18 @@ public class PartyFragment extends Fragment {
   final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
   users u = new users();
   String cat;
-  DatabaseReference ref;
+  Query ref;
   LinearLayoutManager mLayoutManager;
   boolean called = false;
+  Calendar c = Calendar.getInstance();
   private FirebaseRecyclerAdapter<party, PartyHolder> mAdapter;
   private List<party> pli = new ArrayList<>();
-
   // TODO: Rename parameter arguments, choose names that match
   private Menu menu;
   private DatabaseReference mDatabase;
   // TODO: Rename and change types of parameters
   private String mParam1;
   private String mParam2;
-
   private OnFragmentInteractionListener mListener;
 
   public PartyFragment() {
@@ -62,6 +65,7 @@ public class PartyFragment extends Fragment {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    setHasOptionsMenu(true);
     if (getArguments() != null) {
       mParam1 = getArguments().getString(ARG_PARAM1);
       mParam2 = getArguments().getString(ARG_PARAM2);
@@ -89,8 +93,9 @@ public class PartyFragment extends Fragment {
 
     final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
     mDatabase.keepSynced(true);
-    ref = mDatabase.child("parties");
 
+    ref = mDatabase.child("parties").orderByChild("partytime").startAt(c.getTimeInMillis() / 1000);
+    Log.e("Fragment", "onViewCreated: " + (c.getTimeInMillis() / 1000));
     if (!called) {
       recyclerview.setLayoutManager(mLayoutManager);
       mAdapter = new FirebaseRecyclerAdapter<party, PartyHolder>(party.class, R.layout.partycard2,
@@ -147,6 +152,59 @@ public class PartyFragment extends Fragment {
 
       }
     });
+  }
+
+  void setmAdapter(int x)
+
+  {
+    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+    Query q = mDatabase.child("parties");
+    LinearLayoutManager LayoutManager = new LinearLayoutManager(getContext());
+
+    if (x == 1) {
+      q = mDatabase.child("parties").orderByChild("partytime").startAt(c.getTimeInMillis() / 1000);
+      LayoutManager.setStackFromEnd(true);
+      LayoutManager.setReverseLayout(true);
+    } else if (x == 2) {
+      q = mDatabase.child("parties").orderByChild("partytime").startAt(c.getTimeInMillis() / 1000);
+    } else if (x == 3) {
+      q = mDatabase.child("parties").orderByChild("pricestag").startAt(c.getTimeInMillis() / 1000);
+      LayoutManager.setStackFromEnd(true);
+      LayoutManager.setReverseLayout(true);
+    } else if (x == 4) {
+      q = mDatabase.child("parties").orderByChild("pricestag").startAt(c.getTimeInMillis() / 1000);
+    }
+    mAdapter = new FirebaseRecyclerAdapter<party, PartyHolder>(party.class, R.layout.partycard2,
+        PartyHolder.class, q) {
+      @Override
+      public void populateViewHolder(PartyHolder ViewHolder, final party product, int position) {
+        ViewHolder.setData(product, getContext());
+      }
+    };
+    recyclerview.setLayoutManager(LayoutManager);
+    recyclerview.setAdapter(mAdapter);
+  }
+
+  @Override public boolean onOptionsItemSelected(MenuItem item) {
+
+    switch (item.getItemId()) {
+      case R.id.datehigh:
+        setmAdapter(1);
+        return true;
+
+      case R.id.datelow:
+        setmAdapter(2);
+        return true;
+      case R.id.costhigh:
+        setmAdapter(3);
+        return true;
+      case R.id.costlow:
+        setmAdapter(4);
+        return true;
+
+      default:
+        return super.onOptionsItemSelected(item);
+    }
   }
 
   /**
