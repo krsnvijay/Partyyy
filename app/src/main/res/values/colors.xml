@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary_text">#212121</color>
-    <color name="secondary_text">#757575</color>
-    <color name="primary">#00bcd4</color>
-    <color name="primary_dark">#0097A7</color>
-    <color name="colorPrimary">#000000</color>
-    <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#ff5252</color>
-    <color name="primarytext">#212121</color>
-    <color name="secondarytext">#727272</color>
-    <color name="divider">#b6b6b6</color>
-    <color name="iconscolor">#ffffff</color>
-    <color name="accent">#37FDFC</color>
-    <color name = "gold">#D4AF37</color>
-    <integer-array name="fab_menu_item_colors">
-        <!-- A dark Holo shade of red -->
-        <item>@android:color/holo_red_dark</item>
-        <!-- A Holo shade of purple -->
-        <item>@android:color/holo_purple</item>
-        <!-- A light Holo shade of green -->
-        <item>@android:color/holo_green_light</item>
-    </integer-array>
+  <color name="primary_text">#212121</color>
+  <color name="secondary_text">#757575</color>
+  <color name="primary">#00bcd4</color>
+  <color name="primary_dark">#0097A7</color>
+  <color name="colorPrimary">#000000</color>
+  <color name="colorPrimaryDark">#000000</color>
+  <color name="colorAccent">#ff5252</color>
+  <color name="primarytext">#212121</color>
+  <color name="secondarytext">#727272</color>
+  <color name="divider">#b6b6b6</color>
+  <color name="iconscolor">#ffffff</color>
+  <color name="accent">#37FDFC</color>
+  <color name="gold">#D4AF37</color>
+  <integer-array name="fab_menu_item_colors">
+    <!-- A dark Holo shade of red -->
+    <item>@android:color/holo_red_dark</item>
+    <!-- A Holo shade of purple -->
+    <item>@android:color/holo_purple</item>
+    <!-- A light Holo shade of green -->
+    <item>@android:color/holo_green_light</item>
+  </integer-array>
 </resources>

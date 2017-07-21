@@ -15,187 +15,187 @@
 
     android:id="@+id/cv1">
 
-    <RelativeLayout
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="10dp">
+
+    <TextView
+        android:id="@+id/ordertext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp">
+        android:layout_toLeftOf="@+id/orderprice"
+        android:layout_toRightOf="@+id/prodimg"
+        android:text="Party:"
+        android:textSize="16dp"/>
 
-        <TextView
-            android:id="@+id/ordertext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/orderprice"
-            android:layout_toRightOf="@+id/prodimg"
-            android:text="Party:"
-            android:textSize="16dp" />
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ordertext"
+        android:layout_below="@+id/ordertext"
+        android:layout_toLeftOf="@+id/date"
 
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/ordertext"
-            android:layout_below="@+id/ordertext"
-            android:layout_toLeftOf="@+id/date"
+        android:layout_toRightOf="@+id/prodimg"
+        android:maxLines="1"
+        android:minLines="1"
+        android:text="Party Name"
+        android:textSize="20dp"/>
 
-            android:layout_toRightOf="@+id/prodimg"
-            android:maxLines="1"
-            android:minLines="1"
-            android:text="Party Name"
-            android:textSize="20dp" />
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/name"
+        android:layout_alignParentRight="true"
+        android:maxLines="1"
+        android:text="24/10/2017"
+        android:textColor="@color/secondary_text"
+        android:textSize="15dp"/>
 
-        <TextView
-            android:id="@+id/date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/name"
-            android:layout_alignParentRight="true"
-            android:maxLines="1"
-            android:text="24/10/2017"
-            android:textColor="@color/secondary_text"
-            android:textSize="15dp" />
+    <TextView
+        android:id="@+id/orderprice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/ordertext"
 
-        <TextView
-            android:id="@+id/orderprice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/ordertext"
+        android:layout_alignParentRight="true"
+        android:maxLines="1"
+        android:text="Amount paid: ₹1000"
+        android:textSize="16dp"/>
 
-            android:layout_alignParentRight="true"
-            android:maxLines="1"
-            android:text="Amount paid: ₹1000"
-            android:textSize="16dp" />
+    <ImageView
+        android:id="@+id/prodimg"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/rel"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignTop="@+id/name"
+        android:layout_marginRight="10dp"
+        android:scaleType="fitXY"
+        card_view:srcCompat="@drawable/ic_invoice"/>
 
-        <ImageView
-            android:id="@+id/prodimg"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/rel"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignTop="@+id/name"
-            android:layout_marginRight="10dp"
-            android:scaleType="fitXY"
-            card_view:srcCompat="@drawable/ic_invoice" />
+    <RelativeLayout
+        android:id="@+id/rel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/name"
+        android:layout_toRightOf="@+id/prodimg">
 
-        <RelativeLayout
-            android:id="@+id/rel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/name"
-            android:layout_toRightOf="@+id/prodimg">
+      <ImageView
+          android:id="@+id/locicon"
+          android:layout_width="22dp"
+          android:layout_height="22dp"
+          android:layout_below="@+id/pname"
+          android:layout_marginTop="2dp"
+          card_view:srcCompat="@drawable/ic_location_on_black_24dp"
+          android:tint="#727272"/>
 
-            <ImageView
-                android:id="@+id/locicon"
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:layout_below="@+id/pname"
-                android:layout_marginTop="2dp"
-                card_view:srcCompat="@drawable/ic_location_on_black_24dp"
-                android:tint="#727272" />
+      <TextView
+          android:id="@+id/loct"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignBottom="@+id/locicon"
+          android:layout_below="@+id/pname"
+          android:layout_marginLeft="3dp"
+          android:layout_toRightOf="@+id/locicon"
+          android:gravity="bottom"
+          android:text="SRM, Ramapuram"
+          android:textColor="#727272"
+          android:textSize="17dp"/>
+    </RelativeLayout>
 
-            <TextView
-                android:id="@+id/loct"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/locicon"
-                android:layout_below="@+id/pname"
-                android:layout_marginLeft="3dp"
-                android:layout_toRightOf="@+id/locicon"
-                android:gravity="bottom"
-                android:text="SRM, Ramapuram"
-                android:textColor="#727272"
-                android:textSize="17dp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/rel1"
-            android:layout_below="@+id/rel"
-            android:layout_toRightOf="@+id/prodimg">
-            <ImageView
-                android:id="@+id/timicon"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_marginTop="6dp"
-                android:layout_toRightOf="@+id/line"
-                android:tint="#5b5b5b"
-                card_view:srcCompat="@drawable/ic_access_time_black_24dp"
-                />
-            <TextView
-                android:id="@+id/timet"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/timicon"
-                android:layout_marginLeft="3dp"
-                android:layout_toRightOf="@+id/timicon"
-                android:gravity="bottom"
-                android:text="12:00 to 4:00"
-                android:textColor="#5b5b5b"/>
-        </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rel1"
+        android:layout_below="@+id/rel"
+        android:layout_toRightOf="@+id/prodimg">
+      <ImageView
+          android:id="@+id/timicon"
+          android:layout_width="18dp"
+          android:layout_height="18dp"
+          android:layout_marginTop="6dp"
+          android:layout_toRightOf="@+id/line"
+          android:tint="#5b5b5b"
+          card_view:srcCompat="@drawable/ic_access_time_black_24dp"
+      />
+      <TextView
+          android:id="@+id/timet"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignBottom="@+id/timicon"
+          android:layout_marginLeft="3dp"
+          android:layout_toRightOf="@+id/timicon"
+          android:gravity="bottom"
+          android:text="12:00 to 4:00"
+          android:textColor="#5b5b5b"/>
+    </RelativeLayout>
 
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/rel2"
-            android:layout_below="@id/rel1">
-            <ImageView
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="6dp"
-                card_view:srcCompat="@drawable/man"
-                android:tint="#727272"
-                android:id="@+id/stagicon"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="(Stag): 3"
-                android:textSize="17dp"
-                android:layout_toRightOf="@+id/stagicon"
-                android:layout_alignBottom="@+id/stagicon"
-                android:gravity="bottom"
-                android:layout_marginLeft="5dp"
-                android:textColor="#5b5b5b"
-                android:id="@+id/stagprice"/>
-            <ImageView
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:layout_toRightOf="@+id/stagprice"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="6dp"
-                card_view:srcCompat="@drawable/couple"
-                android:tint="#727272"
-                android:id="@+id/coupleicon"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="(Couple): 2"
-                android:textSize="17dp"
-                android:layout_toRightOf="@+id/coupleicon"
-                android:layout_alignBottom="@+id/coupleicon"
-                android:gravity="bottom"
-                android:layout_marginLeft="5dp"
-                android:textColor="#5b5b5b"
-                android:id="@+id/coupleprice"/>
-
-        </RelativeLayout>
-        <TextView
-            android:id="@+id/deliverby"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_below="@+id/rel2"
-            android:layout_marginTop="8dp"
-            android:maxLines="1"
-            android:minLines="1"
-            android:text="(Select to view QR code)"
-            android:textSize="12dp" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/rel2"
+        android:layout_below="@id/rel1">
+      <ImageView
+          android:layout_width="22dp"
+          android:layout_height="22dp"
+          android:layout_marginLeft="8dp"
+          android:layout_marginTop="6dp"
+          card_view:srcCompat="@drawable/man"
+          android:tint="#727272"
+          android:id="@+id/stagicon"
+      />
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="(Stag): 3"
+          android:textSize="17dp"
+          android:layout_toRightOf="@+id/stagicon"
+          android:layout_alignBottom="@+id/stagicon"
+          android:gravity="bottom"
+          android:layout_marginLeft="5dp"
+          android:textColor="#5b5b5b"
+          android:id="@+id/stagprice"/>
+      <ImageView
+          android:layout_width="22dp"
+          android:layout_height="22dp"
+          android:layout_toRightOf="@+id/stagprice"
+          android:layout_marginLeft="8dp"
+          android:layout_marginTop="6dp"
+          card_view:srcCompat="@drawable/couple"
+          android:tint="#727272"
+          android:id="@+id/coupleicon"
+      />
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="(Couple): 2"
+          android:textSize="17dp"
+          android:layout_toRightOf="@+id/coupleicon"
+          android:layout_alignBottom="@+id/coupleicon"
+          android:gravity="bottom"
+          android:layout_marginLeft="5dp"
+          android:textColor="#5b5b5b"
+          android:id="@+id/coupleprice"/>
 
     </RelativeLayout>
+    <TextView
+        android:id="@+id/deliverby"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_below="@+id/rel2"
+        android:layout_marginTop="8dp"
+        android:maxLines="1"
+        android:minLines="1"
+        android:text="(Select to view QR code)"
+        android:textSize="12dp"/>
+
+  </RelativeLayout>
 </android.support.v7.widget.CardView>

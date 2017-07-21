@@ -3,12 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="partyyy.com.notadeveloper.app.partyyy.detailedpartyactivity">
+  <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      tools:context="com.notadeveloper.app.pad.detailedpartyactivity">
 
 
     <ImageView
@@ -39,7 +39,7 @@
         android:layout_marginTop="3dp"
         android:textSize="50dp"
         android:id="@+id/date"
-        />
+    />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
         android:textSize="40dp"
         android:textColor="#4C4C4C"
         android:id="@+id/pname"
-        />
+    />
     <ImageView
         android:layout_width="22dp"
         android:layout_height="22dp"
@@ -83,7 +83,7 @@
         app:srcCompat="@drawable/ic_location_on_black_24dp"
         android:tint="#727272"
         android:id="@+id/locicon"
-        />
+    />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -106,7 +106,7 @@
         app:srcCompat="@drawable/ic_access_time_black_24dp"
         android:tint="#5b5b5b"
         android:id="@+id/timicon"
-        />
+    />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -120,14 +120,14 @@
         android:textColor="#5b5b5b"
         android:id="@+id/timet"/>
     <ImageView
-    android:layout_width="22dp"
-    android:layout_height="22dp"
-    android:layout_below="@+id/timicon"
-    android:layout_toRightOf="@+id/line"
-    android:layout_marginLeft="8dp"
-    android:layout_marginTop="6dp"
-    app:srcCompat="@drawable/ticket"
-    android:id="@+id/ticicon"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_below="@+id/timicon"
+        android:layout_toRightOf="@+id/line"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="6dp"
+        app:srcCompat="@drawable/ticket"
+        android:id="@+id/ticicon"
     />
     <TextView
         android:layout_width="wrap_content"
@@ -148,47 +148,47 @@
         android:id="@+id/fgh"
         android:layout_below="@id/day"
         android:layout_marginTop="15dp">
-        <ImageView
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="6dp"
-            app:srcCompat="@drawable/man"
-            android:tint="#727272"
-            android:id="@+id/stagicon"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="(Stag) ₹250"
-            android:textSize="17dp"
-            android:layout_toRightOf="@+id/stagicon"
-            android:layout_alignBottom="@+id/stagicon"
-            android:gravity="bottom"
-            android:layout_marginLeft="5dp"
-            android:textColor="#5b5b5b"
-            android:id="@+id/stagprice"/>
-        <ImageView
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:layout_toRightOf="@+id/stagprice"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="6dp"
-            app:srcCompat="@drawable/couple"
-            android:tint="#727272"
-            android:id="@+id/coupleicon"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="(Couple) ₹400"
-            android:textSize="17dp"
-            android:layout_toRightOf="@+id/coupleicon"
-            android:layout_alignBottom="@+id/coupleicon"
-            android:gravity="bottom"
-            android:layout_marginLeft="5dp"
-            android:textColor="#5b5b5b"
-            android:id="@+id/coupleprice"/>
+      <ImageView
+          android:layout_width="22dp"
+          android:layout_height="22dp"
+          android:layout_marginLeft="8dp"
+          android:layout_marginTop="6dp"
+          app:srcCompat="@drawable/man"
+          android:tint="#727272"
+          android:id="@+id/stagicon"
+      />
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="(Stag) ₹250"
+          android:textSize="17dp"
+          android:layout_toRightOf="@+id/stagicon"
+          android:layout_alignBottom="@+id/stagicon"
+          android:gravity="bottom"
+          android:layout_marginLeft="5dp"
+          android:textColor="#5b5b5b"
+          android:id="@+id/stagprice"/>
+      <ImageView
+          android:layout_width="22dp"
+          android:layout_height="22dp"
+          android:layout_toRightOf="@+id/stagprice"
+          android:layout_marginLeft="8dp"
+          android:layout_marginTop="6dp"
+          app:srcCompat="@drawable/couple"
+          android:tint="#727272"
+          android:id="@+id/coupleicon"
+      />
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="(Couple) ₹400"
+          android:textSize="17dp"
+          android:layout_toRightOf="@+id/coupleicon"
+          android:layout_alignBottom="@+id/coupleicon"
+          android:gravity="bottom"
+          android:layout_marginLeft="5dp"
+          android:textColor="#5b5b5b"
+          android:id="@+id/coupleprice"/>
 
     </RelativeLayout>
 
@@ -200,7 +200,7 @@
         android:background="#808080"
         android:layout_marginTop="15dp"
         android:id="@+id/line1"
-        >
+    >
 
     </RelativeLayout>
     <TextView
@@ -217,7 +217,7 @@
         android:layout_centerHorizontal="true"
         android:background="#808080"
         android:id="@+id/line2"
-        >
+    >
 
     </RelativeLayout>
     <TextView
@@ -269,7 +269,7 @@
         android:background="#808080"
         android:id="@+id/line3"
         android:layout_marginTop="20dp"
-        >
+    >
 
     </RelativeLayout>
     <TextView
@@ -291,7 +291,7 @@
         app:srcCompat="@drawable/ic_email_black_24dp"
         android:tint="#727272"
         android:id="@+id/emailicon"
-        />
+    />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -302,7 +302,7 @@
         android:layout_alignBottom="@+id/emailicon"
         android:gravity="bottom"
         android:layout_marginLeft="3dp"
-        android:id="@+id/email" />
+        android:id="@+id/email"/>
     <ImageView
         android:layout_width="18dp"
         android:layout_height="18dp"
@@ -312,7 +312,7 @@
         app:srcCompat="@drawable/ic_phone_black_24dp"
         android:tint="#727272"
         android:id="@+id/phoneicon"
-        />
+    />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -323,7 +323,7 @@
         android:layout_alignBottom="@+id/phoneicon"
         android:gravity="bottom"
         android:layout_marginLeft="3dp"
-        android:id="@+id/phone" />
+        android:id="@+id/phone"/>
 
     <Button
         android:id="@+id/book"
@@ -338,5 +338,5 @@
         android:layout_below="@+id/phone"
         android:layout_marginTop="10dp"/>
 
-</RelativeLayout>
-    </ScrollView>
+  </RelativeLayout>
+</ScrollView>

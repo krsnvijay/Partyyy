@@ -1,96 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/activity_signup"
+    android:layout_height="match_parent">
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      android:id="@+id/activity_signup"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:paddingBottom="@dimen/activity_vertical_margin"
+      android:paddingLeft="@dimen/activity_horizontal_margin"
+      android:paddingRight="@dimen/activity_horizontal_margin"
+      android:paddingTop="@dimen/activity_vertical_margin"
+      tools:context="com.notadeveloper.app.sgnpharmacy.Register"
+      android:orientation="vertical"
+      android:padding="20dp">
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/name1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context="com.notadeveloper.app.sgnpharmacy.Register"
-        android:orientation="vertical"
-        android:padding="20dp">
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/name1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <AutoCompleteTextView
-                android:id="@+id/name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
-                android:hint="Name"
-                android:maxLines="1"
-                />
-        </android.support.design.widget.TextInputLayout>
+        android:layout_height="wrap_content">
+      <AutoCompleteTextView
+          android:id="@+id/name"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+          android:hint="Name"
+          android:maxLines="1"
+      />
+    </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/emaila"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <AutoCompleteTextView
-                android:id="@+id/email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:hint="Email"
-                android:maxLines="1"
-                />
-        </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/emaila"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+      <AutoCompleteTextView
+          android:id="@+id/email"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:inputType="textEmailAddress"
+          android:hint="Email"
+          android:maxLines="1"
+      />
+    </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/number1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:counterEnabled="true"
-            app:counterMaxLength="10">
-            <AutoCompleteTextView
-                android:id="@+id/number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="Phone Number"
-                android:maxLines="1"
-                android:maxLength="10"
-                />
-        </android.support.design.widget.TextInputLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/number1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:counterEnabled="true"
+        app:counterMaxLength="10">
+      <AutoCompleteTextView
+          android:id="@+id/number"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:inputType="number"
+          android:hint="Phone Number"
+          android:maxLines="1"
+          android:maxLength="10"
+      />
+    </android.support.design.widget.TextInputLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+    >
 
 
-            <CheckBox
-                android:id="@+id/check"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:checked="false"
-                android:text="I accept these " />
+      <CheckBox
+          android:id="@+id/check"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="10dp"
+          android:checked="false"
+          android:text="I accept these "/>
 
-            <TextView
-                android:id="@+id/terms"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minLines="2"
-                android:text="Terms and Conditions,Privacy Policy."
-                android:textColor="@color/com_facebook_blue"/>
-        </LinearLayout>
-        <Button
-            android:id="@+id/register"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:filterTouchesWhenObscured="true"
-            android:text="Register"
-            android:layout_gravity="right"
-            android:theme="@style/AccentButton" />
-
+      <TextView
+          android:id="@+id/terms"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:minLines="2"
+          android:text="Terms and Conditions,Privacy Policy."
+          android:textColor="@color/com_facebook_blue"/>
     </LinearLayout>
+    <Button
+        android:id="@+id/register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:filterTouchesWhenObscured="true"
+        android:text="Register"
+        android:layout_gravity="right"
+        android:theme="@style/AccentButton"/>
+
+  </LinearLayout>
 </ScrollView>
 

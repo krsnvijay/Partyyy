@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/tools"
     card_view:cardCornerRadius="4dp"
     card_view:cardElevation="3dp"
     android:layout_marginLeft="8dp"
@@ -16,106 +15,105 @@
 
     android:id="@+id/cv1">
 
-    <RelativeLayout
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="10dp">
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp">
+        android:id="@+id/ordertext"
+        android:text="Order id: "
+        android:textSize="16dp"
+        android:layout_toRightOf="@+id/prodimg"
+        android:layout_toLeftOf="@+id/orderprice"
+    />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/orderid"
+        android:layout_below="@+id/ordertext"
+        android:layout_toLeftOf="@+id/date"
+        android:layout_alignLeft="@+id/ordertext"
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/ordertext"
-            android:text="Order id: "
-            android:textSize="16dp"
-            android:layout_toRightOf="@+id/prodimg"
-            android:layout_toLeftOf="@+id/orderprice"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/orderid"
-            android:layout_below="@+id/ordertext"
-            android:layout_toLeftOf="@+id/date"
-            android:layout_alignLeft="@+id/ordertext"
+        android:maxLines="1"
+        android:minLines="1"
+        android:text="1487338502374"
+        android:textSize="20dp"
+        android:layout_toRightOf="@+id/prodimg"
+    />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:id="@+id/date"
+        android:textColor="@color/secondary_text"
+        android:text="24/10/2017"
+        android:textSize="15dp"
+        android:layout_alignBaseline="@+id/orderid"
+        android:layout_alignParentRight="true"
+    />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:id="@+id/orderprice"
 
-            android:maxLines="1"
-            android:minLines="1"
-            android:text="1487338502374"
-            android:textSize="20dp"
-            android:layout_toRightOf="@+id/prodimg"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:id="@+id/date"
-            android:textColor="@color/secondary_text"
-            android:text="24/10/2017"
-            android:textSize="15dp"
-            android:layout_alignBaseline="@+id/orderid"
-            android:layout_alignParentRight="true"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:id="@+id/orderprice"
-
-            android:text="₹1000"
-            android:textSize="16dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignBaseline="@+id/ordertext"
-            />
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/prodimg"
-            card_view:srcCompat="@drawable/ic_invoice"
-            android:layout_marginRight="10dp"
-            android:scaleType="fitXY"
-            android:layout_alignTop="@+id/orderid"
-            android:layout_alignBottom="@+id/orderstatus"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/orderstatus"
-            android:layout_below="@+id/orderid"
-            android:layout_alignLeft="@+id/ordertext"
-            android:maxLines="1"
-            android:minLines="1"
-            android:text="Status: Pending"
-            android:textSize="12dp"
-            android:layout_toRightOf="@+id/prodimg"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/noofpots"
-            android:layout_below="@+id/orderstatus"
-            android:layout_alignLeft="@+id/ordertext"
-            android:maxLines="1"
-            android:minLines="1"
-            android:text="Number of pots: 5"
-            android:textSize="12dp"
-            android:layout_toRightOf="@+id/prodimg"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/deliverby"
-            android:layout_below="@+id/noofpots"
-            android:layout_alignLeft="@+id/ordertext"
-            android:maxLines="1"
-            android:minLines="1"
-            android:text="Delivery by: 2 Hrs"
-            android:textSize="12dp"
-            android:layout_toRightOf="@+id/prodimg"
-            />
+        android:text="₹1000"
+        android:textSize="16dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignBaseline="@+id/ordertext"
+    />
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/prodimg"
+        card_view:srcCompat="@drawable/ic_invoice"
+        android:layout_marginRight="10dp"
+        android:scaleType="fitXY"
+        android:layout_alignTop="@+id/orderid"
+        android:layout_alignBottom="@+id/orderstatus"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/orderstatus"
+        android:layout_below="@+id/orderid"
+        android:layout_alignLeft="@+id/ordertext"
+        android:maxLines="1"
+        android:minLines="1"
+        android:text="Status: Pending"
+        android:textSize="12dp"
+        android:layout_toRightOf="@+id/prodimg"
+    />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/noofpots"
+        android:layout_below="@+id/orderstatus"
+        android:layout_alignLeft="@+id/ordertext"
+        android:maxLines="1"
+        android:minLines="1"
+        android:text="Number of pots: 5"
+        android:textSize="12dp"
+        android:layout_toRightOf="@+id/prodimg"
+    />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/deliverby"
+        android:layout_below="@+id/noofpots"
+        android:layout_alignLeft="@+id/ordertext"
+        android:maxLines="1"
+        android:minLines="1"
+        android:text="Delivery by: 2 Hrs"
+        android:textSize="12dp"
+        android:layout_toRightOf="@+id/prodimg"
+    />
 
 
-
-    </RelativeLayout>
+  </RelativeLayout>
 </android.support.v7.widget.CardView>

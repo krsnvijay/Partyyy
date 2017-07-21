@@ -3,15 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
-    tools:context="partyyy.com.notadeveloper.app.partyyy.ClubFragment">
+    tools:context="com.notadeveloper.app.pad.ClubFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="COMING SOON!!"
-        android:textSize="20dp"
-        android:textColor="#D4AF37"
-        android:gravity="center"/>
+  <!-- TODO: Update blank fragment layout -->
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:text="COMING SOON!!"
+      android:textSize="20dp"
+      android:textColor="#D4AF37"
+      android:gravity="center"/>
 
 </RelativeLayout>
