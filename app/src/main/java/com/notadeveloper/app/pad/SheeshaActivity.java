@@ -97,7 +97,7 @@ public class SheeshaActivity extends AppCompatActivity {
       }
     });
     AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
-    RecyclerView rv = (RecyclerView) findViewById(R.id.rv);
+    final RecyclerView rv = (RecyclerView) findViewById(R.id.rv);
     rv.setHasFixedSize(false);
     rv.setLayoutManager(new LinearLayoutManager(this));
 
@@ -250,6 +250,8 @@ public class SheeshaActivity extends AppCompatActivity {
             list.add(s);
           }
         }
+        SheeshaAdapter s = new SheeshaAdapter(list, SheeshaActivity.this);
+        rv.setAdapter(s);
       }
 
       @Override
@@ -257,9 +259,6 @@ public class SheeshaActivity extends AppCompatActivity {
 
       }
     });
-
-    SheeshaAdapter s = new SheeshaAdapter(list, SheeshaActivity.this);
-    rv.setAdapter(s);
   }
 
   private boolean isEditTextEmpty(String mInput) {

@@ -10,6 +10,13 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 /**
@@ -43,8 +50,7 @@ public class SheeshaAdapter extends RecyclerView.Adapter<SheeshaHolder> {
   @Override
   public void onBindViewHolder(final SheeshaHolder holder, final int position) {
     final shesha s = list.get(position);
-
-    holder.flavor.setText(s.getFlavour());
+      holder.flavor.setText(s.getFlavour());
     holder.cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
       @Override
       public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -79,6 +85,8 @@ public class SheeshaAdapter extends RecyclerView.Adapter<SheeshaHolder> {
         }
       }
     });
+
+
     double f;
   }
 
