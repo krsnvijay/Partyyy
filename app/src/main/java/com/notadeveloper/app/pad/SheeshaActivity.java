@@ -196,8 +196,8 @@ public class SheeshaActivity extends AppCompatActivity {
 
                 FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
                 final String uid = mUser.getUid();
-                final DatabaseReference mDatabase2 =
-                    FirebaseDatabase.getInstance().getReference().child("users").child(uid);
+                final DatabaseReference mDatabase2 = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
+                final DatabaseReference mDatabase3 = FirebaseDatabase.getInstance().getReference();
                 DatabaseReference offsetRef =
                     FirebaseDatabase.getInstance().getReference(".info/serverTimeOffset");
                 offsetRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -220,6 +220,9 @@ public class SheeshaActivity extends AppCompatActivity {
                     mDatabase2.child("myorders")
                         .child(String.valueOf(estimatedServerTimeMs))
                         .setValue(order);
+                      mDatabase3.child("pendingorders")
+                              .child(String.valueOf(estimatedServerTimeMs))
+                              .setValue(order);
 
                     Toast.makeText(SheeshaActivity.this, "Order placed!! PAYMENT!!",
                         Toast.LENGTH_LONG).show();
