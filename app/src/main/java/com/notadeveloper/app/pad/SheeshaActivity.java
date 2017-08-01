@@ -46,6 +46,7 @@ public class SheeshaActivity extends AppCompatActivity {
   private ImageView minusicon;
   private TextView nopot;
   private boolean cancel;
+  private TextView tex2;
   private long estimatedServerTimeMs;
 
   @Override
@@ -58,6 +59,21 @@ public class SheeshaActivity extends AppCompatActivity {
     addicon = (ImageView) findViewById(R.id.addicon);
     minusicon = (ImageView) findViewById(R.id.minusicon);
     nopot = (TextView) findViewById(R.id.nopot);
+    tex2 = (TextView) findViewById(R.id.tex2);
+
+    DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference ref1 = ref.child("potprice");
+    ref1.addValueEventListener(new ValueEventListener() {
+      @Override
+      public void onDataChange(DataSnapshot snapshot) {
+
+        tex2.setText(snapshot.getValue().toString());
+      }
+      @Override
+      public void onCancelled(DatabaseError databaseError) {
+      }
+    });
+      final int price = Integer.parseInt(tex2.getText().toString());
 
     addicon.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -70,7 +86,7 @@ public class SheeshaActivity extends AppCompatActivity {
 
         String no1 = total.getText().toString();
         int noo1 = Integer.parseInt(no1);
-        noo1 = noo1 + 360;
+        noo1 = noo1 + price;
         String f1 = Integer.toString(noo1);
         total.setText(f1);
       }
@@ -90,7 +106,7 @@ public class SheeshaActivity extends AppCompatActivity {
         int noo1 = Integer.parseInt(no1);
 
         if (noo1 != 0) {
-          noo1 = noo1 - 360;
+          noo1 = noo1 - price;
           String f1 = Integer.toString(noo1);
           total.setText(f1);
         }
