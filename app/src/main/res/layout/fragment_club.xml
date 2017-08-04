@@ -1,17 +1,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_display_products"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
-    tools:context="com.notadeveloper.app.pad.ClubFragment">
+    android:background="#000000"
+    >
 
-  <!-- TODO: Update blank fragment layout -->
-  <TextView
+
+  <android.support.v7.widget.RecyclerView
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:text="COMING SOON!!"
-      android:textSize="20dp"
-      android:textColor="#D4AF37"
-      android:gravity="center"/>
+      android:layout_below="@id/my_toolbar"
+      android:id="@+id/rv"/>
+
 
 </RelativeLayout>
+
