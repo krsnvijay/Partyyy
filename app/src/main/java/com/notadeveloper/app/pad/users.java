@@ -17,6 +17,15 @@ public class users {
   String orgname;
   ArrayList<String> myparties = new ArrayList<>();
   HashMap<String, party.BookedTickets> mytickets = new HashMap<>();
+  private Club myclub;
+
+  public Club getMyclub() {
+    return myclub;
+  }
+
+  public void setMyclub(Club myclub) {
+    this.myclub = myclub;
+  }
 
   public users() {
   }

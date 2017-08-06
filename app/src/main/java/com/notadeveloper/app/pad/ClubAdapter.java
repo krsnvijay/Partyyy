@@ -1,6 +1,7 @@
 package com.notadeveloper.app.pad;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -45,6 +46,14 @@ public class ClubAdapter extends RecyclerView.Adapter<ClubHolder> {
 
         holder.clubname.setText(c.clubname);
         holder.loct.setText(c.address3);
+        holder.cv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, ClubDetailedActivity.class);
+                intent.putExtra("Club_id", String.valueOf(c.getClubid()));
+                mContext.startActivity(intent);
+            }
+        });
 
     }
 

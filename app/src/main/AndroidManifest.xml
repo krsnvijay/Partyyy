@@ -45,7 +45,8 @@
         <activity android:name=".DetailedTicketActivity" />
         <activity android:name=".MyTickets" />
         <activity android:name=".SheeshaActivity" />
-        <activity android:name=".SheeshaOrderActivity"></activity>
+        <activity android:name=".SheeshaOrderActivity" />
+        <activity android:name=".ClubDetailedActivity"></activity>
     </application>
 
 </manifest>
