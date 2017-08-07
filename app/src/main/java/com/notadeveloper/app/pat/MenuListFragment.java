@@ -1,4 +1,4 @@
-package com.notadeveloper.app.pad;
+package com.notadeveloper.app.pat;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -35,7 +35,7 @@ public class MenuListFragment extends Fragment {
     View view = inflater.inflate(R.layout.fragment_menu, container,
         false);
 
-    NavigationView vNavigation = (NavigationView) view.findViewById(R.id.vNavigation);
+    NavigationView vNavigation = view.findViewById(R.id.vNavigation);
     vNavigation.setNavigationItemSelectedListener(
         new NavigationView.OnNavigationItemSelectedListener() {
           @Override

@@ -1,4 +1,4 @@
-package com.notadeveloper.app.pad;
+package com.notadeveloper.app.pat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -55,11 +55,11 @@ public class Login extends AppCompatActivity {
             .setTheme(R.style.AppTheme_NoActionBar)
             .setLogo(R.mipmap.ic_launcher)
             .setIsSmartLockEnabled(true)
-            // .setIsSmartLockEnabled(!BuildConfig.DEBUG)
-            .setProviders(Arrays.asList(new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
-                new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build(),
-                new AuthUI.IdpConfig.Builder(AuthUI.FACEBOOK_PROVIDER).build()))
-
+            .setAvailableProviders(
+                Arrays.asList(new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
+                    new AuthUI.IdpConfig.Builder(AuthUI.PHONE_VERIFICATION_PROVIDER).build(),
+                    new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build(),
+                    new AuthUI.IdpConfig.Builder(AuthUI.FACEBOOK_PROVIDER).build()))
             .build(),
         RC_SIGN_IN);
   }

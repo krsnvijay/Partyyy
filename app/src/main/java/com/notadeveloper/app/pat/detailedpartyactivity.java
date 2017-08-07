@@ -1,4 +1,4 @@
-package com.notadeveloper.app.pad;
+package com.notadeveloper.app.pat;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -204,20 +204,20 @@ public class detailedpartyactivity extends AppCompatActivity {
               dialog = new Dialog(detailedpartyactivity.this);
             }
             dialog.setContentView(R.layout.ticketdialog);
-            notic = (TextView) dialog.findViewById(R.id.notic);
-            noticcoup = (TextView) dialog.findViewById(R.id.noticcoup);
-            pricesta = (TextView) dialog.findViewById(R.id.pricesta);
+            notic = dialog.findViewById(R.id.notic);
+            noticcoup = dialog.findViewById(R.id.noticcoup);
+            pricesta = dialog.findViewById(R.id.pricesta);
             pricesta.setText("₹" + p.getPricestag() + " x");
-            pricecoup = (TextView) dialog.findViewById(R.id.pricecoup);
+            pricecoup = dialog.findViewById(R.id.pricecoup);
             pricecoup.setText("₹" + p.getPricecouple() + " x");
-            stprice = (TextView) dialog.findViewById(R.id.stprice);
-            coupprice = (TextView) dialog.findViewById(R.id.coupprice);
-            total = (TextView) dialog.findViewById(R.id.total);
-            book1 = (Button) dialog.findViewById(R.id.book1);
-            addicon = (ImageView) dialog.findViewById(R.id.addicon);
-            minusicon = (ImageView) dialog.findViewById(R.id.minusicon);
-            addiconcoup = (ImageView) dialog.findViewById(R.id.addiconcoup);
-            minuscoup = (ImageView) dialog.findViewById(R.id.minuscoup);
+            stprice = dialog.findViewById(R.id.stprice);
+            coupprice = dialog.findViewById(R.id.coupprice);
+            total = dialog.findViewById(R.id.total);
+            book1 = dialog.findViewById(R.id.book1);
+            addicon = dialog.findViewById(R.id.addicon);
+            minusicon = dialog.findViewById(R.id.minusicon);
+            addiconcoup = dialog.findViewById(R.id.addiconcoup);
+            minuscoup = dialog.findViewById(R.id.minuscoup);
 
             addicon.setOnClickListener(new View.OnClickListener() {
               @Override

@@ -1,4 +1,4 @@
-package com.notadeveloper.app.pad;
+package com.notadeveloper.app.pat;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import java.util.List;
 
-import static com.notadeveloper.app.pad.MainActivity.fromHtml;
+import static com.notadeveloper.app.pat.MainActivity.fromHtml;
 
 /**
  * Created by Chirag on 20-Jul-17.

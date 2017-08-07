@@ -1,4 +1,4 @@
-package com.notadeveloper.app.pad;
+package com.notadeveloper.app.pat;
 
 import java.util.HashMap;
 

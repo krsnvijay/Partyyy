@@ -1,4 +1,4 @@
-package com.notadeveloper.app.pad;
+package com.notadeveloper.app.pat;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,14 +19,6 @@ public class users {
   HashMap<String, party.BookedTickets> mytickets = new HashMap<>();
   private Club myclub;
 
-  public Club getMyclub() {
-    return myclub;
-  }
-
-  public void setMyclub(Club myclub) {
-    this.myclub = myclub;
-  }
-
   public users() {
   }
 
@@ -35,6 +27,14 @@ public class users {
     this.name = name;
     this.number = number;
     this.email = email;
+  }
+
+  public Club getMyclub() {
+    return myclub;
+  }
+
+  public void setMyclub(Club myclub) {
+    this.myclub = myclub;
   }
 
   public String getUid() {

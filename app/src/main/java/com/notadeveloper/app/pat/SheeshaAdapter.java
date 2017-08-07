@@ -1,4 +1,4 @@
-package com.notadeveloper.app.pad;
+package com.notadeveloper.app.pat;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,13 +10,6 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 
 /**
@@ -50,11 +43,11 @@ public class SheeshaAdapter extends RecyclerView.Adapter<SheeshaHolder> {
   @Override
   public void onBindViewHolder(final SheeshaHolder holder, final int position) {
     final shesha s = list.get(position);
-      holder.flavor.setText(s.getFlavour());
+    holder.flavor.setText(s.getFlavour());
     holder.cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
       @Override
       public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-        TextView txtView = (TextView) ((Activity) mContext).findViewById(R.id.nopot);
+        TextView txtView = ((Activity) mContext).findViewById(R.id.nopot);
         int ii = Integer.parseInt(txtView.getText().toString());
         if (holder.cb.isChecked() == true) {
           int t;
@@ -85,7 +78,6 @@ public class SheeshaAdapter extends RecyclerView.Adapter<SheeshaHolder> {
         }
       }
     });
-
 
     double f;
   }

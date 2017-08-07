@@ -1,4 +1,4 @@
-package com.notadeveloper.app.pad;
+package com.notadeveloper.app.pat;
 
 import android.content.Context;
 import android.net.Uri;
@@ -83,7 +83,7 @@ public class PartyFragment extends Fragment {
   public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
 
-    recyclerview = (RecyclerView) view.findViewById(R.id.recyclerview);
+    recyclerview = view.findViewById(R.id.recyclerview);
     getUser();
 
     mLayoutManager = new LinearLayoutManager(getActivity());

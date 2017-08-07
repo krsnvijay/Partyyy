@@ -1,4 +1,4 @@
-package com.notadeveloper.app.pad;
+package com.notadeveloper.app.pat;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -23,13 +23,13 @@ public class TicketHolder extends RecyclerView.ViewHolder {
   public TicketHolder(View itemView) {
     super(itemView);
 
-    name = (TextView) itemView.findViewById(R.id.name);
-    orderprice = (TextView) itemView.findViewById(R.id.orderprice);
-    date = (TextView) itemView.findViewById(R.id.date);
-    loct = (TextView) itemView.findViewById(R.id.loct);
-    timet = (TextView) itemView.findViewById(R.id.timet);
-    stagprice = (TextView) itemView.findViewById(R.id.stagprice);
-    coupleprice = (TextView) itemView.findViewById(R.id.coupleprice);
-    cv1 = (CardView) itemView.findViewById(R.id.cv1);
+    name = itemView.findViewById(R.id.name);
+    orderprice = itemView.findViewById(R.id.orderprice);
+    date = itemView.findViewById(R.id.date);
+    loct = itemView.findViewById(R.id.loct);
+    timet = itemView.findViewById(R.id.timet);
+    stagprice = itemView.findViewById(R.id.stagprice);
+    coupleprice = itemView.findViewById(R.id.coupleprice);
+    cv1 = itemView.findViewById(R.id.cv1);
   }
 }

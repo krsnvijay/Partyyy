@@ -1,4 +1,4 @@
-package com.notadeveloper.app.pad;
+package com.notadeveloper.app.pat;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -57,10 +57,10 @@ public class Register extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.register);
 
-    name = (AutoCompleteTextView) findViewById(R.id.name);
-    number = (AutoCompleteTextView) findViewById(R.id.number);
-    email = (AutoCompleteTextView) findViewById(R.id.email);
-    check = (CheckBox) findViewById(R.id.check);
+    name = findViewById(R.id.name);
+    number = findViewById(R.id.number);
+    email = findViewById(R.id.email);
+    check = findViewById(R.id.check);
 
     mAuth = FirebaseAuth.getInstance();
     mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
@@ -76,7 +76,7 @@ public class Register extends AppCompatActivity {
       email.setText(profileemail);
     }
     s = false;
-    TextView text = (TextView) findViewById(R.id.terms);
+    TextView text = findViewById(R.id.terms);
     text.setPaintFlags(text.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
     text.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -90,7 +90,7 @@ public class Register extends AppCompatActivity {
       }
     });
 
-    Button register = (Button) findViewById(R.id.register);
+    Button register = findViewById(R.id.register);
     register.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
@@ -103,11 +103,11 @@ public class Register extends AppCompatActivity {
         final String b = number.getText().toString();
         final String f = email.getText().toString();
 
-        TextInputLayout name1 = (TextInputLayout) findViewById(R.id.name1);
-        TextInputLayout number1 = (TextInputLayout) findViewById(R.id.number1);
+        TextInputLayout name1 = findViewById(R.id.name1);
+        TextInputLayout number1 = findViewById(R.id.number1);
 
-        TextInputLayout email = (TextInputLayout) findViewById(R.id.emaila);
-        check = (CheckBox) findViewById(R.id.check);
+        TextInputLayout email = findViewById(R.id.emaila);
+        check = findViewById(R.id.check);
 
         if (!check.isChecked()) {
           cancel = true;

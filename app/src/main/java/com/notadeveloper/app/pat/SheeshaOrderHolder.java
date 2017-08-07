@@ -1,4 +1,4 @@
-package com.notadeveloper.app.pad;
+package com.notadeveloper.app.pat;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -20,12 +20,12 @@ public class SheeshaOrderHolder extends RecyclerView.ViewHolder {
 
   public SheeshaOrderHolder(View itemView) {
     super(itemView);
-    cv1 = (CardView) itemView.findViewById(R.id.cv1);
-    orderid = (TextView) itemView.findViewById(R.id.orderid);
-    date = (TextView) itemView.findViewById(R.id.date);
-    price = (TextView) itemView.findViewById(R.id.orderprice);
-    status = (TextView) itemView.findViewById(R.id.orderstatus);
-    noofpots = (TextView) itemView.findViewById(R.id.noofpots);
-    deliverby = (TextView) itemView.findViewById(R.id.deliverby);
+    cv1 = itemView.findViewById(R.id.cv1);
+    orderid = itemView.findViewById(R.id.orderid);
+    date = itemView.findViewById(R.id.date);
+    price = itemView.findViewById(R.id.orderprice);
+    status = itemView.findViewById(R.id.orderstatus);
+    noofpots = itemView.findViewById(R.id.noofpots);
+    deliverby = itemView.findViewById(R.id.deliverby);
   }
 }

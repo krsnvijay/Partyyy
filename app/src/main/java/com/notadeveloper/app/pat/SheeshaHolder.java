@@ -1,4 +1,4 @@
-package com.notadeveloper.app.pad;
+package com.notadeveloper.app.pat;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -19,7 +19,7 @@ public class SheeshaHolder extends RecyclerView.ViewHolder {
 
   public SheeshaHolder(View itemView) {
     super(itemView);
-    cb = (CheckBox) itemView.findViewById(R.id.check);
+    cb = itemView.findViewById(R.id.check);
     ButterKnife.bind(this, itemView);
   }
 }

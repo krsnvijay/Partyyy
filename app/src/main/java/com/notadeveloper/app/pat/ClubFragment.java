@@ -1,4 +1,4 @@
-package com.notadeveloper.app.pad;
+package com.notadeveloper.app.pat;
 
 import android.content.Context;
 import android.net.Uri;
@@ -10,13 +10,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 
 /**
@@ -80,44 +78,44 @@ public class ClubFragment extends Fragment {
     return inflater.inflate(R.layout.fragment_club, container, false);
   }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+  @Override
+  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
 
-        final RecyclerView rv = (RecyclerView) view.findViewById(R.id.rv);
-        rv.setHasFixedSize(false);
-        rv.setLayoutManager(new LinearLayoutManager(getActivity()));
+    final RecyclerView rv = view.findViewById(R.id.rv);
+    rv.setHasFixedSize(false);
+    rv.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.keepSynced(true);
-        ref = mDatabase.child("clubs");
+    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+    mDatabase.keepSynced(true);
+    ref = mDatabase.child("clubs");
 
+    ref.addValueEventListener(new ValueEventListener() {
+      @Override
+      public void onDataChange(DataSnapshot datasnapshot) {
+        if (list != null) {
+          list.clear();
+        } else {
+          list = new ArrayList<Club>();
+        }
+        for (DataSnapshot postSnapshot : datasnapshot.getChildren()) {
+          Club c = postSnapshot.getValue(Club.class);
+          if (!list.contains(c) && list != null) {
+            list.add(c);
+          }
+          ClubAdapter ss = new ClubAdapter(list, getActivity());
+          rv.setAdapter(ss);
+        }
+      }
 
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot datasnapshot) {
-                if (list != null)
-                    list.clear();
-                else list = new ArrayList<Club>();
-                for (DataSnapshot postSnapshot : datasnapshot.getChildren()) {
-                    Club c = postSnapshot.getValue(Club.class);
-                    if (!list.contains(c) && list != null) {
-                        list.add(c);
-                    }
-                    ClubAdapter ss = new ClubAdapter(list, getActivity());
-                    rv.setAdapter(ss);
+      @Override
+      public void onCancelled(DatabaseError databaseError) {
 
-                }
-            }
+      }
+    });
+  }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
+  // TODO: Rename method, update argument and hook method into UI event
   public void onButtonPressed(Uri uri) {
     if (mListener != null) {
       mListener.onFragmentInteraction(uri);

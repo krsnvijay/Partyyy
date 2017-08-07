@@ -11,6 +11,8 @@
   <color name="secondarytext">#727272</color>
   <color name="divider">#b6b6b6</color>
   <color name="iconscolor">#ffffff</color>
+  <color name="white">#ffffff</color>
+  <color name="tw__composer_black">#000000</color>
   <color name="accent">#37FDFC</color>
   <color name="gold">#D4AF37</color>
   <integer-array name="fab_menu_item_colors">

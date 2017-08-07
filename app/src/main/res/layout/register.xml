@@ -80,7 +80,7 @@
           android:layout_height="wrap_content"
           android:minLines="2"
           android:text="Terms and Conditions,Privacy Policy."
-          android:textColor="@color/com_facebook_blue"/>
+          android:textColor="@color/primary"/>
     </LinearLayout>
     <Button
         android:id="@+id/register"

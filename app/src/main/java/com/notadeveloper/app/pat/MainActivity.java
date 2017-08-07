@@ -1,4 +1,4 @@
-package com.notadeveloper.app.pad;
+package com.notadeveloper.app.pat;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -51,23 +51,23 @@ public class MainActivity extends AppCompatActivity
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    dl = (DrawerLayout) findViewById(R.id.dl);
+    dl = findViewById(R.id.dl);
     abdt = new ActionBarDrawerToggle(this, dl, R.string.Open, R.string.Close);
     abdt.setDrawerIndicatorEnabled(true);
 
     dl.addDrawerListener(abdt);
     abdt.syncState();
-    Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+    Toolbar myToolbar = findViewById(R.id.my_toolbar);
     setSupportActionBar(myToolbar);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_dehaze_black_24dp);
 
-    TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+    TabLayout tabLayout = findViewById(R.id.tab_layout);
     tabLayout.addTab(tabLayout.newTab().setText("Parties"));
     tabLayout.addTab(tabLayout.newTab().setText("Clubs"));
     tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-    final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+    final ViewPager viewPager = findViewById(R.id.pager);
     final PagerAdapter adapter = new PagerAdapter
         (getSupportFragmentManager(), tabLayout.getTabCount());
     viewPager.setAdapter(adapter);
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity
       }
     });
 
-    NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+    NavigationView navigationView = findViewById(R.id.nav_view);
 
     navigationView.setNavigationItemSelectedListener(
         new NavigationView.OnNavigationItemSelectedListener() {

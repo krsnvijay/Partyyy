@@ -1,4 +1,4 @@
-package com.notadeveloper.app.pad;
+package com.notadeveloper.app.pat;
 
 import android.app.Dialog;
 import android.os.Build;
@@ -29,7 +29,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import static com.notadeveloper.app.pad.MainActivity.fromHtml;
+import static com.notadeveloper.app.pat.MainActivity.fromHtml;
 
 public class SheeshaActivity extends AppCompatActivity {
   public static TextView total;
@@ -54,12 +54,12 @@ public class SheeshaActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_sheesha);
 
-    total = (TextView) findViewById(R.id.total);
-    book1 = (Button) findViewById(R.id.book1);
-    addicon = (ImageView) findViewById(R.id.addicon);
-    minusicon = (ImageView) findViewById(R.id.minusicon);
-    nopot = (TextView) findViewById(R.id.nopot);
-    tex2 = (TextView) findViewById(R.id.tex2);
+    total = findViewById(R.id.total);
+    book1 = findViewById(R.id.book1);
+    addicon = findViewById(R.id.addicon);
+    minusicon = findViewById(R.id.minusicon);
+    nopot = findViewById(R.id.nopot);
+    tex2 = findViewById(R.id.tex2);
 
     DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
     DatabaseReference ref1 = ref.child("potprice");
@@ -69,11 +69,12 @@ public class SheeshaActivity extends AppCompatActivity {
 
         tex2.setText(snapshot.getValue().toString());
       }
+
       @Override
       public void onCancelled(DatabaseError databaseError) {
       }
     });
-      final int price = Integer.parseInt(tex2.getText().toString());
+    final int price = Integer.parseInt(tex2.getText().toString());
 
     addicon.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -113,7 +114,7 @@ public class SheeshaActivity extends AppCompatActivity {
       }
     });
     AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
-    final RecyclerView rv = (RecyclerView) findViewById(R.id.rv);
+    final RecyclerView rv = findViewById(R.id.rv);
     rv.setHasFixedSize(false);
     rv.setLayoutManager(new LinearLayoutManager(this));
 
@@ -139,19 +140,19 @@ public class SheeshaActivity extends AppCompatActivity {
           dialog.setContentView(R.layout.addresschangedialog);
           dialog.setTitle(fromHtml("<font color='#c83737'>Edit Address</font>"));
 
-          Button dialogbutton = (Button) dialog.findViewById(R.id.okedittext);
-          final EditText edittextdial1 = (EditText) dialog.findViewById(R.id.adda1);
+          Button dialogbutton = dialog.findViewById(R.id.okedittext);
+          final EditText edittextdial1 = dialog.findViewById(R.id.adda1);
           final AutoCompleteTextView edittextdial2 =
-              (AutoCompleteTextView) dialog.findViewById(R.id.adda2);
+              dialog.findViewById(R.id.adda2);
           final AutoCompleteTextView edittextdial3 =
-              (AutoCompleteTextView) dialog.findViewById(R.id.pina);
-          final TextView noop = (TextView) dialog.findViewById(R.id.noop);
-          final Button editorder = (Button) dialog.findViewById(R.id.editorder);
+              dialog.findViewById(R.id.pina);
+          final TextView noop = dialog.findViewById(R.id.noop);
+          final Button editorder = dialog.findViewById(R.id.editorder);
 
-          final TextInputLayout edittexttil1 = (TextInputLayout) dialog.findViewById(R.id.add1);
-          final TextInputLayout edittexttil2 = (TextInputLayout) dialog.findViewById(R.id.add2);
-          final TextInputLayout edittexttil3 = (TextInputLayout) dialog.findViewById(R.id.pin);
-          final Spinner spinner = (Spinner) dialog.findViewById(R.id.deliverytype);
+          final TextInputLayout edittexttil1 = dialog.findViewById(R.id.add1);
+          final TextInputLayout edittexttil2 = dialog.findViewById(R.id.add2);
+          final TextInputLayout edittexttil3 = dialog.findViewById(R.id.pin);
+          final Spinner spinner = dialog.findViewById(R.id.deliverytype);
 
           noop.setText("No of pots: " + nopot.getText().toString());
           editorder.setOnClickListener(new View.OnClickListener() {
@@ -212,7 +213,8 @@ public class SheeshaActivity extends AppCompatActivity {
 
                 FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
                 final String uid = mUser.getUid();
-                final DatabaseReference mDatabase2 = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
+                final DatabaseReference mDatabase2 =
+                    FirebaseDatabase.getInstance().getReference().child("users").child(uid);
                 final DatabaseReference mDatabase3 = FirebaseDatabase.getInstance().getReference();
                 DatabaseReference offsetRef =
                     FirebaseDatabase.getInstance().getReference(".info/serverTimeOffset");
@@ -236,9 +238,9 @@ public class SheeshaActivity extends AppCompatActivity {
                     mDatabase2.child("myorders")
                         .child(String.valueOf(estimatedServerTimeMs))
                         .setValue(order);
-                      mDatabase3.child("pendingorders")
-                              .child(String.valueOf(estimatedServerTimeMs))
-                              .setValue(order);
+                    mDatabase3.child("pendingorders")
+                        .child(String.valueOf(estimatedServerTimeMs))
+                        .setValue(order);
 
                     Toast.makeText(SheeshaActivity.this, "Order placed!! PAYMENT!!",
                         Toast.LENGTH_LONG).show();

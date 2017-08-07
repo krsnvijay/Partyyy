@@ -1,4 +1,4 @@
-package com.notadeveloper.app.pad;
+package com.notadeveloper.app.pat;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

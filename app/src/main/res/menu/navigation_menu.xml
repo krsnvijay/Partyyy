@@ -1,64 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-<group
-    android:checkableBehavior="single"
-    android:id="@+id/menu1"
-    >
+  <group
+      android:checkableBehavior="single"
+      android:id="@+id/menu1"
+  >
     <item
         android:id="@+id/logout"
         android:checked="false"
         android:icon="@drawable/ic_undo_black_24dp"
-        android:title="Log out" />
+        android:title="Log out"/>
     <item
         android:id="@+id/tac"
         android:checked="false"
         android:icon="@drawable/ic_assignment_black_24dp"
-        android:title="Terms and conditions" />
+        android:title="Terms and conditions"/>
     <item
         android:id="@+id/settings"
         android:checked="false"
         android:icon="@drawable/ic_settings_black_24dp"
-        android:title="Settings" />
+        android:title="Settings"/>
     <item
         android:id="@+id/mytick"
         android:checked="false"
         android:icon="@drawable/ic_confetti"
-        android:title="My tickets" />
-</group>
-    <group>
+        android:title="My tickets"/>
+  </group>
+  <group>
 
-        <item android:title="Services"
-android:actionMenuTextColor="#32ff12"
-            />
-</group>
-    <group
-        android:checkableBehavior="none"
-        android:id="@+id/menu2"
-        >
+    <item android:title="Services"
+        android:actionMenuTextColor="#32ff12"
+    />
+  </group>
+  <group
+      android:checkableBehavior="none"
+      android:id="@+id/menu2"
+  >
 
-        <!--
-        <item
-            android:id="@+id/action_car"
-            android:icon="@drawable/ic_confetti"
-            android:title="car services" />
-        <item
-            android:id="@+id/action_food"
-            android:icon="@drawable/ic_confetti"
-            android:title="food"/>
-        <item
-            android:id="@+id/action_booze"
-            android:icon="@drawable/ic_confetti"
+    <!--
+    <item
+        android:id="@+id/action_car"
+        android:icon="@drawable/ic_confetti"
+        android:title="car services" />
+    <item
+        android:id="@+id/action_food"
+        android:icon="@drawable/ic_confetti"
+        android:title="food"/>
+    <item
+        android:id="@+id/action_booze"
+        android:icon="@drawable/ic_confetti"
 
-            android:title="booze" />
-            -->
-        <item
-            android:id="@+id/action_sheesha"
-            android:icon="@drawable/ic_confetti"
-            android:title="Rent Sheesha" />
-        <item
-            android:id="@+id/order_sheesha"
-            android:icon="@drawable/ic_confetti"
-            android:title="My Sheesha Orders" />
-    </group>
+        android:title="booze" />
+        -->
+    <item
+        android:id="@+id/action_sheesha"
+        android:icon="@drawable/ic_confetti"
+        android:title="Rent Sheesha"/>
+    <item
+        android:id="@+id/order_sheesha"
+        android:icon="@drawable/ic_confetti"
+        android:title="My Sheesha Orders"/>
+  </group>
 </menu>
