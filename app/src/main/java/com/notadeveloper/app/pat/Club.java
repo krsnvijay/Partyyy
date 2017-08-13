@@ -7,7 +7,9 @@ import java.util.ArrayList;
  * Club DataModel For FireBase
  */
 
-public class Club {
+
+public class Club
+{
   String clubid;
   ArrayList<String> clubpicture;
   String clubname;
@@ -20,17 +22,17 @@ public class Club {
   String address3;
   String pin;
   String description;
+  String picture;
   ArrayList<String> menupicture;
   ArrayList<String> utils;
 
-  public Club() {
-  }
+  public Club()
+  {}
 
-  public Club(String clubid, ArrayList<String> clubpicture, String clubname, String time,
-      String time1,
-      String email, String number, String address1, String address2, String address3,
-      String pin, String description, ArrayList<String> menupicture,
-      ArrayList<String> utils) {
+  public Club(String clubid,String picture, ArrayList<String> clubpicture, String clubname, String time, String time1,
+              String email, String number, String address1, String address2, String address3,
+              String pin, String description, ArrayList<String> menupicture,
+              ArrayList<String> utils) {
     this.clubpicture = clubpicture;
     this.clubname = clubname;
     this.time = time;
@@ -45,6 +47,15 @@ public class Club {
     this.menupicture = menupicture;
     this.utils = utils;
     this.clubid = clubid;
+    this.picture=picture;
+  }
+
+  public String getPicture() {
+    return picture;
+  }
+
+  public void setPicture(String picture) {
+    this.picture = picture;
   }
 
   public String getClubid() {
@@ -151,6 +162,7 @@ public class Club {
     this.description = description;
   }
 
+
   public ArrayList<String> getUtils() {
     return utils;
   }
@@ -158,4 +170,6 @@ public class Club {
   public void setUtils(ArrayList<String> utils) {
     this.utils = utils;
   }
+
+
 }

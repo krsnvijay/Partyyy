@@ -11,21 +11,26 @@
       tools:context="com.notadeveloper.app.pat.detailedpartyactivity">
 
 
-    <ImageView
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:id="@+id/iv"
-        android:scaleType="fitXY"
-        android:background="@drawable/club"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"/>
+        android:layout_height="250dp" />
+    <LinearLayout
+        android:id="@+id/layoutDots"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginBottom="25dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_above="@+id/pname">
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Club Name"
         android:textStyle="bold"
-        android:layout_below="@+id/iv"
+        android:layout_below="@+id/view_pager"
         android:layout_toRightOf="@+id/line"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"
@@ -206,18 +211,24 @@
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="13dp"
         android:id="@+id/menupictext"/>
-    <ImageView
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager1"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:id="@+id/menus"
-        android:layout_below="@id/menupictext"
-        android:scaleType="fitXY"
-        android:background="@drawable/club"
-        android:layout_alignParentLeft="true"/>
+        android:layout_height="250dp"
+        android:layout_below="@+id/menupictext"/>
+    <LinearLayout
+        android:id="@+id/layoutDots1"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginBottom="25dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_above="@+id/line5">
+    </LinearLayout>
     <RelativeLayout
         android:layout_width="300dp"
         android:layout_height="1dp"
-        android:layout_below="@+id/menus"
+        android:layout_below="@+id/view_pager1"
         android:layout_centerHorizontal="true"
         android:background="#808080"
         android:id="@+id/line5"

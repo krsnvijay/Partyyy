@@ -7,6 +7,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 /**
@@ -27,21 +30,28 @@ public class ClubAdapter extends RecyclerView.Adapter<ClubHolder> {
     this.mContext = mContext;
   }
 
+
   @Override
   public ClubHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     Context context = parent.getContext();
     View itemView = LayoutInflater.from(mContext)
-        .inflate(R.layout.club_card, parent, false);
+            .inflate(R.layout.club_card, parent, false);
 
     return new ClubHolder(itemView);
+
   }
 
   @Override
-  public void onBindViewHolder(ClubHolder holder, int position) {
+  public void onBindViewHolder(ClubHolder holder, int position)
+  {
     final Club c = list.get(position);
 
     holder.clubname.setText(c.clubname);
     holder.loct.setText(c.address3);
+    if(c.getPicture()!=null)
+    {
+      Glide.with(mContext).load(c.getPicture()).into(holder.iv);
+    }
     holder.cv.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
@@ -50,6 +60,7 @@ public class ClubAdapter extends RecyclerView.Adapter<ClubHolder> {
         mContext.startActivity(intent);
       }
     });
+
   }
 
   @Override

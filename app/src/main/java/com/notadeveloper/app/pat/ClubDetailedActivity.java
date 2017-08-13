@@ -1,11 +1,20 @@
 package com.notadeveloper.app.pat;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.view.*;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -14,10 +23,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import static android.text.Html.fromHtml;
+
 public class ClubDetailedActivity extends AppCompatActivity {
 
-  @BindView(R.id.iv)
-  ImageView iv;
+
+
   @BindView(R.id.pname)
   TextView pname;
   @BindView(R.id.loct)
@@ -38,8 +53,7 @@ public class ClubDetailedActivity extends AppCompatActivity {
   TextView parking;
   @BindView(R.id.swimming)
   TextView swimming;
-  @BindView(R.id.menus)
-  ImageView menus;
+
   @BindView(R.id.contactt)
   TextView contactt;
   @BindView(R.id.email)
@@ -48,7 +62,16 @@ public class ClubDetailedActivity extends AppCompatActivity {
   TextView phone;
 
   Club c = new Club();
+  private TextView[] dots;
   String s;
+  int currentPage = 0;
+  ArrayList<String> al = new ArrayList<String>();
+  ArrayList<String> alm = new ArrayList<String>();
+  private MyViewPagerAdapter myViewPagerAdapter;
+  private LinearLayout dotsLayout;
+  private MyViewPagerAdapter myViewPagerAdapter1;
+  private LinearLayout dotsLayout1;
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -63,12 +86,16 @@ public class ClubDetailedActivity extends AppCompatActivity {
     FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
     final String uid = mUser.getUid();
     final DatabaseReference mDatabase =
-        FirebaseDatabase.getInstance().getReference().child("clubs").child(s);
+            FirebaseDatabase.getInstance().getReference().child("clubs").child(s);
+    final ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
+    final ViewPager viewPager1 = (ViewPager) findViewById(R.id.view_pager1);
+
 
     mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
       @Override
       public void onDataChange(DataSnapshot dataSnapshot) {
         c = dataSnapshot.getValue(Club.class);
+
 
         pname.setText(c.getClubname());
         loct.setText(c.getAddress3());
@@ -78,18 +105,117 @@ public class ClubDetailedActivity extends AppCompatActivity {
         add2.setText(c.getAddress2());
         city.setText(c.getAddress3());
         pin.setText(c.getPin());
-        if (c.getUtils().contains("Parking")) {
-          parking.setText("Parking - YES");
-        } else {
-          parking.setText("Parking - NO");
-        }
-        if (c.getUtils().contains("Swimming pool")) {
-          swimming.setText("Swimming pool - YES");
-        } else {
-          swimming.setText("Swimming pool - NO");
+        if(c.getUtils()!=null) {
+          if (c.getUtils().contains("Parking"))
+            parking.setText("Parking - YES");
+          else
+            parking.setText("Parking - NO");
+          if (c.getUtils().contains("Swimming pool"))
+            swimming.setText("Swimming pool - YES");
+          else
+            swimming.setText("Swimming pool - NO");
         }
         email.setText(c.getEmail());
         phone.setText(c.getNumber());
+
+
+
+        if (c.getClubpicture() != null) {
+          al.addAll(c.getClubpicture());
+          myViewPagerAdapter = new MyViewPagerAdapter(al.size(),al);
+          viewPager.setAdapter(myViewPagerAdapter);
+          dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
+          addBottomDots(0);
+
+          ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
+
+            @Override
+            public void onPageSelected(int position) {
+              addBottomDots(position);
+              currentPage=position;
+
+
+            }
+
+            @Override
+            public void onPageScrolled(int arg0, float arg1, int arg2) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int arg0) {
+
+            }
+          };
+          viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
+          final Handler handler = new Handler();
+          final Runnable Update = new Runnable() {
+            public void run() {
+              if (currentPage == al.size()) {
+                currentPage = 0;
+              }
+              viewPager.setCurrentItem(currentPage++, true);
+            }
+          };
+
+          Timer timer = new Timer(); // This will create a new Thread
+          timer .schedule(new TimerTask() { // task to be scheduled
+
+            @Override
+            public void run() {
+              handler.post(Update);
+            }
+          }, 500, 1500);
+        }
+        if (c.getMenupicture() != null) {
+          alm.addAll(c.getMenupicture());
+          myViewPagerAdapter1 = new MyViewPagerAdapter(alm.size(),alm);
+          viewPager1.setAdapter(myViewPagerAdapter1);
+          dotsLayout1 = (LinearLayout) findViewById(R.id.layoutDots1);
+          addBottomDotsm(0);
+
+          ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
+
+            @Override
+            public void onPageSelected(int position) {
+              addBottomDotsm(position);
+              currentPage=position;
+
+
+            }
+
+            @Override
+            public void onPageScrolled(int arg0, float arg1, int arg2) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int arg0) {
+
+            }
+          };
+          viewPager1.addOnPageChangeListener(viewPagerPageChangeListener);
+          final Handler handler = new Handler();
+          final Runnable Update = new Runnable() {
+            public void run() {
+              if (currentPage == alm.size()) {
+                currentPage = 0;
+              }
+              viewPager1.setCurrentItem(currentPage++, true);
+            }
+          };
+
+          Timer timer = new Timer(); // This will create a new Thread
+          timer .schedule(new TimerTask() { // task to be scheduled
+
+            @Override
+            public void run() {
+              handler.post(Update);
+            }
+          }, 500, 1500);
+        }
+
+
       }
 
       @Override
@@ -97,5 +223,85 @@ public class ClubDetailedActivity extends AppCompatActivity {
 
       }
     });
+
   }
+  public class MyViewPagerAdapter extends android.support.v4.view.PagerAdapter {
+    private LayoutInflater layoutInflater;
+
+    private Context mContext;
+    int sizee;
+    ArrayList<String> af;
+    public MyViewPagerAdapter(int size, ArrayList<String> af)
+    {
+      sizee=size;
+      this.af = af;
+    }
+
+    @Override
+    public Object instantiateItem(ViewGroup container, int position) {
+      layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+      View view = layoutInflater.inflate(R.layout.pager_item, container, false);
+      ImageView iv = (ImageView)view.findViewById(R.id.imageView);
+      Glide.with(ClubDetailedActivity.this).load(af.get(position)).into(iv);
+      container.addView(view);
+
+      return view;
+    }
+
+    @Override
+    public int getCount() {
+      return sizee;
+    }
+
+    @Override
+    public boolean isViewFromObject(View view, Object obj) {
+      return view == obj;
+    }
+
+
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+      View view = (View) object;
+      container.removeView(view);
+    }
+  }
+  private void addBottomDots(int currentPage) {
+    dots = new TextView[al.size()];
+
+    int colorsActive = getResources().getColor(R.color.dot_light_screen3);
+    int colorsInactive = getResources().getColor(R.color.dot_dark_screen3);
+
+    dotsLayout.removeAllViews();
+    for (int i = 0; i < dots.length; i++) {
+      dots[i] = new TextView(this);
+      dots[i].setText(fromHtml("&#8226;"));
+      dots[i].setTextSize(35);
+      dots[i].setTextColor(colorsInactive);
+      dotsLayout.addView(dots[i]);
+    }
+
+    if (dots.length > 0)
+      dots[currentPage].setTextColor(colorsActive);
+  }
+  private void addBottomDotsm(int currentPage) {
+    dots = new TextView[alm.size()];
+
+    int colorsActive = getResources().getColor(R.color.dot_light_screen3);
+    int colorsInactive = getResources().getColor(R.color.dot_dark_screen3);
+
+    dotsLayout1.removeAllViews();
+    for (int i = 0; i < dots.length; i++) {
+      dots[i] = new TextView(this);
+      dots[i].setText(fromHtml("&#8226;"));
+      dots[i].setTextSize(35);
+      dots[i].setTextColor(colorsInactive);
+      dotsLayout1.addView(dots[i]);
+    }
+
+    if (dots.length > 0)
+      dots[currentPage].setTextColor(colorsActive);
+  }
+
+
 }
