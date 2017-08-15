@@ -75,7 +75,9 @@ public class MenuListFragment extends Fragment {
               builder.setPositiveButton("OK", null);
               // builder.setNegativeButton("Cancel", null);
               builder.show();
-            } else if (id == R.id.settings) {
+            } else if (id == R.id.about) {
+              Intent i = new Intent(getActivity(), AboutActivity.class);
+              startActivity(i);
 
             } else if (id == R.id.action_sheesha) {
               Intent i = new Intent(getActivity(), SheeshaActivity.class);

@@ -15,16 +15,17 @@
         android:checked="false"
         android:icon="@drawable/ic_assignment_black_24dp"
         android:title="Terms and conditions"/>
-    <item
-        android:id="@+id/settings"
-        android:checked="false"
-        android:icon="@drawable/ic_settings_black_24dp"
-        android:title="Settings"/>
+
     <item
         android:id="@+id/mytick"
         android:checked="false"
         android:icon="@drawable/ic_confetti"
         android:title="My tickets"/>
+    <item
+        android:id="@+id/about"
+        android:checked="false"
+        android:icon="@drawable/ic_confetti"
+        android:title="About Us"/>
   </group>
   <group>
 
