@@ -4,12 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.bumptech.glide.Glide;
-
 import java.util.ArrayList;
 
 /**
@@ -48,9 +47,15 @@ public class ClubAdapter extends RecyclerView.Adapter<ClubHolder> {
 
     holder.clubname.setText(c.clubname);
     holder.loct.setText(c.address3);
-    if(c.getPicture()!=null)
-    {
-      Glide.with(mContext).load(c.getPicture()).into(holder.iv);
+    if (c.getPicture() != null) {
+      Log.e("CLubGlide", "onBindViewHolder: " + c.getPicture());
+      GlideApp.with(mContext)
+          .load(c.getPicture())
+          .thumbnail(0.1f)
+          .placeholder(R.drawable.club)
+          .into(holder.iv);
+    } else {
+      Glide.with(mContext).load(R.drawable.club).into(holder.iv);
     }
     holder.cv.setOnClickListener(new View.OnClickListener() {
       @Override
