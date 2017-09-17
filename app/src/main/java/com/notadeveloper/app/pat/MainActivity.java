@@ -98,8 +98,7 @@ public class MainActivity extends AppCompatActivity
             int id = menuItem.getItemId();
             if (id == R.id.logout) {
 
-              final AlertDialog.Builder builder =
-                  new AlertDialog.Builder(MainActivity.this, R.style.pop);
+              final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
               builder.setMessage("Are You Sure?");
               builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 @Override
@@ -124,7 +123,7 @@ public class MainActivity extends AppCompatActivity
               builder.setNegativeButton("No", null);
               builder.show();
             } else if (id == R.id.tac) {
-              AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.pop);
+              AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
               builder.setTitle("Terms and conditions");
               builder.setMessage("T & C");
               builder.setPositiveButton("OK", null);
@@ -178,7 +177,7 @@ public class MainActivity extends AppCompatActivity
   @Override
   public void onBackPressed() {
 
-    final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.pop);
+    final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
     builder.setMessage("Are You Sure you want to exit?");
     builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
       @Override

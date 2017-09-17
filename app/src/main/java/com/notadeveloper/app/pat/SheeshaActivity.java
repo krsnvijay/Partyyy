@@ -132,7 +132,7 @@ public class SheeshaActivity extends AppCompatActivity {
         } else {
           final Dialog dialog;
           if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            dialog = new Dialog(SheeshaActivity.this, R.style.dialogthemez);
+            dialog = new Dialog(SheeshaActivity.this);
           } else {
             dialog = new Dialog(SheeshaActivity.this);
           }

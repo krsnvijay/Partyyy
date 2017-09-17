@@ -7,206 +7,202 @@
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
+      android:layout_height="wrap_content"
+
       tools:context="com.notadeveloper.app.pat.detailedpartyactivity">
 
 
     <ImageView
+        android:id="@+id/iv1"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:id="@+id/iv"
-        android:scaleType="fitXY"
-        android:background="@drawable/ima"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-    />
-    <ImageView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:id="@+id/qr"
-        android:layout_below="@+id/iv"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_alignParentTop="true"
 
         android:scaleType="fitXY"/>
+
+    <ImageView
+        android:id="@+id/iv"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_below="@+id/iv1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/margin16"
+        />
+
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/rel"
-        android:layout_below="@+id/qr"
-        android:layout_centerHorizontal="true">
-
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv"
+        android:layout_marginLeft="@dimen/margin8"
+        android:layout_marginRight="@dimen/margin8"
+        android:layout_marginTop="@dimen/margin16"
+        android:gravity="center"
+        >
 
       <TextView
+          android:id="@+id/month"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:textStyle="bold"
           android:text="DEC"
-          android:textSize="30dp"
-          android:textColor="@color/colorAccent"
+          android:textSize="@dimen/textHeading"
+          android:textStyle="bold"/>
 
-          android:layout_marginLeft="15dp"
-          android:layout_marginTop="20dp"
-          android:id="@+id/month"/>
       <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="17"
-          android:layout_below="@+id/month"
-          android:layout_marginLeft="12dp"
-          android:layout_marginTop="3dp"
-          android:textSize="50dp"
           android:id="@+id/date"
-      />
-      <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="FRI"
-          android:textSize="30dp"
+          android:layout_alignRight="@+id/month"
+          android:layout_below="@+id/month"
+          android:text="17"
+          android:textSize="@dimen/textHeadingLarge"
+          />
+
+      <TextView
+          android:id="@+id/day"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignRight="@+id/month"
           android:layout_below="@+id/date"
-          android:textColor="#4C4C4C"
-          android:layout_marginLeft="16dp"
-          android:id="@+id/day"/>
+          android:text="FRI"
+          android:textSize="@dimen/textHeading"
+          android:textStyle="bold"
+          />
+
       <RelativeLayout
+          android:id="@+id/line"
           android:layout_width="1dp"
           android:layout_height="100dp"
-          android:background="#808080"
+          android:layout_marginLeft="@dimen/margin16"
+          android:layout_marginRight="@dimen/margin16"
           android:layout_toRightOf="@+id/month"
-
-          android:layout_marginTop="40dp"
-          android:layout_marginLeft="23dp"
-          android:id="@+id/line">
+          android:background="@color/textColorSecondary"
+          >
 
       </RelativeLayout>
+
       <TextView
+          android:id="@+id/pname"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="Party Name"
-          android:textStyle="bold"
-
+          android:layout_marginTop="@dimen/margin16"
           android:layout_toRightOf="@+id/line"
-          android:layout_marginLeft="10dp"
-          android:layout_marginTop="20dp"
-          android:textSize="40dp"
-          android:textColor="#4C4C4C"
-          android:id="@+id/pname"
-      />
+          android:text="Party Name"
+          android:textSize="@dimen/textHeadingLarge"
+          android:textStyle="bold"/>
+
       <ImageView
+          android:id="@+id/locicon"
           android:layout_width="22dp"
           android:layout_height="22dp"
           android:layout_below="@+id/pname"
+
           android:layout_toRightOf="@+id/line"
-          android:layout_marginLeft="8dp"
-          android:layout_marginTop="2dp"
-          app:srcCompat="@drawable/ic_location_on_black_24dp"
-          android:tint="#727272"
-          android:id="@+id/locicon"
-      />
+          app:srcCompat="@drawable/ic_location_on_black_24dp"/>
+
       <TextView
+          android:id="@+id/loct"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="SRM, Ramapuram"
-          android:textSize="17dp"
-          android:layout_below="@+id/pname"
-          android:layout_toRightOf="@+id/locicon"
           android:layout_alignBottom="@+id/locicon"
+          android:layout_marginLeft="@dimen/margin8"
+          android:layout_toRightOf="@+id/locicon"
           android:gravity="bottom"
-          android:layout_marginLeft="3dp"
-          android:id="@+id/loct"
-          android:textColor="#727272"/>
+          android:text="SRM, Ramapuram"
+          android:textSize="@dimen/textBody"
+          />
+
       <ImageView
+          android:id="@+id/timicon"
           android:layout_width="22dp"
           android:layout_height="22dp"
           android:layout_below="@+id/locicon"
           android:layout_toRightOf="@+id/line"
-          android:layout_marginLeft="8dp"
-          android:layout_marginTop="6dp"
-          app:srcCompat="@drawable/ic_access_time_black_24dp"
-          android:tint="#5b5b5b"
-          android:id="@+id/timicon"
-      />
+          app:srcCompat="@drawable/ic_access_time_black_24dp"/>
+
       <TextView
+          android:id="@+id/timet"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="12:00 to 4:00"
-          android:textSize="17dp"
-          android:layout_below="@+id/loct"
-          android:layout_toRightOf="@+id/locicon"
           android:layout_alignBottom="@+id/timicon"
+          android:layout_marginLeft="@dimen/margin8"
+          android:layout_toRightOf="@+id/locicon"
           android:gravity="bottom"
-          android:layout_marginLeft="3dp"
-          android:textColor="#5b5b5b"
-          android:id="@+id/timet"/>
+          android:text="12:00 to 4:00"
+          android:textSize="@dimen/textBody"
+          />
+
       <TextView
+          android:id="@+id/noticket"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:layout_alignLeft="@+id/pname"
+          android:gravity="bottom"
           android:text="Amount paid: ₹250"
-          android:textSize="17dp"
-          android:layout_below="@+id/timet"
-          android:layout_marginLeft="5dp"
-          android:textColor="#5b5b5b"
-          android:id="@+id/totprice"
-          android:layout_alignLeft="@+id/timicon"
-          android:layout_marginTop="10dp"/>
+
+          android:textSize="@dimen/textBody"
+          />
+
       <RelativeLayout
+          android:id="@+id/fgh"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_centerHorizontal="true"
-          android:id="@+id/fgh"
           android:layout_below="@id/day"
-          android:layout_marginTop="15dp">
+          android:layout_centerHorizontal="true"
+          android:layout_marginTop="@dimen/margin16"
+          >
+
         <ImageView
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="6dp"
-            app:srcCompat="@drawable/man"
-            android:tint="#727272"
             android:id="@+id/stagicon"
-        />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="(Stag) ₹250"
-            android:textSize="17dp"
-            android:layout_toRightOf="@+id/stagicon"
-            android:layout_alignBottom="@+id/stagicon"
-            android:gravity="bottom"
-            android:layout_marginLeft="5dp"
-            android:textColor="#5b5b5b"
-            android:id="@+id/stagprice"/>
-        <ImageView
             android:layout_width="22dp"
             android:layout_height="22dp"
-            android:layout_toRightOf="@+id/stagprice"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="6dp"
-            app:srcCompat="@drawable/couple"
-            android:tint="#727272"
-            android:id="@+id/coupleicon"
-        />
+            app:srcCompat="@drawable/ic_men_silhouette"
+            />
+
         <TextView
+            android:id="@+id/stagprice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="(Couple) ₹400"
-            android:textSize="17dp"
-            android:layout_toRightOf="@+id/coupleicon"
-            android:layout_alignBottom="@+id/coupleicon"
+            android:layout_alignBottom="@+id/stagicon"
+            android:layout_toRightOf="@+id/stagicon"
             android:gravity="bottom"
-            android:layout_marginLeft="5dp"
-            android:textColor="#5b5b5b"
-            android:id="@+id/coupleprice"/>
+            android:text="(Stag): 2"
+            android:textSize="@dimen/textBody"
+            />
+
+        <ImageView
+            android:id="@+id/coupleicon"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginLeft="@dimen/margin8"
+            android:layout_toRightOf="@+id/stagprice"
+            app:srcCompat="@drawable/ic_family_of_heterosexual_couple"
+            />
+
+        <TextView
+            android:id="@+id/coupleprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/coupleicon"
+            android:layout_toRightOf="@+id/coupleicon"
+            android:gravity="bottom"
+            android:text="(Couple): 3"
+            android:textSize="@dimen/textBody"
+            />
 
       </RelativeLayout>
 
     </RelativeLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/rel"
-        android:text="(Please show this page before entering party. Enjoy!)"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="10dp"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/margin16"
+        android:text="(Show this page before entering. Enjoy!)"
+        android:textSize="@dimen/textBody"
+        />
   </RelativeLayout>
 </ScrollView>

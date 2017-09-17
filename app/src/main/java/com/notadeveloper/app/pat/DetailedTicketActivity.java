@@ -19,9 +19,9 @@ import com.google.firebase.database.ValueEventListener;
 
 public class DetailedTicketActivity extends AppCompatActivity {
 
-  @BindView(R.id.iv)
+  @BindView(R.id.iv1)
   ImageView mIv;
-  @BindView(R.id.qr)
+  @BindView(R.id.iv)
   ImageView mQr;
   @BindView(R.id.month)
   TextView mMonth;
@@ -41,7 +41,7 @@ public class DetailedTicketActivity extends AppCompatActivity {
   ImageView mTimicon;
   @BindView(R.id.timet)
   TextView mTimet;
-  @BindView(R.id.totprice)
+  @BindView(R.id.noticket)
   TextView mTotprice;
   @BindView(R.id.stagicon)
   ImageView mStagicon;
@@ -65,6 +65,7 @@ public class DetailedTicketActivity extends AppCompatActivity {
     FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
     final String uid = mUser.getUid();
     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+    Glide.with(DetailedTicketActivity.this).load(R.drawable.ima).thumbnail(0.1f).into(mIv);
     mDatabase.child("users")
         .child(uid)
         .child("mytickets")

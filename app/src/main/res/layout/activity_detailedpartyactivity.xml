@@ -1,342 +1,399 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
   <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto"
-      xmlns:tools="http://schemas.android.com/tools"
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      tools:context="com.notadeveloper.app.pat.detailedpartyactivity">
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="@dimen/margin8"
+      android:layout_marginRight="@dimen/margin8"
+      >
 
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
+
         android:id="@+id/iv"
-        android:scaleType="fitXY"
-        android:background="@drawable/ima"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"/>
-    <TextView
-        android:layout_width="wrap_content"
+        android:layout_marginTop="@dimen/margin8"
+        android:elevation="4dp"
+        />
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cv0"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="DEC"
-        android:textSize="30dp"
-        android:textColor="@color/colorAccent"
         android:layout_below="@+id/iv"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="20dp"
-        android:id="@+id/month"/>
+        android:clickable="false"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        card_view:cardCornerRadius="4dp"
+        card_view:cardElevation="4dp"
+        card_view:cardUseCompatPadding="true"
+        card_view:contentPadding="@dimen/margin16"
+        >
+      <RelativeLayout
+          android:id="@+id/relat"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          >
+
+        <TextView
+            android:id="@+id/month"
+            android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+            android:layout_below="@id/pname"
+            android:layout_marginTop="@dimen/margin8"
+        android:text="DEC"
+            android:textSize="@dimen/textMedium"
+            android:textStyle="normal"
+            />
     <TextView
+        android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="17"
         android:layout_below="@+id/month"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="3dp"
-        android:textSize="50dp"
-        android:id="@+id/date"
+        android:text="17"
+        android:textColor="?attr/colorAccent"
+        android:textSize="@dimen/textHeadingLarge"
     />
     <TextView
+        android:id="@+id/day"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="FRI"
-        android:textSize="30dp"
         android:layout_below="@+id/date"
-        android:textColor="#4C4C4C"
-        android:layout_marginLeft="16dp"
-        android:id="@+id/day"/>
+        android:text="FRI"
+        android:textSize="@dimen/textMedium"
+
+        android:textStyle="normal"
+        />
     <RelativeLayout
+        android:id="@+id/line"
         android:layout_width="1dp"
-        android:layout_height="100dp"
-        android:background="#808080"
+        android:layout_height="90dp"
+        android:layout_below="@id/pname"
+        android:layout_marginLeft="@dimen/margin16"
+        android:layout_marginTop="@dimen/margin8"
         android:layout_toRightOf="@+id/month"
-        android:layout_below="@+id/iv"
-        android:layout_marginTop="40dp"
-        android:layout_marginLeft="23dp"
-        android:id="@+id/line">
+        android:background="#808080"
+        >
 
     </RelativeLayout>
     <TextView
+        android:id="@+id/pname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Party Name"
+        android:textColor="?attr/colorAccent"
+        android:textSize="@dimen/textHeadingLarge"
         android:textStyle="bold"
-        android:layout_below="@+id/iv"
-        android:layout_toRightOf="@+id/line"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
-        android:textSize="40dp"
-        android:textColor="#4C4C4C"
-        android:id="@+id/pname"
     />
     <ImageView
-        android:layout_width="22dp"
-        android:layout_height="22dp"
-        android:layout_below="@+id/pname"
-        android:layout_toRightOf="@+id/line"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="2dp"
-        app:srcCompat="@drawable/ic_location_on_black_24dp"
-        android:tint="#727272"
         android:id="@+id/locicon"
-    />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SRM, Ramapuram"
-        android:textSize="17dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_below="@+id/pname"
-        android:layout_toRightOf="@+id/locicon"
-        android:layout_alignBottom="@+id/locicon"
-        android:gravity="bottom"
-        android:layout_marginLeft="3dp"
+        android:layout_marginLeft="@dimen/margin8"
+        android:layout_marginTop="@dimen/margin8"
+        android:layout_toRightOf="@+id/line"
+
+        app:srcCompat="@drawable/ic_location_on_black_24dp"
+    />
+    <TextView
         android:id="@+id/loct"
-        android:textColor="#727272"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/locicon"
+        android:layout_marginLeft="@dimen/margin8"
+        android:layout_toRightOf="@+id/locicon"
+        android:gravity="bottom"
+        android:maxLines="1"
+        android:text="SRM, Ramapuram"
+        android:textSize="@dimen/textSubheading"
+        />
     <ImageView
-        android:layout_width="22dp"
-        android:layout_height="22dp"
-        android:layout_below="@+id/locicon"
-        android:layout_toRightOf="@+id/line"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="6dp"
-        app:srcCompat="@drawable/ic_access_time_black_24dp"
-        android:tint="#5b5b5b"
         android:id="@+id/timicon"
-    />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="12:00 to 4:00"
-        android:textSize="17dp"
-        android:layout_below="@+id/loct"
-        android:layout_toRightOf="@+id/locicon"
-        android:layout_alignBottom="@+id/timicon"
-        android:gravity="bottom"
-        android:layout_marginLeft="3dp"
-        android:textColor="#5b5b5b"
-        android:id="@+id/timet"/>
-    <ImageView
-        android:layout_width="22dp"
-        android:layout_height="22dp"
-        android:layout_below="@+id/timicon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_below="@+id/locicon"
+        android:layout_marginLeft="@dimen/margin8"
+        android:layout_marginTop="@dimen/margin8"
         android:layout_toRightOf="@+id/line"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="6dp"
-        app:srcCompat="@drawable/ticket"
-        android:id="@+id/ticicon"
+
+        app:srcCompat="@drawable/ic_access_time_black_24dp"
     />
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/timet"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="200 available"
-        android:textSize="17dp"
-        android:layout_below="@+id/timet"
+        android:layout_alignBottom="@+id/timicon"
+        android:layout_marginLeft="@dimen/margin8"
         android:layout_toRightOf="@+id/locicon"
-        android:layout_alignBottom="@+id/ticicon"
         android:gravity="bottom"
-        android:layout_marginLeft="5dp"
-        android:textColor="#5b5b5b"
-        android:id="@+id/noticket"/>
-    <RelativeLayout
-        android:layout_width="wrap_content"
+        android:text="12:00 to 4:00"
+
+        android:textSize="@dimen/textSubheading"
+        />
+    <ImageView
+        android:id="@+id/ticicon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_below="@+id/timicon"
+        android:layout_marginLeft="@dimen/margin8"
+        android:layout_marginTop="@dimen/margin8"
+        android:layout_toRightOf="@+id/line"
+        app:srcCompat="@drawable/ic_ticket"
+    />
+    <TextView
+        android:id="@+id/noticket"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:layout_alignBottom="@+id/ticicon"
+        android:layout_marginLeft="@dimen/margin8"
+        android:layout_toRightOf="@+id/locicon"
+        android:gravity="bottom"
+        android:text="200 available"
+
+        android:textSize="@dimen/textSubheading"
+        />
+    <RelativeLayout
         android:id="@+id/fgh"
-        android:layout_below="@id/day"
-        android:layout_marginTop="15dp">
-      <ImageView
-          android:layout_width="22dp"
-          android:layout_height="22dp"
-          android:layout_marginLeft="8dp"
-          android:layout_marginTop="6dp"
-          app:srcCompat="@drawable/man"
-          android:tint="#727272"
-          android:id="@+id/stagicon"
-      />
-      <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="(Stag) ₹250"
-          android:textSize="17dp"
-          android:layout_toRightOf="@+id/stagicon"
-          android:layout_alignBottom="@+id/stagicon"
-          android:gravity="bottom"
-          android:layout_marginLeft="5dp"
-          android:textColor="#5b5b5b"
-          android:id="@+id/stagprice"/>
-      <ImageView
-          android:layout_width="22dp"
-          android:layout_height="22dp"
-          android:layout_toRightOf="@+id/stagprice"
-          android:layout_marginLeft="8dp"
-          android:layout_marginTop="6dp"
-          app:srcCompat="@drawable/couple"
-          android:tint="#727272"
-          android:id="@+id/coupleicon"
-      />
-      <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="(Couple) ₹400"
-          android:textSize="17dp"
-          android:layout_toRightOf="@+id/coupleicon"
-          android:layout_alignBottom="@+id/coupleicon"
-          android:gravity="bottom"
-          android:layout_marginLeft="5dp"
-          android:textColor="#5b5b5b"
-          android:id="@+id/coupleprice"/>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="300dp"
-        android:layout_height="1dp"
-        android:layout_below="@+id/fgh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line"
         android:layout_centerHorizontal="true"
-        android:background="#808080"
-        android:layout_marginTop="15dp"
-        android:id="@+id/line1"
-    >
+        android:layout_marginTop="@dimen/margin8"
+        >
+      <ImageView
+          android:id="@+id/stagicon"
+          android:layout_width="24dp"
+          android:layout_height="24dp"
+          app:srcCompat="@drawable/ic_men_silhouette"
+          />
+      <TextView
+          android:id="@+id/stagprice"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignBottom="@+id/stagicon"
+          android:layout_toRightOf="@+id/stagicon"
+          android:gravity="bottom"
+          android:text="(Stag) ₹250"
+
+          android:textSize="@dimen/textSubheading"
+          />
+      <ImageView
+          android:id="@+id/coupleicon"
+          android:layout_width="24dp"
+          android:layout_height="24dp"
+          android:layout_marginLeft="@dimen/margin8"
+          android:layout_toRightOf="@+id/stagprice"
+
+          app:srcCompat="@drawable/ic_family_of_heterosexual_couple"
+          />
+      <TextView
+          android:id="@+id/coupleprice"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignBottom="@+id/coupleicon"
+          android:layout_toRightOf="@+id/coupleicon"
+          android:gravity="bottom"
+          android:text="(Couple) ₹400"
+          android:textSize="@dimen/textSubheading"
+          />
 
     </RelativeLayout>
+    </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cv1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cv0"
+        android:clickable="false"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        card_view:cardCornerRadius="4dp"
+        card_view:cardElevation="4dp"
+        card_view:cardUseCompatPadding="true"
+        card_view:contentPadding="@dimen/margin16"
+        >
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          >
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/line1"
+        android:text="About:"
+        android:textColor="?attr/colorAccent"
+        android:textSize="@dimen/textHeading"
+        />
+        <TextView
+            android:id="@+id/descrip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
         android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce varius, enim ut mattis fermentum, odio neque vehicula ex, non euismod nisi ipsum in dolor. Donec non mollis ipsum, eget ultricies odio. Sed facilisis suscipit lectus, non vestibulum ex vulputate et. Pellentesque arcu leo, viverra non pharetra eget, consectetur et ante. Nullam eu lacus sed tortor auctor fermentum ultricies sed urna. Vestibulum ac ligula leo. Duis ullamcorper, nibh et convallis hendrerit, mauris odio condimentum ipsum, at mattis leo mi at justo."
-        android:padding="20dp"
-        android:id="@+id/descrip"/>
+            android:textSize="@dimen/textBody"
+            />
+      </LinearLayout>
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cv2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cv1"
+        android:clickable="false"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        card_view:cardCornerRadius="4dp"
+        card_view:cardElevation="4dp"
+        card_view:cardUseCompatPadding="true"
+        card_view:contentPadding="@dimen/margin16"
+        >
     <RelativeLayout
-        android:layout_width="300dp"
-        android:layout_height="1dp"
-        android:layout_below="@+id/descrip"
-        android:layout_centerHorizontal="true"
-        android:background="#808080"
-        android:id="@+id/line2"
-    >
-
-    </RelativeLayout>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
     <TextView
+        android:id="@+id/addt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Address:"
-        android:textSize="20dp"
-        android:layout_below="@+id/line2"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="10dp"
-        android:id="@+id/addt"/>
+        android:textColor="?attr/colorAccent"
+        android:textSize="@dimen/textHeading"
+        />
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/add1"
-        android:text="168, Lord Hobart Road,"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/addt"
         android:layout_below="@+id/addt"
-        android:layout_alignLeft="@+id/addt"
-        android:layout_marginTop="10dp"/>
+        android:text="168, Lord Hobart Road,"
+        android:textSize="@dimen/textBody"
+        />
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/add2"
-        android:text="Brooklands,"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/addt"
         android:layout_below="@+id/add1"
-        android:layout_alignLeft="@+id/addt"
-        android:layout_marginTop="4dp"/>
+        android:layout_marginTop="@dimen/margin8"
+        android:text="Brooklands,"
+        android:textSize="@dimen/textBody"
+        />
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/city"
-        android:text="Coonoor."
-        android:layout_below="@+id/add2"
-        android:layout_alignLeft="@+id/addt"
-        android:layout_marginTop="4dp"/>
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/pin"
-        android:text="643101"
-        android:layout_below="@+id/city"
         android:layout_alignLeft="@+id/addt"
-        android:layout_marginTop="4dp"/>
-    <RelativeLayout
-        android:layout_width="300dp"
-        android:layout_height="1dp"
-        android:layout_below="@+id/pin"
-        android:layout_centerHorizontal="true"
-        android:background="#808080"
-        android:id="@+id/line3"
-        android:layout_marginTop="20dp"
-    >
-
-    </RelativeLayout>
+        android:layout_below="@+id/add2"
+        android:layout_marginTop="@dimen/margin8"
+        android:text="Coonoor."
+        android:textSize="@dimen/textBody"
+        />
     <TextView
+        android:id="@+id/pin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/addt"
+        android:layout_below="@+id/city"
+        android:layout_marginTop="@dimen/margin8"
+        android:text="643101"
+        android:textSize="@dimen/textBody"
+        />
+    </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cv3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cv2"
+        android:clickable="false"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        card_view:cardCornerRadius="4dp"
+        card_view:cardElevation="4dp"
+        card_view:cardUseCompatPadding="true"
+        card_view:contentPadding="@dimen/margin16"
+        >
+      <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          >
+    <TextView
+        android:id="@+id/contactt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Contact:"
-        android:textSize="20dp"
-        android:layout_below="@+id/line3"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="10dp"
-        android:id="@+id/contactt"/>
+        android:textColor="?attr/colorAccent"
+        android:textSize="@dimen/textHeading"
+        />
 
     <ImageView
+        android:id="@+id/emailicon"
         android:layout_width="18dp"
         android:layout_height="18dp"
         android:layout_below="@+id/contactt"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="@dimen/margin8"
         app:srcCompat="@drawable/ic_email_black_24dp"
-        android:tint="#727272"
-        android:id="@+id/emailicon"
     />
     <TextView
+        android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="partyyy@gmail.com"
-        android:textColor="#727272"
-        android:layout_below="@+id/contactt"
-        android:layout_toRightOf="@+id/emailicon"
         android:layout_alignBottom="@+id/emailicon"
+        android:layout_marginLeft="@dimen/margin8"
+        android:layout_toRightOf="@+id/emailicon"
         android:gravity="bottom"
-        android:layout_marginLeft="3dp"
-        android:id="@+id/email"/>
+        android:text="partyyy@gmail.com"
+        android:textSize="@dimen/textBody"
+        />
     <ImageView
+        android:id="@+id/phoneicon"
         android:layout_width="18dp"
         android:layout_height="18dp"
         android:layout_below="@+id/emailicon"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="@dimen/margin8"
         app:srcCompat="@drawable/ic_phone_black_24dp"
-        android:tint="#727272"
-        android:id="@+id/phoneicon"
     />
     <TextView
+        android:id="@+id/phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="9996857423"
-        android:textColor="#727272"
-        android:layout_below="@+id/email"
-        android:layout_toRightOf="@+id/phoneicon"
         android:layout_alignBottom="@+id/phoneicon"
+        android:layout_marginLeft="@dimen/margin8"
+        android:layout_toRightOf="@+id/phoneicon"
         android:gravity="bottom"
-        android:layout_marginLeft="3dp"
-        android:id="@+id/phone"/>
+        android:text="9996857423"
+        android:textSize="@dimen/textBody"
+        />
+      </RelativeLayout>
+    </android.support.v7.widget.CardView>
 
     <Button
         android:id="@+id/book"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/cv3"
+        android:layout_marginBottom="@dimen/margin8"
+        android:layout_marginTop="@dimen/margin8"
         android:filterTouchesWhenObscured="true"
         android:text="BOOK NOW!"
-        android:theme="@style/AccentButton"
-        android:paddingRight="20dp"
-        android:paddingLeft="20dp"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/phone"
-        android:layout_marginTop="10dp"/>
+        />
 
   </RelativeLayout>
 </ScrollView>

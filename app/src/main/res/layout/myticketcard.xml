@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    card_view:cardCornerRadius="4dp"
-    card_view:cardElevation="3dp"
+    android:id="@+id/cv1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
     android:clickable="false"
     android:focusable="true"
+
     android:foreground="?android:attr/selectableItemBackground"
+    card_view:cardCornerRadius="4dp"
+    card_view:cardElevation="3dp"
 
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     card_view:cardUseCompatPadding="true"
-
-    android:id="@+id/cv1">
+    >
 
   <RelativeLayout
       android:layout_width="match_parent"
@@ -51,7 +52,6 @@
         android:layout_alignParentRight="true"
         android:maxLines="1"
         android:text="24/10/2017"
-        android:textColor="@color/secondary_text"
         android:textSize="15dp"/>
 
     <TextView
@@ -92,7 +92,7 @@
           android:layout_below="@+id/pname"
           android:layout_marginTop="2dp"
           card_view:srcCompat="@drawable/ic_location_on_black_24dp"
-          android:tint="#727272"/>
+          />
 
       <TextView
           android:id="@+id/loct"
@@ -104,14 +104,13 @@
           android:layout_toRightOf="@+id/locicon"
           android:gravity="bottom"
           android:text="SRM, Ramapuram"
-          android:textColor="#727272"
           android:textSize="17dp"/>
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/rel1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/rel1"
         android:layout_below="@+id/rel"
         android:layout_toRightOf="@+id/prodimg">
       <ImageView
@@ -119,8 +118,6 @@
           android:layout_width="18dp"
           android:layout_height="18dp"
           android:layout_marginTop="6dp"
-          android:layout_toRightOf="@+id/line"
-          android:tint="#5b5b5b"
           card_view:srcCompat="@drawable/ic_access_time_black_24dp"
       />
       <TextView
@@ -132,66 +129,67 @@
           android:layout_toRightOf="@+id/timicon"
           android:gravity="bottom"
           android:text="12:00 to 4:00"
-          android:textColor="#5b5b5b"/>
+          />
     </RelativeLayout>
 
 
     <RelativeLayout
+        android:id="@+id/rel2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/rel1"
         android:layout_centerHorizontal="true"
-        android:id="@+id/rel2"
-        android:layout_below="@id/rel1">
+        >
       <ImageView
+          android:id="@+id/stagicon"
           android:layout_width="22dp"
           android:layout_height="22dp"
           android:layout_marginLeft="8dp"
           android:layout_marginTop="6dp"
-          card_view:srcCompat="@drawable/man"
-          android:tint="#727272"
-          android:id="@+id/stagicon"
+
+          card_view:srcCompat="@drawable/ic_men_silhouette"
       />
       <TextView
+          android:id="@+id/stagprice"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:layout_alignBottom="@+id/stagicon"
+          android:layout_marginLeft="5dp"
+          android:layout_toRightOf="@+id/stagicon"
+          android:gravity="bottom"
           android:text="(Stag): 3"
           android:textSize="17dp"
-          android:layout_toRightOf="@+id/stagicon"
-          android:layout_alignBottom="@+id/stagicon"
-          android:gravity="bottom"
-          android:layout_marginLeft="5dp"
-          android:textColor="#5b5b5b"
-          android:id="@+id/stagprice"/>
+          />
       <ImageView
+          android:id="@+id/coupleicon"
           android:layout_width="22dp"
           android:layout_height="22dp"
-          android:layout_toRightOf="@+id/stagprice"
           android:layout_marginLeft="8dp"
           android:layout_marginTop="6dp"
-          card_view:srcCompat="@drawable/couple"
-          android:tint="#727272"
-          android:id="@+id/coupleicon"
+          android:layout_toRightOf="@+id/stagprice"
+
+          card_view:srcCompat="@drawable/ic_family_of_heterosexual_couple"
       />
       <TextView
+          android:id="@+id/coupleprice"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:layout_alignBottom="@+id/coupleicon"
+          android:layout_marginLeft="5dp"
+          android:layout_toRightOf="@+id/coupleicon"
+          android:gravity="bottom"
           android:text="(Couple): 2"
           android:textSize="17dp"
-          android:layout_toRightOf="@+id/coupleicon"
-          android:layout_alignBottom="@+id/coupleicon"
-          android:gravity="bottom"
-          android:layout_marginLeft="5dp"
-          android:textColor="#5b5b5b"
-          android:id="@+id/coupleprice"/>
+          />
 
     </RelativeLayout>
     <TextView
         android:id="@+id/deliverby"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_below="@+id/rel2"
         android:layout_marginTop="8dp"
+        android:gravity="center"
         android:maxLines="1"
         android:minLines="1"
         android:text="(Select to view QR code)"

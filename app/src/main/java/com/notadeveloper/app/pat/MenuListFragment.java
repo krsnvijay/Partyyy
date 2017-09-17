@@ -43,8 +43,7 @@ public class MenuListFragment extends Fragment {
             int id = menuItem.getItemId();
             if (id == R.id.logout) {
 
-              final AlertDialog.Builder builder =
-                  new AlertDialog.Builder(getActivity(), R.style.pop);
+              final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
               builder.setMessage("Are You Sure?");
               builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 @Override
@@ -69,7 +68,7 @@ public class MenuListFragment extends Fragment {
               builder.setNegativeButton("No", null);
               builder.show();
             } else if (id == R.id.tac) {
-              AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.pop);
+              AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
               builder.setTitle("Terms and conditions");
               builder.setMessage("T & C");
               builder.setPositiveButton("OK", null);

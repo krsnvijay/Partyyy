@@ -3,7 +3,8 @@ package com.notadeveloper.app.pat;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.view.*;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -22,12 +21,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import static android.text.Html.fromHtml;
+import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
 public class ClubDetailedActivity extends AppCompatActivity {
 
@@ -62,11 +61,11 @@ public class ClubDetailedActivity extends AppCompatActivity {
   TextView phone;
 
   Club c = new Club();
-  private TextView[] dots;
   String s;
   int currentPage = 0;
   ArrayList<String> al = new ArrayList<String>();
   ArrayList<String> alm = new ArrayList<String>();
+  private TextView[] dots;
   private MyViewPagerAdapter myViewPagerAdapter;
   private LinearLayout dotsLayout;
   private MyViewPagerAdapter myViewPagerAdapter1;
@@ -87,8 +86,8 @@ public class ClubDetailedActivity extends AppCompatActivity {
     final String uid = mUser.getUid();
     final DatabaseReference mDatabase =
             FirebaseDatabase.getInstance().getReference().child("clubs").child(s);
-    final ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
-    final ViewPager viewPager1 = (ViewPager) findViewById(R.id.view_pager1);
+    final ViewPager viewPager = findViewById(R.id.view_pager);
+    final ViewPager viewPager1 = findViewById(R.id.view_pager1);
 
 
     mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -124,7 +123,7 @@ public class ClubDetailedActivity extends AppCompatActivity {
           al.addAll(c.getClubpicture());
           myViewPagerAdapter = new MyViewPagerAdapter(al.size(),al);
           viewPager.setAdapter(myViewPagerAdapter);
-          dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
+          dotsLayout = findViewById(R.id.layoutDots);
           addBottomDots(0);
 
           ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
@@ -171,7 +170,7 @@ public class ClubDetailedActivity extends AppCompatActivity {
           alm.addAll(c.getMenupicture());
           myViewPagerAdapter1 = new MyViewPagerAdapter(alm.size(),alm);
           viewPager1.setAdapter(myViewPagerAdapter1);
-          dotsLayout1 = (LinearLayout) findViewById(R.id.layoutDots1);
+          dotsLayout1 = findViewById(R.id.layoutDots1);
           addBottomDotsm(0);
 
           ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
@@ -225,12 +224,48 @@ public class ClubDetailedActivity extends AppCompatActivity {
     });
 
   }
-  public class MyViewPagerAdapter extends android.support.v4.view.PagerAdapter {
-    private LayoutInflater layoutInflater;
 
-    private Context mContext;
+  private void addBottomDots(int currentPage) {
+    dots = new TextView[al.size()];
+
+    int colorsActive = ContextCompat.getColor(this, R.color.background);
+    int colorsInactive = ContextCompat.getColor(this, R.color.textColorSecondary);
+
+    dotsLayout.removeAllViews();
+    for (int i = 0; i < dots.length; i++) {
+      dots[i] = new TextView(this);
+      dots[i].setText(fromHtml("&#8226;"));
+      dots[i].setTextSize(35);
+      dots[i].setTextColor(colorsInactive);
+      dotsLayout.addView(dots[i]);
+    }
+
+    if (dots.length > 0) dots[currentPage].setTextColor(colorsActive);
+  }
+
+  private void addBottomDotsm(int currentPage) {
+    dots = new TextView[alm.size()];
+
+    int colorsActive = ContextCompat.getColor(this, R.color.background);
+    int colorsInactive = ContextCompat.getColor(this, R.color.textColorSecondary);
+
+    dotsLayout1.removeAllViews();
+    for (int i = 0; i < dots.length; i++) {
+      dots[i] = new TextView(this);
+      dots[i].setText(fromHtml("&#8226;"));
+      dots[i].setTextSize(35);
+      dots[i].setTextColor(colorsInactive);
+      dotsLayout1.addView(dots[i]);
+    }
+
+    if (dots.length > 0) dots[currentPage].setTextColor(colorsActive);
+  }
+
+  public class MyViewPagerAdapter extends android.support.v4.view.PagerAdapter {
     int sizee;
     ArrayList<String> af;
+    private LayoutInflater layoutInflater;
+    private Context mContext;
     public MyViewPagerAdapter(int size, ArrayList<String> af)
     {
       sizee=size;
@@ -242,8 +277,14 @@ public class ClubDetailedActivity extends AppCompatActivity {
       layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
       View view = layoutInflater.inflate(R.layout.pager_item, container, false);
-      ImageView iv = (ImageView)view.findViewById(R.id.imageView);
-      Glide.with(ClubDetailedActivity.this).load(af.get(position)).into(iv);
+      ImageView iv = view.findViewById(R.id.imageView);
+      GlideApp.with(ClubDetailedActivity.this)
+          .load(af.get(position))
+          .thumbnail(0.1f)
+          .fitCenter()
+          .placeholder(R.drawable.ic_picture)
+          .transition(withCrossFade())
+          .into(iv);
       container.addView(view);
 
       return view;
@@ -265,42 +306,6 @@ public class ClubDetailedActivity extends AppCompatActivity {
       View view = (View) object;
       container.removeView(view);
     }
-  }
-  private void addBottomDots(int currentPage) {
-    dots = new TextView[al.size()];
-
-    int colorsActive = getResources().getColor(R.color.dot_light_screen3);
-    int colorsInactive = getResources().getColor(R.color.dot_dark_screen3);
-
-    dotsLayout.removeAllViews();
-    for (int i = 0; i < dots.length; i++) {
-      dots[i] = new TextView(this);
-      dots[i].setText(fromHtml("&#8226;"));
-      dots[i].setTextSize(35);
-      dots[i].setTextColor(colorsInactive);
-      dotsLayout.addView(dots[i]);
-    }
-
-    if (dots.length > 0)
-      dots[currentPage].setTextColor(colorsActive);
-  }
-  private void addBottomDotsm(int currentPage) {
-    dots = new TextView[alm.size()];
-
-    int colorsActive = getResources().getColor(R.color.dot_light_screen3);
-    int colorsInactive = getResources().getColor(R.color.dot_dark_screen3);
-
-    dotsLayout1.removeAllViews();
-    for (int i = 0; i < dots.length; i++) {
-      dots[i] = new TextView(this);
-      dots[i].setText(fromHtml("&#8226;"));
-      dots[i].setTextSize(35);
-      dots[i].setTextColor(colorsInactive);
-      dotsLayout1.addView(dots[i]);
-    }
-
-    if (dots.length > 0)
-      dots[currentPage].setTextColor(colorsActive);
   }
 
 

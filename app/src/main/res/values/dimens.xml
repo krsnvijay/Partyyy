@@ -7,4 +7,12 @@
   <dimen name="nav_header_vertical_spacing">16dp</dimen>
   <dimen name="nav_header_height">160dp</dimen>
   <dimen name="appbar_padding_top">8dp</dimen>
+  <dimen name="textHeadingLarge">32sp</dimen>
+  <dimen name="textHeading">24sp</dimen>
+  <dimen name="textMedium">20sp</dimen>
+  <dimen name="textSubheading">16sp</dimen>
+  <dimen name="textBody">14sp</dimen>
+  <dimen name="margin8">8dp</dimen>
+  <dimen name="margin16">16dp</dimen>
+
 </resources>

@@ -25,8 +25,8 @@
           android:id="@+id/adda1"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:inputType="textPostalAddress"
           android:hint="Door No/Flat No."
+          android:inputType="textPostalAddress"
           android:maxLines="1"
       />
     </android.support.design.widget.TextInputLayout>
@@ -38,8 +38,8 @@
           android:id="@+id/adda2"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:inputType="textPostalAddress"
           android:hint="Area / Locality"
+          android:inputType="textPostalAddress"
           android:maxLines="1"
       />
     </android.support.design.widget.TextInputLayout>
@@ -54,41 +54,44 @@
           android:id="@+id/pina"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:inputType="number"
           android:hint="PIN code"
-          android:maxLines="1"
+          android:inputType="number"
           android:maxLength="6"
+          android:maxLines="1"
       />
     </android.support.design.widget.TextInputLayout>
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
       <TextView
+          android:id="@+id/noop"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:layout_centerVertical="true"
           android:text="No of pots: 10"
           android:textSize="20dp"
-          android:id="@+id/noop"
-          android:layout_centerVertical="true"/>
+          />
       <Button
+          android:id="@+id/editorder"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:id="@+id/editorder"
-          android:text="edit order"
-          android:layout_toRightOf="@+id/noop"
           android:layout_marginLeft="20dp"
-          android:theme="@style/AccentButton"/>
+          android:layout_toRightOf="@+id/noop"
+          android:text="edit order"
+          />
     </RelativeLayout>
 
 
     <TextView android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="Deliver By"
         android:textSize="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_height="wrap_content"/>
-    <Spinner android:layout_width="match_parent"
-        android:layout_height="40dp"
+        />
+    <Spinner
         android:id="@+id/deliverytype"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
         android:entries="@array/delivertype"
 
     />
@@ -100,6 +103,6 @@
         android:filterTouchesWhenObscured="true"
         android:text="Proceed to payment"
 
-        android:theme="@style/AccentButton"/>
+        />
   </LinearLayout>
 </ScrollView>

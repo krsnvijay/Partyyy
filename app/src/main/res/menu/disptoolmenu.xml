@@ -7,9 +7,9 @@
   <item
       android:id="@+id/actbarm"
       android:icon="@drawable/ic_sort_black_24dp"
+      android:orderInCategory="7"
       android:title="sort"
-
-      app:showAsAction="always" android:orderInCategory="7">
+      app:showAsAction="always">
     <menu>
       <item
           android:id="@+id/datehigh"

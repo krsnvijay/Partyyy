@@ -2,9 +2,8 @@ package com.notadeveloper.app.pat;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.ColorInt;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.ColorUtils;
+import android.support.annotation.Nullable;
+import android.support.v7.graphics.Palette;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -13,11 +12,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.github.florent37.glidepalette.BitmapPalette;
 import com.github.florent37.glidepalette.GlidePalette;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
 /**
  * Created by Admin on 3/21/2017.
@@ -42,6 +44,8 @@ public class PartyHolder extends RecyclerView.ViewHolder {
   TextView loct;
   @BindView(R.id.timicon)
   ImageView timicon;
+  @BindView(R.id.nooftickets) TextView nooftickets;
+  @BindView(R.id.ticicon) ImageView ticicon;
   @BindView(R.id.cv)
   CardView cv;
   party p;
@@ -62,47 +66,54 @@ public class PartyHolder extends RecyclerView.ViewHolder {
     this.p = p1;
     this.mContext = mContext;
 
-    @ColorInt final int defaultColor =
-        ContextCompat.getColor(mContext, android.R.color.background_light);
-    @ColorInt final int textc = ColorUtils.setAlphaComponent(~defaultColor, 0xFF);
-
     GlideApp.with(mContext)
         .load(p.getPicture())
-        .placeholder(R.drawable.ima).listener(GlidePalette.with(p.getPicture())
-        .use(GlidePalette.Profile.VIBRANT)
-        .intoBackground(cv, GlidePalette.Swatch.RGB)
-        .intoTextColor(pname, GlidePalette.Swatch.BODY_TEXT_COLOR)
-        .intoTextColor(timet, GlidePalette.Swatch.BODY_TEXT_COLOR)
-        .intoTextColor(price, GlidePalette.Swatch.BODY_TEXT_COLOR)
-        .intoTextColor(date, GlidePalette.Swatch.BODY_TEXT_COLOR)
-        .intoTextColor(month, GlidePalette.Swatch.TITLE_TEXT_COLOR)
-        .intoTextColor(day, GlidePalette.Swatch.BODY_TEXT_COLOR)
-        .intoTextColor(loct, GlidePalette.Swatch.BODY_TEXT_COLOR)
+        .thumbnail(0.1f)
+        .transition(withCrossFade())
+        .placeholder(R.drawable.ima)
+        .listener(GlidePalette.with(p.getPicture()).intoCallBack(new BitmapPalette.CallBack() {
+          @Override public void onPaletteLoaded(@Nullable Palette palette) {
+            if (palette != null) {
+              Palette.Swatch vibrant = palette.getDarkVibrantSwatch();
+              Palette.Swatch muted = palette.getDarkMutedSwatch();
+              if (muted != null) {
 
-        .use(GlidePalette.Profile.MUTED)
-        .intoBackground(cv, GlidePalette.Swatch.RGB)
-        .intoTextColor(pname, GlidePalette.Swatch.BODY_TEXT_COLOR)
-        .intoTextColor(timet, GlidePalette.Swatch.BODY_TEXT_COLOR)
-        .intoTextColor(price, GlidePalette.Swatch.BODY_TEXT_COLOR)
-        .intoTextColor(date, GlidePalette.Swatch.BODY_TEXT_COLOR)
-        .intoTextColor(month, GlidePalette.Swatch.TITLE_TEXT_COLOR)
-        .intoTextColor(day, GlidePalette.Swatch.BODY_TEXT_COLOR)
-        .intoTextColor(loct, GlidePalette.Swatch.BODY_TEXT_COLOR)
-
-        .use(GlidePalette.Profile.MUTED_DARK)
-        .intoBackground(cv, GlidePalette.Swatch.RGB)
-        .intoTextColor(timet, GlidePalette.Swatch.BODY_TEXT_COLOR)
-        .intoTextColor(day, GlidePalette.Swatch.BODY_TEXT_COLOR)
-        .intoTextColor(loct, GlidePalette.Swatch.BODY_TEXT_COLOR)
-        .intoTextColor(price, GlidePalette.Swatch.BODY_TEXT_COLOR)
-        .intoTextColor(date, GlidePalette.Swatch.BODY_TEXT_COLOR)
-        .intoTextColor(month, GlidePalette.Swatch.TITLE_TEXT_COLOR)
-
-        .crossfade(true)
+                cv.setCardBackgroundColor(muted.getRgb());
+                pname.setTextColor(muted.getBodyTextColor());
+                timet.setTextColor(muted.getBodyTextColor());
+                price.setTextColor(muted.getBodyTextColor());
+                date.setTextColor(muted.getBodyTextColor());
+                month.setTextColor(muted.getBodyTextColor());
+                day.setTextColor(muted.getBodyTextColor());
+                loct.setTextColor(muted.getBodyTextColor());
+                nooftickets.setTextColor(muted.getBodyTextColor());
+                locicon.setColorFilter(muted.getBodyTextColor());
+                timicon.setColorFilter(muted.getBodyTextColor());
+                ticicon.setColorFilter(muted.getBodyTextColor());
+                line.setBackgroundColor(muted.getBodyTextColor());
+              } else if (vibrant != null) {
+                cv.setCardBackgroundColor(vibrant.getRgb());
+                pname.setTextColor(vibrant.getBodyTextColor());
+                timet.setTextColor(vibrant.getBodyTextColor());
+                price.setTextColor(vibrant.getBodyTextColor());
+                date.setTextColor(vibrant.getBodyTextColor());
+                month.setTextColor(vibrant.getBodyTextColor());
+                day.setTextColor(vibrant.getBodyTextColor());
+                loct.setTextColor(vibrant.getBodyTextColor());
+                nooftickets.setTextColor(vibrant.getBodyTextColor());
+                locicon.setColorFilter(vibrant.getBodyTextColor());
+                timicon.setColorFilter(vibrant.getBodyTextColor());
+                ticicon.setColorFilter(vibrant.getBodyTextColor());
+                line.setBackgroundColor(vibrant.getBodyTextColor());
+              }
+            }
+          }
+        })
     ).into(iv);
     pname.setText(p.getTitle());
     loct.setText(p.getAddress3());
     timet.setText(p.getTime() + " to " + p.getTime1());
+    nooftickets.setText(String.valueOf(p.getTickets()));
     String d = p.getDates();
     int as = Integer.parseInt(p.getPricestag());
     int b = Integer.parseInt(p.getPricecouple());

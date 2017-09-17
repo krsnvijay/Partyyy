@@ -81,7 +81,7 @@ public class Register extends AppCompatActivity {
     text.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(Register.this, R.style.pop);
+        AlertDialog.Builder builder = new AlertDialog.Builder(Register.this);
         builder.setTitle("Terms and conditions");
         builder.setMessage("T & C");
         builder.setPositiveButton("OK", null);

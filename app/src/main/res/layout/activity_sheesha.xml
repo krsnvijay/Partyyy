@@ -9,105 +9,100 @@
 >
 
   <RelativeLayout
+      android:id="@+id/rl1"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:id="@+id/rl1"
       android:layout_centerHorizontal="true">
     <TextView
+        android:id="@+id/potstext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin8"
         android:text="Number of pots:"
-        android:textSize="23dp"
-        android:id="@+id/potstext"/>
+        android:textSize="@dimen/textHeading"
+        />
     <ImageView
         android:id="@+id/minusicon"
-        android:layout_width="20dp"
-        android:layout_height="wrap_content"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_alignBottom="@+id/potstext"
         android:layout_alignTop="@+id/potstext"
-        android:layout_toRightOf="@+id/potstext"
         android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/potstext"
         android:background="?selectableItemBackgroundBorderless"
-
-        android:tint="@color/colorAccent"
-        app:srcCompat="@drawable/minus"
+        app:srcCompat="@drawable/ic_indeterminate_check_box_black_24dp"
     />
     <TextView
         android:id="@+id/nopot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/minusicon"
-        android:layout_alignTop="@+id/minusicon"
-        android:layout_marginLeft="5dp"
-
-        android:layout_marginRight="5dp"
+        android:layout_marginLeft="@dimen/margin8"
+        android:layout_marginRight="@dimen/margin8"
         android:layout_toRightOf="@+id/minusicon"
-        android:gravity="bottom"
-
         android:text="0"
-        android:textSize="17dp"/>
+        android:textSize="@dimen/textHeading"
+        />
     <ImageView
         android:id="@+id/addicon"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_alignBottom="@+id/minusicon"
         android:layout_alignTop="@+id/minusicon"
-
         android:layout_toRightOf="@+id/nopot"
         android:background="?selectableItemBackgroundBorderless"
-
-        android:tint="@color/colorAccent"
-        app:srcCompat="@drawable/plus"
+        app:srcCompat="@drawable/ic_add_box_black_24dp"
     />
   </RelativeLayout>
   <RelativeLayout
+      android:id="@+id/rl2"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_below="@+id/rl1"
-      android:id="@+id/rl2"
       android:layout_centerHorizontal="true">
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/tw__composer_black"
-        android:textColor="@color/white"
         android:id="@+id/tex1"
-        android:text="(₹"/>
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/tw__composer_black"
-        android:textColor="@color/white"
-        android:layout_toRightOf="@+id/tex1"
+        android:text="(₹"
+        android:textSize="@dimen/textBody"
+        />
+    <TextView
         android:id="@+id/tex2"
-        android:text="360"/>
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/tw__composer_black"
-        android:textColor="@color/white"
-        android:layout_toRightOf="@+id/tex2"
+        android:layout_toRightOf="@+id/tex1"
+        android:text="360"
+        android:textSize="@dimen/textBody"
+        />
+    <TextView
         android:id="@+id/tex3"
-        android:text=" / pot)"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/tex2"
+        android:text=" / pot)"
+        android:textSize="@dimen/textBody"
+        />
   </RelativeLayout>
 
   <TextView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Flavours:"
-      android:textSize="23dp"
-      android:layout_marginLeft="10dp"
       android:id="@+id/flavourstext"
-      android:layout_below="@id/rl2"/>
-  <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:layout_below="@id/rl2"
+      android:layout_marginLeft="10dp"
+      android:text="Flavours:"
+      android:textSize="@dimen/textHeading"
+      />
+  <TextView
       android:id="@+id/info"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_above="@+id/total"
       android:layout_centerHorizontal="true"
-      android:background="@color/tw__composer_black"
-      android:textColor="@color/white"
       android:text="(3 flavours can be selected per pot)"
-      android:layout_above="@+id/total"/>
+      android:textSize="@dimen/textBody"
+      />
   <RelativeLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
@@ -123,10 +118,9 @@
       android:layout_height="wrap_content"
       android:layout_alignBaseline="@+id/total"
       android:layout_toLeftOf="@+id/total"
-      android:background="@color/tw__composer_black"
       android:text="Total: ₹"
-      android:textColor="@color/white"
-      android:textSize="30dp"/>
+      android:textSize="@dimen/textHeading"
+      />
 
   <TextView
       android:id="@+id/total"
@@ -134,10 +128,9 @@
       android:layout_height="wrap_content"
       android:layout_above="@+id/book1"
       android:layout_alignParentRight="true"
-      android:background="@color/tw__composer_black"
       android:text="0"
-      android:textColor="@color/white"
-      android:textSize="30dp"/>
+      android:textSize="@dimen/textHeading"
+      />
   <Button
       android:id="@+id/book1"
       android:layout_width="wrap_content"
@@ -147,7 +140,7 @@
       android:layout_gravity="end"
       android:filterTouchesWhenObscured="true"
       android:text="proceed"
-      android:theme="@style/AccentButton"/>
+      />
 
 
 </RelativeLayout>

@@ -6,224 +6,232 @@
     android:padding="8dp">
 
   <TextView
+      android:id="@+id/tictext"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:layout_marginBottom="23dp"
       android:text="Select number of tickets:"
       android:textSize="20dp"
-      android:textColor="@color/colorPrimary"
-      android:id="@+id/tictext"
-      android:layout_marginBottom="23dp"/>
+      />
   <RelativeLayout
+      android:id="@+id/rl"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:id="@+id/rl"
+      android:layout_below="@+id/tictext"
       android:layout_marginLeft="8dp"
       android:layout_marginTop="6dp"
-      android:layout_below="@+id/tictext">
+      >
     <ImageView
+        android:id="@+id/stagicon"
         android:layout_width="22dp"
         android:layout_height="22dp"
-        app:srcCompat="@drawable/man"
-        android:id="@+id/stagicon"
+        app:srcCompat="@drawable/ic_men_silhouette"
     />
     <TextView
+        android:id="@+id/stagprice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/pricesta"
+        android:layout_alignLeft="@+id/coupleprice"
+        android:layout_alignStart="@+id/coupleprice"
+        android:gravity="bottom"
         android:text="(Stag):"
         android:textSize="17dp"
-        android:gravity="bottom"
-        android:id="@+id/stagprice" android:layout_above="@+id/pricesta"
-        android:layout_alignLeft="@+id/coupleprice"
-        android:layout_alignStart="@+id/coupleprice"/>
+        />
 
     <TextView
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_below="@+id/stagicon"
+        android:id="@+id/pricesta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/stagicon"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
         android:text="₹250 ×"
         android:textSize="18dp"
-        android:id="@+id/pricesta"
 
     />
 
     <ImageView
-        android:layout_width="20dp"
-        android:background="?selectableItemBackgroundBorderless"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/pricesta"
-        android:layout_alignBottom="@+id/pricesta"
-        android:layout_toRightOf="@+id/pricesta"
-        app:srcCompat="@drawable/minus"
-        android:tint="@color/colorAccent"
         android:id="@+id/minusicon"
+        android:layout_width="20dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/pricesta"
+        android:layout_alignTop="@+id/pricesta"
+        android:layout_toRightOf="@+id/pricesta"
+        android:background="?selectableItemBackgroundBorderless"
+        app:srcCompat="@drawable/ic_indeterminate_check_box_black_24dp"
     />
     <TextView
+        android:id="@+id/notic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/minusicon"
+        android:layout_alignTop="@+id/minusicon"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:text="0"
-        android:layout_alignTop="@+id/minusicon"
         android:layout_toRightOf="@+id/minusicon"
         android:gravity="bottom"
-        android:layout_alignBottom="@+id/minusicon"
+        android:text="0"
         android:textSize="17dp"
-        android:id="@+id/notic"/>
+        />
     <ImageView
+        android:id="@+id/addicon"
         android:layout_width="22dp"
         android:layout_height="22dp"
-        app:srcCompat="@drawable/plus"
-        android:tint="@color/colorAccent"
-        android:layout_alignTop="@+id/minusicon"
         android:layout_alignBottom="@+id/minusicon"
-        android:background="?selectableItemBackgroundBorderless"
-
-        android:id="@+id/addicon"
+        android:layout_alignTop="@+id/minusicon"
         android:layout_toRightOf="@+id/notic"
+
+        android:background="?selectableItemBackgroundBorderless"
+        app:srcCompat="@drawable/ic_add_box_black_24dp"
     />
     <TextView
+        android:id="@+id/stpricet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/addicon"
-        android:layout_alignTop="@+id/minusicon"
-
         android:layout_alignBottom="@+id/minusicon"
+
+        android:layout_alignTop="@+id/minusicon"
         android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/addicon"
         android:text="₹"
         android:textSize="20dp"
-        android:id="@+id/stpricet"/>
+        />
     <TextView
+        android:id="@+id/stprice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/stpricet"
-        android:layout_alignTop="@+id/minusicon"
-
         android:layout_alignBottom="@+id/minusicon"
+
+        android:layout_alignTop="@+id/minusicon"
+        android:layout_toRightOf="@+id/stpricet"
         android:text="0"
         android:textSize="20dp"
-        android:id="@+id/stprice"/>
+        />
     <ImageView
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/pricesta"
+        android:id="@+id/coupleicon"
         android:layout_width="22dp"
         android:layout_height="22dp"
-        app:srcCompat="@drawable/couple"
-        android:id="@+id/coupleicon"
+        android:layout_below="@+id/pricesta"
+        android:layout_marginTop="10dp"
+        app:srcCompat="@drawable/ic_family_of_heterosexual_couple"
     />
     <TextView
+        android:id="@+id/coupleprice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/coupleicon"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/coupleicon"
+        android:gravity="bottom"
         android:text="(Couple):"
         android:textSize="17dp"
-        android:layout_toRightOf="@+id/coupleicon"
-        android:layout_alignBottom="@+id/coupleicon"
-        android:gravity="bottom"
-        android:layout_marginLeft="5dp"
-        android:id="@+id/coupleprice"/>
+        />
     <TextView
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_below="@+id/coupleicon"
+        android:id="@+id/pricecoup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/coupleicon"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
         android:text="₹250 ×"
         android:textSize="18dp"
-        android:id="@+id/pricecoup"
 
     />
 
     <ImageView
+        android:id="@+id/minuscoup"
         android:layout_width="20dp"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/pricecoup"
         android:layout_alignBottom="@+id/pricecoup"
+        android:layout_alignTop="@+id/pricecoup"
         android:layout_toRightOf="@+id/pricecoup"
-        app:srcCompat="@drawable/minus"
-        android:tint="@color/colorAccent"
         android:background="?selectableItemBackgroundBorderless"
 
-        android:id="@+id/minuscoup"
+        app:srcCompat="@drawable/ic_indeterminate_check_box_black_24dp"
     />
     <TextView
+        android:id="@+id/noticcoup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/minuscoup"
+        android:layout_alignTop="@+id/minuscoup"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:text="0"
-        android:layout_alignTop="@+id/minuscoup"
         android:layout_toRightOf="@+id/minuscoup"
         android:gravity="bottom"
-        android:layout_alignBottom="@+id/minuscoup"
+        android:text="0"
         android:textSize="17dp"
-        android:id="@+id/noticcoup"/>
+        />
     <ImageView
+        android:id="@+id/addiconcoup"
         android:layout_width="22dp"
         android:layout_height="22dp"
-        app:srcCompat="@drawable/plus"
-        android:tint="@color/colorAccent"
-        android:background="?selectableItemBackgroundBorderless"
-        android:layout_toRightOf="@+id/noticcoup"
         android:layout_alignBottom="@+id/minuscoup"
         android:layout_alignTop="@+id/minuscoup"
-        android:id="@+id/addiconcoup"
+        android:layout_toRightOf="@+id/noticcoup"
+        android:background="?selectableItemBackgroundBorderless"
+        app:srcCompat="@drawable/ic_add_box_black_24dp"
     />
     <TextView
+        android:id="@+id/couppricet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/addiconcoup"
-        android:layout_alignTop="@+id/minuscoup"
-
         android:layout_alignBottom="@+id/minuscoup"
+
+        android:layout_alignTop="@+id/minuscoup"
         android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/addiconcoup"
         android:text="₹"
         android:textSize="20dp"
-        android:id="@+id/couppricet"/>
+        />
     <TextView
+        android:id="@+id/coupprice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/couppricet"
-        android:layout_alignTop="@+id/minuscoup"
-
         android:layout_alignBottom="@+id/minuscoup"
+
+        android:layout_alignTop="@+id/minuscoup"
+        android:layout_toRightOf="@+id/couppricet"
         android:text="0"
         android:textSize="20dp"
-        android:id="@+id/coupprice"/>
+        />
 
   </RelativeLayout>
 
 
   <TextView
+      android:id="@+id/totalt"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:layout_alignParentStart="true"
+      android:layout_below="@+id/rl"
+      android:layout_marginTop="21dp"
       android:text="Total:₹"
       android:textSize="23dp"
-      android:layout_marginTop="21dp"
-      android:id="@+id/totalt"
-      android:layout_below="@+id/rl"
-      android:layout_alignParentLeft="true"
-      android:layout_alignParentStart="true"/>
+      />
 
 
   <TextView
+      android:id="@+id/total"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:layout_below="@+id/rl"
+      android:layout_marginTop="21dp"
+      android:layout_toRightOf="@+id/totalt"
       android:text="0"
       android:textSize="23dp"
-      android:layout_marginTop="21dp"
-      android:id="@+id/total" android:layout_below="@+id/rl"
-      android:layout_toRightOf="@+id/totalt"
   />
   <Button
       android:id="@+id/book1"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:layout_below="@+id/total"
       android:layout_gravity="end"
       android:filterTouchesWhenObscured="true"
       android:text="Book"
-      android:layout_below="@+id/total"
-      android:theme="@style/AccentButton"/>
+      />
 
 
 </RelativeLayout>
