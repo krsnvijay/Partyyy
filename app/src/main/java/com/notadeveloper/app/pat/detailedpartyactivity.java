@@ -2,8 +2,11 @@ package com.notadeveloper.app.pat;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -53,6 +57,7 @@ public class detailedpartyactivity extends AppCompatActivity {
   @BindView(R.id.noticket) TextView noticket;
   @BindView(R.id.stagprice) TextView stagprice;
   @BindView(R.id.coupleprice) TextView coupleprice;
+  @BindView(R.id.cv2) CardView cv2;
   private String photoUrl;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
@@ -342,5 +347,10 @@ public class detailedpartyactivity extends AppCompatActivity {
 
       }
     });
+  }
+
+  @OnClick(R.id.cv2) public void onViewClicked() {
+    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(p.getLocation()));
+    startActivity(intent);
   }
 }
