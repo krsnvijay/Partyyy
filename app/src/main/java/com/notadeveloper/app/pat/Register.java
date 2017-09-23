@@ -65,7 +65,7 @@ public class Register extends AppCompatActivity {
     mAuth = FirebaseAuth.getInstance();
     mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
     FirebaseUser mUser = mAuth.getCurrentUser();
-
+    startActivity(new Intent(this, IntroActivity.class));
     if (mUser != null) {
       // Name, email address, and profile photo Url
       uid = mUser.getUid();

@@ -9,6 +9,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,8 +43,6 @@ public class ClubDetailedActivity extends AppCompatActivity {
   @BindView(R.id.add2) TextView add2;
   @BindView(R.id.city) TextView city;
   @BindView(R.id.pin) TextView pin;
-  @BindView(R.id.parking) TextView parking;
-  @BindView(R.id.swimming) TextView swimming;
 
   @BindView(R.id.contactt) TextView contactt;
   @BindView(R.id.email) TextView email;
@@ -55,6 +54,7 @@ public class ClubDetailedActivity extends AppCompatActivity {
   ArrayList<String> al = new ArrayList<String>();
   ArrayList<String> alm = new ArrayList<String>();
   @BindView(R.id.cv2) CardView cv2;
+  @BindView(R.id.facility_text) TextView facilityText;
   private TextView[] dots;
   private MyViewPagerAdapter myViewPagerAdapter;
   private LinearLayout dotsLayout;
@@ -90,16 +90,7 @@ public class ClubDetailedActivity extends AppCompatActivity {
         city.setText(c.getAddress3());
         pin.setText(c.getPin());
         if (c.getUtils() != null) {
-          if (c.getUtils().contains("Parking")) {
-            parking.setText("Parking - YES");
-          } else {
-            parking.setText("Parking - NO");
-          }
-          if (c.getUtils().contains("Swimming pool")) {
-            swimming.setText("Swimming pool - YES");
-          } else {
-            swimming.setText("Swimming pool - NO");
-          }
+          facilityText.setText(TextUtils.join("\n", c.getUtils()));
         }
         email.setText(c.getEmail());
         phone.setText(c.getNumber());
@@ -233,8 +224,10 @@ public class ClubDetailedActivity extends AppCompatActivity {
   }
 
   @OnClick(R.id.cv2) public void onViewClicked() {
-    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(c.getLocation()));
-    startActivity(intent);
+    if (c.getLocation() != null) {
+      Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(c.getLocation()));
+      startActivity(intent);
+    }
   }
 
   public class MyViewPagerAdapter extends android.support.v4.view.PagerAdapter {

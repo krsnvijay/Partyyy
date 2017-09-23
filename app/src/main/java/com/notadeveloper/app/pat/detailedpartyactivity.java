@@ -69,7 +69,7 @@ public class detailedpartyactivity extends AppCompatActivity {
 
     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
     ref = mDatabase.child("parties").child(s);
-    ref.addListenerForSingleValueEvent(new ValueEventListener() {
+    ref.addValueEventListener(new ValueEventListener() {
       @Override public void onDataChange(DataSnapshot dataSnapshot) {
         p = dataSnapshot.getValue(party.class);
 
@@ -260,62 +260,78 @@ public class detailedpartyactivity extends AppCompatActivity {
 
             book1.setOnClickListener(new View.OnClickListener() {
               @Override public void onClick(View view) {
-                if (Double.parseDouble(total.getText().toString()) != 0) {
-                  final ProgressDialog pd = new ProgressDialog(detailedpartyactivity.this);
-                  pd.setMessage("Booking Ticket...");
-                  pd.show();
-                  DatabaseReference offsetRef =
-                      FirebaseDatabase.getInstance().getReference(".info/serverTimeOffset");
-                  offsetRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override public void onDataChange(DataSnapshot snapshot) {
-                      long offset = snapshot.getValue(Long.class);
+                if (p.getTickets()
+                    > Integer.parseInt(notic.getText().toString()) + Integer.parseInt(
+                    noticcoup.getText().toString())) {
+                  if (Double.parseDouble(total.getText().toString()) != 0) {
+                    final ProgressDialog pd = new ProgressDialog(detailedpartyactivity.this);
+                    pd.setMessage("Booking Ticket...");
+                    pd.show();
+                    DatabaseReference offsetRef =
+                        FirebaseDatabase.getInstance().getReference(".info/serverTimeOffset");
+                    offsetRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                      @Override public void onDataChange(DataSnapshot snapshot) {
+                        long offset = snapshot.getValue(Long.class);
 
-                      final long esttime = System.currentTimeMillis() + offset;
-                      photoUrl = "https://api.qrserver.com/v1/create-qr-code/?size=512x512&data="
-                          + String.valueOf(esttime);
-                      DatabaseReference mDb = FirebaseDatabase.getInstance()
-                          .getReference()
-                          .child("users")
-                          .child(u.getUid())
-                          .child("mytickets")
-                          .child(String.valueOf(esttime));
-                      DatabaseReference mDb2 = FirebaseDatabase.getInstance()
-                          .getReference()
-                          .child("parties")
-                          .child(String.valueOf(p.getPid()))
-                          .child("ticketsBooked")
-                          .child(String.valueOf(esttime));
-                      party.BookedTickets b =
-                          new party.BookedTickets(String.valueOf(esttime), u.getUid(), u.getName(),
-                              String.valueOf(p.getPid()),
-                              Double.parseDouble(total.getText().toString()),
-                              Integer.parseInt(notic.getText().toString()),
-                              Integer.parseInt(noticcoup.getText().toString()), false, photoUrl);
-                      mDb2.setValue(b);
-                      b.setLoct(p.getAddress1() + p.getAddress2() + p.getAddress3());
-                      b.setDate(p.getDates());
-                      b.setPname(p.getTitle());
-                      b.setTime(p.getTime() + " to " + p.getTime1());
-                      mDb.setValue(b);
+                        final long esttime = System.currentTimeMillis() + offset;
+                        photoUrl = "https://api.qrserver.com/v1/create-qr-code/?size=512x512&data="
+                            + String.valueOf(esttime);
+                        DatabaseReference mDb = FirebaseDatabase.getInstance()
+                            .getReference()
+                            .child("users")
+                            .child(u.getUid())
+                            .child("mytickets")
+                            .child(String.valueOf(esttime));
+                        DatabaseReference mDb2 = FirebaseDatabase.getInstance()
+                            .getReference()
+                            .child("parties")
+                            .child(String.valueOf(p.getPid()))
+                            .child("ticketsBooked")
+                            .child(String.valueOf(esttime));
+                        DatabaseReference mDb3 = FirebaseDatabase.getInstance()
+                            .getReference()
+                            .child("parties")
+                            .child(String.valueOf(p.getPid()))
+                            .child("tickets");
 
-                      dialog.dismiss();
-                      pd.dismiss();
-                      finish();
-                    }
+                        party.BookedTickets b =
+                            new party.BookedTickets(String.valueOf(esttime), u.getUid(),
+                                u.getName(), String.valueOf(p.getPid()),
+                                Double.parseDouble(total.getText().toString()),
+                                Integer.parseInt(notic.getText().toString()),
+                                Integer.parseInt(noticcoup.getText().toString()), false, photoUrl);
+                        mDb2.setValue(b);
+                        b.setLoct(p.getAddress1() + p.getAddress2() + p.getAddress3());
+                        b.setDate(p.getDates());
+                        b.setPname(p.getTitle());
+                        b.setTime(p.getTime() + " to " + p.getTime1());
+                        mDb.setValue(b);
 
-                    @Override public void onCancelled(DatabaseError error) {
-                      System.err.println("Listener was cancelled");
-                    }
-                  });
+                        mDb3.setValue(
+                            p.getTickets() - (Integer.parseInt(notic.getText().toString()) + Integer
+                                .parseInt(noticcoup.getText().toString())));
+
+                        dialog.dismiss();
+                        pd.dismiss();
+                        finish();
+                      }
+
+                      @Override public void onCancelled(DatabaseError error) {
+                        System.err.println("Listener was cancelled");
+                      }
+                    });
+                  } else {
+                    Toast.makeText(detailedpartyactivity.this, "Invalid Tickets", Toast.LENGTH_LONG)
+                        .show();
+                  }
                 } else {
-                  Toast.makeText(detailedpartyactivity.this, "Invalid Tickets", Toast.LENGTH_LONG)
+                  Toast.makeText(detailedpartyactivity.this,
+                      "Tickets not available, Check Availability and try again", Toast.LENGTH_LONG)
                       .show();
                 }
-
                 View focusView = null;
 
-                Toast.makeText(detailedpartyactivity.this, "Payment and then verification(OTP)",
-                    Toast.LENGTH_LONG).show();
+
 
                 dialog.dismiss();
               }
@@ -350,7 +366,9 @@ public class detailedpartyactivity extends AppCompatActivity {
   }
 
   @OnClick(R.id.cv2) public void onViewClicked() {
+    if (p.getLocation() != null) {
     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(p.getLocation()));
-    startActivity(intent);
+      startActivity(intent);
+    }
   }
 }

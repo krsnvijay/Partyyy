@@ -10,4 +10,7 @@
   <color name="textColorSecondary">#727272</color>
   <color name="background">#ffffff</color>
   <color name="blacktransparent">#80000000</color>
+  <color name="bgcolor1">#FF558B2F</color>
+  <color name="bgcolor2">#212121</color>
+  <color name="bgcolor3">#4527a0</color>
 </resources>
