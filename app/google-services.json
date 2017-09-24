@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "780830825228-pu48fkaqkkn79h8aa9bebgpdhdm39b9i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.notadeveloper.app.pat",
+            "certificate_hash": "ea0196fa171a01a2231a36798f114af12e732b7c"
+          }
+        },
+        {
           "client_id": "780830825228-nbnslc8c0anvj9iooc7uuuitk35dp6f9.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -74,6 +82,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "780830825228-q13m1849t13n5kqq9oj28mnjpupjskc4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.notadeveloper.app.patadmin",
+            "certificate_hash": "ea0196fa171a01a2231a36798f114af12e732b7c"
+          }
+        },
         {
           "client_id": "780830825228-kco6tivpfbfqb2peg9tbcf6vjiic8eob.apps.googleusercontent.com",
           "client_type": 1,
